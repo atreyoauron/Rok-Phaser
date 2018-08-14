@@ -17,6 +17,7 @@ startScene.create = function () {
     const bg = this.add.tileSprite(0, 0, 1911, 360, 'background');
     const grounds = this.physics.add.staticGroup();
     skeleton = this.physics.add.sprite(0,0, 'skeleton');
+    skeleton.setOrigin(0.5);
     skeleton.x = screenWidth / 2 + 200;
     grounds.create(320, 220, 'ground');
     grounds.create(1000, 220, 'ground');
@@ -62,6 +63,7 @@ startScene.create = function () {
 }
 
 startScene.update = function () {
+    skeleton.body.setSize(skeleton.width, skeleton.height, -35, -100);
     const cursors = this.input.keyboard.createCursorKeys();
 
     if (this.input.activePointer.isDown) {
