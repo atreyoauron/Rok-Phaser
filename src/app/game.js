@@ -27,9 +27,26 @@ startScene.create = function () {
         frameRate: 10,
         repeat: -1,
         yoyo: false
-    });    
+    });
+
+    this.anims.create({
+        key: 'dying',
+        frames: this.anims.generateFrameNames('skeleton', { prefix: 'dying', end: 7, zeroPad: 1 }),
+        frameRate: 10,
+        repeat: 0,
+        yoyo: false
+    });
+    
+    this.anims.create({
+        key: 'strongAttack',
+        frames: this.anims.generateFrameNames('skeleton', { prefix: 'strongAttack', end: 4, zeroPad: 1 }),
+        frameRate: 10,
+        repeat: 0,
+        yoyo: false
+    });
 
     this.physics.world.bounds.width = bg.width;
+
     bg.fixedToCamera = true;
     bg.setOrigin(0, 0);
 
@@ -38,6 +55,7 @@ startScene.create = function () {
     odin.setOrigin(0.5);
     odin.x = (screenWidth / 2);
     odin.setGravityY(200);
+    
     this.cameras.main.startFollow(odin);
     this.cameras.main.setBounds(0, 0, bg.width, bg.height);
     this.physics.add.collider([odin, skeleton], grounds);
@@ -67,8 +85,6 @@ startScene.update = function () {
             odin.setVelocityY(-330);
         }
     }
-
-    this.input
 }
 
 
