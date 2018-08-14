@@ -1,12 +1,13 @@
 /// <reference path="../../phaser.d.ts" />
 
 const startScene = new Phaser.Scene('game');
-let odin;
+let odin, skeleton;
 
 startScene.preload = function () {
     this.load.image('background', 'src/assets/img/background.png');
     this.load.image('odin', 'src/assets/img/odin.png');
     this.load.image('ground', 'src/assets/img/ground.png');
+    const atlas = this.load.atlas('skeleton', 'src/assets/img/skeleton.png', 'src/assets/json/skeleton-atlas.json');
 }
 
 startScene.create = function () {
@@ -15,8 +16,18 @@ startScene.create = function () {
 
     const bg = this.add.tileSprite(0, 0, 1911, 360, 'background');
     const grounds = this.physics.add.staticGroup();
+    skeleton = this.physics.add.sprite(0,0, 'skeleton');
+    skeleton.x = screenWidth / 2 + 200;
     grounds.create(320, 220, 'ground');
     grounds.create(1000, 220, 'ground');
+
+    this.anims.create({
+        key: 'walking',
+        frames: this.anims.generateFrameNames('skeleton', { prefix: 'walking', end: 7, zeroPad: 1 }),
+        frameRate: 10,
+        repeat: -1,
+        yoyo: false
+    });    
 
     this.physics.world.bounds.width = bg.width;
     bg.fixedToCamera = true;
@@ -29,7 +40,7 @@ startScene.create = function () {
     odin.setGravityY(200);
     this.cameras.main.startFollow(odin);
     this.cameras.main.setBounds(0, 0, bg.width, bg.height);
-    this.physics.add.collider(odin, grounds);
+    this.physics.add.collider([odin, skeleton], grounds);
 }
 
 startScene.update = function () {
@@ -57,9 +68,7 @@ startScene.update = function () {
         }
     }
 
-    if (cursors.space.isDown) {
-
-    }
+    this.input
 }
 
 
