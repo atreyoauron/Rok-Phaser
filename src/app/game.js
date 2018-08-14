@@ -16,8 +16,8 @@ startScene.create = function () {
 
     const bg = this.add.tileSprite(0, 0, 1911, 360, 'background');
     const grounds = this.physics.add.staticGroup();
-    skeleton = this.physics.add.sprite(0,0, 'skeleton');
-    skeleton.setOrigin(0.5);
+    skeleton = this.physics.add.sprite(0, 0, 'skeleton');
+    skeleton.setCollideWorldBounds(true);
     skeleton.x = screenWidth / 2 + 200;
     grounds.create(320, 220, 'ground');
     grounds.create(1000, 220, 'ground');
@@ -37,7 +37,7 @@ startScene.create = function () {
         repeat: 0,
         yoyo: false
     });
-    
+
     this.anims.create({
         key: 'strongAttack',
         frames: this.anims.generateFrameNames('skeleton', { prefix: 'strongAttack', end: 4, zeroPad: 1 }),
@@ -45,6 +45,12 @@ startScene.create = function () {
         repeat: 0,
         yoyo: false
     });
+
+    skeleton.on('animationcomplete', function(animation, frame) {
+        console.log(animation);
+        console.log(frame);
+        skeleton.setSize(skeleton.body.width, skeleton.body.height, skeleton.width, skeleton.height);
+    }, this);
 
     this.physics.world.bounds.width = bg.width;
 
@@ -56,14 +62,22 @@ startScene.create = function () {
     odin.setOrigin(0.5);
     odin.x = (screenWidth / 2);
     odin.setGravityY(200);
-    
+
+    skeleton.setSizeToFrame(skeleton.frame)
+
     this.cameras.main.startFollow(odin);
     this.cameras.main.setBounds(0, 0, bg.width, bg.height);
     this.physics.add.collider([odin, skeleton], grounds);
 }
 
+startScene.animComplete = function(animation, frame) {
+    console.log(animation);
+    console.log(frame);
+    console.log('hellow');
+}
+
 startScene.update = function () {
-    skeleton.body.setSize(skeleton.width, skeleton.height, -35, -100);
+    skeleton.anim
     const cursors = this.input.keyboard.createCursorKeys();
 
     if (this.input.activePointer.isDown) {
