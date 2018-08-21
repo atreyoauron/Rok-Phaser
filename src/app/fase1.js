@@ -20,15 +20,25 @@ class FaseUm extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('bg2', 'src/assets/img/background.png');
         this.load.image('odin', 'src/assets/img/odin.png');
-        this.load.image('invisibleWall', 'src/assets/img/invisible-wall.jpg');
+        this.cameras.main.setBackgroundColor('rgba(230, 230, 230, 1)');
+        
+        const simpleCube = this.make.graphics();
+        simpleCube.fillStyle('0x9b9b9b');
+        simpleCube.beginPath();
+        simpleCube.fillRect(0,0, 200, 200);
+        simpleCube.generateTexture('simpleCube', 200, 10);
     }
 
     create() {
         const screenWidth = this.sys.game.config.width;
         const screenHeight = this.sys.game.config.height;
-        this.bg = this.add.sprite(0, 0, 'bg2');    
+
+        const platform = this.physics.add.staticSprite(0,0,'simpleCube');
+        platform.setOrigin(0,0)
+        platform.x = 0;
+        platform.y = 300;
+        platform.enableBody(true);
 
         this.odin = new Odin({
             scene: this,
@@ -37,42 +47,13 @@ class FaseUm extends Phaser.Scene {
             key: 'odin'
         });
 
-        this.physics.world.bounds.width = this.bg.width;
-        this.cameras.main.setBounds(0, 0, this.bg.width, this.bg.height);
-
-        this.bg.fixedToCamera = true;
-        this.bg.setOrigin(0, 0);
         this.odin.create();
+
+        this.physics.add.collider(this.odin, platform);
     }
 
     update() {     
         this.odin.update();
-        
-        if(
-            this.odin.x + this.odin.width > (this.cameras.main.scrollX + this.sys.game.config.width - this.odin.width / 2) && 
-            this.odin.x + this.odin.width < (this.cameras.main.scrollX + this.sys.game.config.width + this.odin.width / 2)    
-            ) {
-
-            if (this.cameras.main.scrollX + this.sys.game.config.width >= this.bg.width) {
-                return;
-            }
-
-            this.cameras.main.setScroll(this.cameras.main.scrollX + this.sys.game.config.width);
-            this.odin.x = this.cameras.main.scrollX + this.odin.width * 2;
-        }
-        
-        console.log(this.odin.x - this.odin.width);
-        console.log(this.cameras.main.scrollX);
-
-        if(this.odin.x - this.odin.width < (this.cameras.main.scrollX)) {
-            if (this.cameras.main.scrollX - this.odin.width < 0) {
-                console.log('caindo aqui');
-                return;
-            }
-
-            this.cameras.main.setScroll(this.cameras.main.scrollX - this.sys.game.config.width);
-            this.odin.x = this.cameras.main.scrollX + this.sys.game.config.width - this.odin.width * 2;            
-        }
     }
 }
 export default FaseUm;
