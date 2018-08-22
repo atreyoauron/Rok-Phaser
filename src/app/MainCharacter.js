@@ -56,7 +56,7 @@ class MainCharacter extends Phaser.GameObjects.Sprite {
             const isDoubleJumping = this.getData('isDoubleJumping');
 
             if (itens.doubleJump && !isDoubleJumping) {
-                this.body.setVelocityY(-430);
+                this.body.setVelocityY(-330);
                 this.setData('isDoubleJumping', true);
             }
         }        
@@ -69,7 +69,7 @@ class MainCharacter extends Phaser.GameObjects.Sprite {
             lifePoints: 400,
             shield: 0,
             itens: {
-                doubleJump: true,
+                doubleJump: false,
                 spear: false,
                 armor: false
             }

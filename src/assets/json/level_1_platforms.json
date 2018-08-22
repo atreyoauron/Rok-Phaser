@@ -1,0 +1,95 @@
+[
+    {
+        "x": 0,
+        "y": 160,
+        "texture": "simpleCube",
+        "xOrigin": 0,
+        "yOrigin": 0,
+        "enableBody": true,
+        "overWriteSize": true,
+        "SizeToAdd": {
+            "width": 250,
+            "height": 10
+        }
+    },
+    {
+        "x": 640,
+        "y": 160,
+        "texture": "simpleCube",
+        "xOrigin": 1,
+        "yOrigin": 0,
+        "enableBody": true,
+        "overWriteSize": true,
+        "SizeToAdd": {
+            "width": 250,
+            "height": 10
+        }        
+    },
+    {
+        "x": 250,
+        "y": 360,
+        "texture": "simpleCube",
+        "xOrigin": 0.5,
+        "yOrigin": 1,
+        "enableBody": true,
+        "overWriteSize": true,
+        "SizeToAdd": {
+            "width": 70,
+            "height": 60
+        }        
+
+    },
+    {
+        "x": 320,
+        "y": 360,
+        "texture": "simpleCube",
+        "xOrigin": 0.5,
+        "yOrigin": 1,
+        "enableBody": true,
+        "overWriteSize": true,
+        "SizeToAdd": {
+            "width": 70,
+            "height": 130
+        }        
+
+    },
+    {
+        "x": 365,
+        "y": 310,
+        "texture": "simpleCube",
+        "xOrigin": 0.5,
+        "yOrigin": 1,
+        "enableBody": true,
+        "overWriteSize": true,
+        "SizeToAdd": {
+            "width": 20,
+            "height": 20
+        }        
+    },
+    {
+        "x": 380,
+        "y": 360,
+        "texture": "simpleCube",
+        "xOrigin": 0.5,
+        "yOrigin": 1,
+        "enableBody": true,
+        "overWriteSize": true,
+        "SizeToAdd": {
+            "width": 50,
+            "height": 50
+        }
+    },
+    {
+        "x": 520,
+        "y": 360,
+        "texture": "simpleCube",
+        "xOrigin": 0.5,
+        "yOrigin": 1,
+        "enableBody": true,
+        "overWriteSize": true,
+        "SizeToAdd": {
+            "width": 130,
+            "height": 130
+        }
+    }         
+]

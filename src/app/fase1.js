@@ -17,12 +17,14 @@ class FaseUm extends Phaser.Scene {
         this.bg;
         this.changedScreen = false;
         this.odin;
+        this.platformsObject;
     }
 
     preload() {
         this.load.image('odin', 'src/assets/img/odin.png');
+        this.platformsObject = this.load.json('platformsData', 'src/assets/json/level_1_platforms.json');
         this.cameras.main.setBackgroundColor('rgba(230, 230, 230, 1)');
-        
+                
         const simpleCube = this.make.graphics();
         simpleCube.fillStyle('0x9b9b9b');
         simpleCube.beginPath();
@@ -34,12 +36,6 @@ class FaseUm extends Phaser.Scene {
         const screenWidth = this.sys.game.config.width;
         const screenHeight = this.sys.game.config.height;
 
-        const platform = this.physics.add.staticSprite(0,0,'simpleCube');
-        platform.setOrigin(0,0)
-        platform.x = 0;
-        platform.y = 300;
-        platform.enableBody(true);
-
         this.odin = new Odin({
             scene: this,
             x: this.sys.game.config.width / 2,
@@ -49,7 +45,27 @@ class FaseUm extends Phaser.Scene {
 
         this.odin.create();
 
-        this.physics.add.collider(this.odin, platform);
+        const platforms = this.physics.add.staticGroup(); 
+
+        const plat = this.physics.add.staticSprite();
+        this.cache.json.get('platformsData').forEach(data => {
+            const platform = platforms.create(data.x, data.y, data.texture);
+            platform.setOrigin(data.xOrigin, data.yOrigin);
+
+            if (data.overWriteSize) {
+                platform.setSize(data.SizeToAdd.width, data.SizeToAdd.height);
+                platform.setDisplaySize(data.SizeToAdd.width, data.SizeToAdd.height);
+                platform.enableBody(data.enableBody);
+            }
+
+            platform.enableBody(data.enableBody);
+        });
+
+        this.physics.add.collider(this.odin, platforms);
+    }
+
+    addNewSize(defaultWidth, defaultHeight, widthToAdd, heightToAdd) {
+        
     }
 
     update() {     
