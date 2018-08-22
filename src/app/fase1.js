@@ -20,8 +20,13 @@ class FaseUm extends Phaser.Scene {
         this.platformsObject;
     }
 
+    init(data) {
+        console.log(data);
+    }
+ 
     preload() {
         this.load.image('odin', 'src/assets/img/odin.png');
+        this.load.audio('bgMusic', 'src/assets/audio/sound.mp3');
         this.platformsObject = this.load.json('platformsData', 'src/assets/json/level_1_platforms.json');
         this.cameras.main.setBackgroundColor('rgba(230, 230, 230, 1)');
                 
@@ -33,6 +38,9 @@ class FaseUm extends Phaser.Scene {
     }
 
     create() {
+        const bgMusic = this.sound.add('bgMusic');
+        bgMusic.play();
+
         const screenWidth = this.sys.game.config.width;
         const screenHeight = this.sys.game.config.height;
 
@@ -43,6 +51,7 @@ class FaseUm extends Phaser.Scene {
             key: 'odin'
         });
 
+        this.odin.configureMainCharacter();
         this.odin.create();
 
         const platforms = this.physics.add.staticGroup(); 
@@ -62,14 +71,20 @@ class FaseUm extends Phaser.Scene {
         });
 
         this.physics.add.collider(this.odin, platforms);
+
+        this.input.keyboard.on('keydown_ONE', function() {
+            this.scene.start('faseum');
+        }, this);
+        this.input.keyboard.on('keydown_TWO', function() {
+            this.scene.start('fasedois');
+        }, this);
+
+        this.odin.getDoubleJumpItem();
     }
 
-    addNewSize(defaultWidth, defaultHeight, widthToAdd, heightToAdd) {
-        
-    }
-
-    update() {     
-        this.odin.update();
+    update() {
+        console.log(this.input.keyboard);
+        this.odin.createCursorMovement(this);
     }
 }
 export default FaseUm;
