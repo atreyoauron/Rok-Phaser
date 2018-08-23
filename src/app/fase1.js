@@ -32,6 +32,7 @@ class FaseUm extends Phaser.Scene {
         this.load.image('odin', 'src/assets/img/odin.png');
         this.load.tilemapTiledJSON('background', 'src/assets/json/background-davi.json');
         this.load.image('redblock', 'src/assets/img/red-block.png');
+        this.load.image('background', 'src/assets/img/bg-fase-1.png');
         this.platformsObject = this.load.json('platformsData', 'src/assets/json/level_1_platforms.json');
         this.cameras.main.setBackgroundColor('rgba(230, 230, 230, 1)');
         this.load.audio('bgMusic', 'src/assets/audio/sound.mp3');
@@ -55,11 +56,12 @@ class FaseUm extends Phaser.Scene {
 
         var map = this.add.tilemap('background');
 
-
         var tileset = map.addTilesetImage('redblock');
         this.ground = map.createStaticLayer('redPlatforms', tileset);
         this.ground.setCollisionByProperty({ collides: true });
-        
+        this.ground.setVisible(false);
+        const bg = this.add.sprite(0,0, 'background');
+        bg.setOrigin(0);
         this.odin = new Odin({
             scene: this,
             x: this.sys.game.config.width / 2,
