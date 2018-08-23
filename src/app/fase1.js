@@ -15,12 +15,17 @@ class FaseUm extends Phaser.Scene {
         })
 
         this.bg;
-        this.changedScreen = false;
         this.odin;
         this.platformsObject;
         this.tilemap;
         this.ground;
         this.amarelo;
+        this.bgMusic;
+        this.startSong;
+    }
+
+    init(config) {
+
     }
 
     preload() {
@@ -29,6 +34,7 @@ class FaseUm extends Phaser.Scene {
         this.load.image('blocos', 'src/assets/img/brick_tileset.png');
         this.platformsObject = this.load.json('platformsData', 'src/assets/json/level_1_platforms.json');
         this.cameras.main.setBackgroundColor('rgba(230, 230, 230, 1)');
+        this.load.audio('bgMusic', 'src/assets/audio/sound.mp3');
                 
         const simpleCube = this.make.graphics();
         simpleCube.fillStyle('0x9b9b9b');
@@ -38,6 +44,12 @@ class FaseUm extends Phaser.Scene {
     }
 
     create() {
+        if(!window.bgMusic) {
+            console.log('caindo aqui');
+            window.bgMusic = this.sound.add('bgMusic');
+            window.bgMusic.play();
+        }
+
         const screenWidth = this.sys.game.config.width;
         const screenHeight = this.sys.game.config.height;
 
@@ -56,8 +68,15 @@ class FaseUm extends Phaser.Scene {
             y: this.sys.game.config.height / 2,
             key: 'odin'
         });
+
         this.odin.create();
+        this.odin.configureMainCharacter();
+
         this.physics.add.collider(this.odin, [this.ground, this.amarelo]);
+
+        this.input.keyboard.on('keydown_TWO', function() {
+            this.scene.start('fasedois');
+        }, this);        
     }
 
     addNewSize(defaultWidth, defaultHeight, widthToAdd, heightToAdd) {
@@ -65,7 +84,7 @@ class FaseUm extends Phaser.Scene {
     }
 
     update() {
-        this.odin.update();
+        this.odin.createCursorMovement(this);
     }
 }
 export default FaseUm;
