@@ -7,16 +7,33 @@
 
         <style>
             body {
+                background-color: #000;
                 margin: 0;
             }
 
             canvas {
-                width: 100%;
+                width: 640px;
+                height: 360px;
+                position: absolute;
+                left: 0;
+                right: 0;
+                top: 0;
+                bottom: 0;
+                margin: auto;
+            }
+
+            h1, p {
+                font-family: Arial, Helvetica, sans-serif;
+                color: #fff;
+                text-align: center;
             }
         </style>
     </head>
     <body>
-
+        <h1>NOK</h1>
+        <p>
+            use as setas para movimentar o personagem, espaço ou seta para cima para pular
+        </p>
         <script src="./src/assets/js/phaser.js" type="text/javascript"></script>
         <script src="./src/app/index.js" type="module"></script>
     </body>
