@@ -22,7 +22,7 @@ class MainCharacter extends Phaser.GameObjects.Sprite {
 
         if ((bodyRule)) {
             this.setData('isDoubleJumping', false);
-            this.body.setVelocityY(-330);
+            this.body.setVelocityY(-260);
         }
 
         if (!this.body.onFloor() && !this.body.touching.down) {
@@ -30,7 +30,7 @@ class MainCharacter extends Phaser.GameObjects.Sprite {
             const isDoubleJumping = this.getData('isDoubleJumping');
 
             if (itens.doubleJump && !isDoubleJumping) {
-                this.body.setVelocityY(-440);
+                this.body.setVelocityY(-330);
                 this.setData('isDoubleJumping', true);
             }
         }        

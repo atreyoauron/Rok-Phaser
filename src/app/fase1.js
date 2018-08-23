@@ -46,7 +46,6 @@ class FaseUm extends Phaser.Scene {
 
     create() {
         if(!window.bgMusic) {
-            console.log('caindo aqui');
             window.bgMusic = this.sound.add('bgMusic');
             window.bgMusic.play();
         }
