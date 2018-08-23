@@ -18,10 +18,15 @@ class FaseUm extends Phaser.Scene {
         this.changedScreen = false;
         this.odin;
         this.platformsObject;
+        this.tilemap;
+        this.ground;
+        this.amarelo;
     }
 
     preload() {
         this.load.image('odin', 'src/assets/img/odin.png');
+        this.load.tilemapTiledJSON('background', 'src/assets/json/background.json');
+        this.load.image('blocos', 'src/assets/img/brick_tileset.png');
         this.platformsObject = this.load.json('platformsData', 'src/assets/json/level_1_platforms.json');
         this.cameras.main.setBackgroundColor('rgba(230, 230, 230, 1)');
                 
@@ -36,39 +41,30 @@ class FaseUm extends Phaser.Scene {
         const screenWidth = this.sys.game.config.width;
         const screenHeight = this.sys.game.config.height;
 
+        var map = this.add.tilemap('background');
+
+
+        var tileset = map.addTilesetImage('blocos');
+        this.ground = map.createStaticLayer('ground', tileset);
+        this.amarelo = map.createStaticLayer('amarelo', tileset);
+        this.ground.setCollisionByProperty({ collides: true });
+        this.amarelo.setCollisionByProperty({ collides: true });
+        
         this.odin = new Odin({
             scene: this,
             x: this.sys.game.config.width / 2,
             y: this.sys.game.config.height / 2,
             key: 'odin'
         });
-
         this.odin.create();
-
-        const platforms = this.physics.add.staticGroup(); 
-
-        const plat = this.physics.add.staticSprite();
-        this.cache.json.get('platformsData').forEach(data => {
-            const platform = platforms.create(data.x, data.y, data.texture);
-            platform.setOrigin(data.xOrigin, data.yOrigin);
-
-            if (data.overWriteSize) {
-                platform.setSize(data.SizeToAdd.width, data.SizeToAdd.height);
-                platform.setDisplaySize(data.SizeToAdd.width, data.SizeToAdd.height);
-                platform.enableBody(data.enableBody);
-            }
-
-            platform.enableBody(data.enableBody);
-        });
-
-        this.physics.add.collider(this.odin, platforms);
+        this.physics.add.collider(this.odin, [this.ground, this.amarelo]);
     }
 
     addNewSize(defaultWidth, defaultHeight, widthToAdd, heightToAdd) {
         
     }
 
-    update() {     
+    update() {
         this.odin.update();
     }
 }

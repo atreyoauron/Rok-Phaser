@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" tiledversion="1.1.6" orientation="orthogonal" renderorder="right-down" width="20" height="10" tilewidth="32" tileheight="36" infinite="0" nextobjectid="1">
+ <tileset firstgid="1" name="bricks" tilewidth="32" tileheight="36" tilecount="5" columns="5">
+  <image source="../img/brick_tileset.png" width="160" height="36"/>
+ </tileset>
+ <tileset firstgid="6" source="../../../tiled/bricks.tsx"/>
+ <layer name="ground" width="20" height="10">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,6,
+6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,6,
+6,6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,6,
+0,6,6,6,6,0,0,0,0,0,0,0,0,0,0,0,0,0,6,6,
+0,0,0,0,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,0
+</data>
+ </layer>
+</map>
