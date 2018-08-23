@@ -22,7 +22,7 @@ class MainCharacter extends Phaser.GameObjects.Sprite {
 
         if ((bodyRule)) {
             this.setData('isDoubleJumping', false);
-            this.body.setVelocityY(-260);
+            this.body.setVelocityY(-280);
         }
 
         if (!this.body.onFloor() && !this.body.touching.down) {
