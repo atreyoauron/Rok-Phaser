@@ -3,7 +3,7 @@ class MainCharacter extends Phaser.GameObjects.Sprite {
         super(config.scene, config.x, config.y, config.key);
         config.scene.physics.world.enable(this);
         config.scene.add.existing(this);
-        this.body.setVelocity(0, 0).setBounce(0.2).setCollideWorldBounds(true);
+        this.body.setVelocity(0, 0).setCollideWorldBounds(true);
     }
 
     preload() {

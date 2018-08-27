@@ -6,6 +6,7 @@ class FaseUm extends Phaser.Scene {
     constructor() {
         super({
             key: 'faseum',
+            pixelArt: true,
             physics: {
                 arcade: {
                     gravity: { y: 700 },
@@ -16,10 +17,8 @@ class FaseUm extends Phaser.Scene {
 
         this.bg;
         this.odin;
-        this.platformsObject;
         this.tilemap;
         this.ground;
-        this.amarelo;
         this.bgMusic;
         this.startSong;
     }
@@ -29,53 +28,53 @@ class FaseUm extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('odin', 'src/assets/img/odin.png');
-        this.load.tilemapTiledJSON('background', 'src/assets/json/background-davi.json');
-        this.load.image('redblock', 'src/assets/img/red-block.png');
-        this.load.image('background', 'src/assets/img/bg-fase-1.png');
-        this.platformsObject = this.load.json('platformsData', 'src/assets/json/level_1_platforms.json');
-        this.cameras.main.setBackgroundColor('rgba(230, 230, 230, 1)');
+        this.load.image('light', 'src/assets/img/light.png');
+        this.load.image('odin',['src/assets/img/odin.png', 'src/assets/img/odin.png']);
+        this.load.tilemapTiledJSON('fase_1', 'src/assets/json/fase_1.json');
+        this.load.image('fase_1_plataformas', 'src/assets/img/plataforma_fase_1.png');
+        this.load.image('fundo_fase_1', ['src/assets/img/fase_1_bg.png', 'src/assets/img/fase_n_1_bg.png']);
         this.load.audio('bgMusic', 'src/assets/audio/sound.mp3');
-                
-        const simpleCube = this.make.graphics();
-        simpleCube.fillStyle('0x9b9b9b');
-        simpleCube.beginPath();
-        simpleCube.fillRect(0,0, 200, 200);
-        simpleCube.generateTexture('simpleCube', 200, 10);
     }
 
     create() {
         if(!window.bgMusic) {
             window.bgMusic = this.sound.add('bgMusic');
-            window.bgMusic.play();
+            // window.bgMusic.play();
         }
 
         const screenWidth = this.sys.game.config.width;
         const screenHeight = this.sys.game.config.height;
+        this.lights.addLight(screenWidth / 2, screenHeight / 2, 200);
+        // this.lights.enable(); 
 
-        var map = this.add.tilemap('background');
+        var map = this.add.tilemap('fase_1');
 
-        var tileset = map.addTilesetImage('redblock');
-        this.ground = map.createStaticLayer('redPlatforms', tileset);
-        this.ground.setCollisionByProperty({ collides: true });
-        this.ground.setVisible(false);
-        const bg = this.add.sprite(0,0, 'background');
-        bg.setOrigin(0);
+        const fundo = this.add.image(0,0, 'fundo_fase_1');
+        fundo.setOrigin(0);
+                
+        var tileset = map.addTilesetImage('fase_1_plataformas');
+        this.ground = map.createStaticLayer('plataforma_fase_1', tileset);        
+        this.ground.setCollisionByProperty({collider: true})
+        // fundo.setPipeline('Light2D');
+        // this.ground.setPipeline('Light2D');
+
         this.odin = new Odin({
             scene: this,
             x: this.sys.game.config.width / 2,
             y: this.sys.game.config.height / 2,
             key: 'odin'
         });
+        // this.odin.setPipeline('Light2D');
+
 
         this.odin.create();
         this.odin.configureMainCharacter();
 
-        this.physics.add.collider(this.odin, [this.ground, this.amarelo]);
-
+        this.physics.add.collider(this.odin, [this.ground]);
+        
         this.input.keyboard.on('keydown_TWO', function() {
             this.scene.start('fasedois');
-        }, this);        
+        }, this);
     }
 
     addNewSize(defaultWidth, defaultHeight, widthToAdd, heightToAdd) {
@@ -84,6 +83,10 @@ class FaseUm extends Phaser.Scene {
 
     update() {
         this.odin.createCursorMovement(this);
+
+        if(this.input.activePointer.isDown) {
+            console.log('%s %s', this.input.activePointer.x, this.input.activePointer.y);
+        }
     }
 }
 export default FaseUm;
