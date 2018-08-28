@@ -1,15 +1,34 @@
 const Creditos = new Phaser.Scene('creditos');
 
-Creditos.preload = function() {
+class Menu extends Phaser.Scene {
+    constructor() {
+        super({
+            key: 'menu',
+            pixelArt: true,
+            physics: {
+                arcade: {
+                    gravity: {y: 700},
+                    debug: true
+                }
+            }
+        })
+    }
 
-}
+    init() {
 
-Creditos.create = function() {
+    }
 
-}
+    preload() {
 
-Creditos.update = function() {
+    }
 
+    create() {
+
+    }
+
+    update() {
+        
+    }
 }
 
 export default Creditos;
