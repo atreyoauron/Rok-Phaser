@@ -21,10 +21,20 @@ class FaseUm extends Phaser.Scene {
         this.ground;
         this.bgMusic;
         this.startSong;
+        this.config;
+        this.hasConfig = false;
     }
 
     init(config) {
 
+        if (config.odinx) {
+            this.hasConfig = true;
+            this.odin.body.setVelocityX(0);
+            this.odin.x = config.odinx;
+            this.odin.y = config.odiny;
+            this.physics.world.enable(this.odin);
+            this.odin.body.setVelocity(0, 0).setCollideWorldBounds(true);            
+        }
     }
 
     preload() {
@@ -58,17 +68,18 @@ class FaseUm extends Phaser.Scene {
         // fundo.setPipeline('Light2D');
         // this.ground.setPipeline('Light2D');
 
-        this.odin = new Odin({
-            scene: this,
-            x: this.sys.game.config.width / 2,
-            y: this.sys.game.config.height / 2,
-            key: 'odin'
-        });
-        // this.odin.setPipeline('Light2D');
-
-
-        this.odin.create();
-        this.odin.configureMainCharacter();
+        if (!this.odin) {
+            this.odin = new Odin({
+                scene: this,
+                x: this.sys.game.config.width / 2,
+                y: this.sys.game.config.height / 2,
+                key: 'odin'
+            });
+            this.odin.create();
+            this.odin.configureMainCharacter();            
+        } else {
+            this.odin = this.add.existing(this.odin);
+        }
 
         this.physics.add.collider(this.odin, [this.ground]);
         
@@ -77,15 +88,16 @@ class FaseUm extends Phaser.Scene {
         }, this);
     }
 
-    addNewSize(defaultWidth, defaultHeight, widthToAdd, heightToAdd) {
-        
-    }
-
     update() {
         this.odin.createCursorMovement(this);
 
-        if(this.input.activePointer.isDown) {
-            console.log('%s %s', this.input.activePointer.x, this.input.activePointer.y);
+        if (this.odin.x >= 633) {
+            this.odin.body.setVelocityX(0);
+
+            this.scene.start('fasedois', {
+                odinx: 30,
+                odiny: this.odin.y - 5
+            });
         }
     }
 }

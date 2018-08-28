@@ -17,9 +17,18 @@ class FaseDois extends Phaser.Scene {
         this.odin;
     }
 
-    init() {
+    init(config) {
         let faseUm = this.scene.get('faseum');
         this.odin = faseUm.odin;
+
+        if (config) {
+            this.odin.body.setVelocityX(0);
+            this.odin.x = config.odinx;
+            this.odin.y = config.odiny;
+            this.physics.world.enable(this.odin);
+            this.odin.body.setVelocity(0, 0).setCollideWorldBounds(true);
+            this.odin = this.add.existing(this.odin);            
+        }
     } 
 
     preload() {
@@ -33,9 +42,7 @@ class FaseDois extends Phaser.Scene {
         const screenHeight = this.sys.game.config.height;
         this.cameras.main.setBackgroundColor('rgba(10, 230, 255, 1)');
 
-        this.physics.world.enable(this.odin);
-        this.odin.body.setVelocity(0, 0).setBounce(0.2).setCollideWorldBounds(true);
-        this.odin = this.add.existing(this.odin);
+
 
         var map = this.add.tilemap('fase_2');
 
@@ -53,6 +60,20 @@ class FaseDois extends Phaser.Scene {
 
     update() {
         this.odin.createCursorMovement(this);
+
+        if (this.odin.x >= 633) {
+            this.odin.body.setVelocityX(0);
+            this.scene.start('fasedois', {
+                odinx: 20,
+                odiny: this.odin.y - 5
+            });
+        } else if (this.odin.x <= 7) {
+            this.odin.body.setVelocityX(0);
+            this.scene.start('faseum', {
+                odinx: 500,
+                odiny: this.odin.y - 5
+            });
+        }        
     }
 }
 

@@ -47,23 +47,14 @@ class MainCharacter extends Phaser.GameObjects.Sprite {
             this.jump(this);
         }, this);
 
-        if (context.input.activePointer.isDown) {
-            const clickedX = context.input.activePointer.x;
-            this.body.setVelocityX(200);
-            if (clickedX > context.sys.game.config.width / 2) {
-                this.body.setVelocityX(200);
-            } else {
-                this.body.setVelocityX(-160);
-            }
+        if (cursors.right.isDown) {
+            this.body.setVelocityX(160);
+        } else if (cursors.left.isDown) {
+            console.log('is down');
+            this.body.setVelocityX(-160)
         } else {
-            if (cursors.right.isDown) {
-                this.body.setVelocityX(160);
-            } else if (cursors.left.isDown) {
-                this.body.setVelocityX(-160)
-            } else {
-                this.body.setVelocityX(0);
-            }
-        }        
+            this.body.setVelocityX(0);
+        }      
     }
 
     configureMainCharacter() {
