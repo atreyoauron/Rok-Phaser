@@ -23,6 +23,9 @@ class FaseDois extends Phaser.Scene {
     } 
 
     preload() {
+        this.load.tilemapTiledJSON('fase_2', 'src/assets/json/fase_2.json');
+        this.load.image('plataformas', 'src/assets/img/plataforma_fase_1.png');
+
     }
 
     create() {
@@ -34,27 +37,18 @@ class FaseDois extends Phaser.Scene {
         this.odin.body.setVelocity(0, 0).setBounce(0.2).setCollideWorldBounds(true);
         this.odin = this.add.existing(this.odin);
 
-        const platforms = this.physics.add.staticGroup(); 
+        var map = this.add.tilemap('fase_2');
 
-        const plat = this.physics.add.staticSprite();
-        this.cache.json.get('platformsData').forEach(data => {
-            const platform = platforms.create(data.x, data.y, data.texture);
-            platform.setOrigin(data.xOrigin, data.yOrigin);
-
-            if (data.overWriteSize) {
-                platform.setSize(data.SizeToAdd.width, data.SizeToAdd.height);
-                platform.setDisplaySize(data.SizeToAdd.width, data.SizeToAdd.height);
-                platform.enableBody(data.enableBody);
-            }
-
-            platform.enableBody(data.enableBody);
-        });
+        var tileset = map.addTilesetImage('plataformas');
+        this.ground = map.createStaticLayer('plataformas', tileset);        
+        this.ground.setCollisionByProperty({collider: true});        
 
         this.input.keyboard.on('keydown_ONE', function() {
             this.scene.start('faseum');
         }, this);
 
-        this.physics.add.collider(this.odin, platforms);
+
+        this.physics.add.collider(this.odin, [this.ground]);
     }
 
     update() {
