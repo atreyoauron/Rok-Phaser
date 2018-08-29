@@ -1,15 +1,24 @@
-const Creditos = new Phaser.Scene('creditos');
+/// <reference path="../../phaser.d.ts" />
 
-Creditos.preload = function() {
+class Creditos extends Phaser.Scene {
+    constructor() {
+        super({
+            key: 'Creditos',
+            pixelArt: true
+        })
+    }
 
-}
+    preload() {
 
-Creditos.create = function() {
+    }
 
-}
+    create() {
 
-Creditos.update = function() {
+    }
 
+    update() {
+
+    }
 }
 
 export default Creditos;

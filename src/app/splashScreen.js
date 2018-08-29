@@ -1,15 +1,26 @@
-const SplashScreen = new Phaser.Scene('splashscreen');
+/// <reference path="../../phaser.d.ts" />
 
-SplashScreen.create = function() {
+class SplashScreen extends Phaser.Scene {
+    constructor() {
+        super({
+            key: 'SplashScreen',
+            pixelArt: true
+        })
+    }
 
-}
+    preload() {
+        this.load.image('fundo-splash','src/assets/img/splash-screen.jpg');
+    }
 
-SplashScreen.create = function() {
+    create() {
+        const splash = this.add.image(0, 0, 'fundo-splash');
+        splash.setOrigin(0);
+        splash.setAlpha(0.5);
+    }
 
-}
+    update() {
 
-SplashScreen.update = function() {
-
+    }
 }
 
 export default SplashScreen;
