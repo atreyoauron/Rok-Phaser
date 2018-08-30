@@ -38,12 +38,7 @@ class FaseUm extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('light', 'src/assets/img/light.png');
-        this.load.image('odin',['src/assets/img/odin.png', 'src/assets/img/odin.png']);
-        this.load.tilemapTiledJSON('fase_1', 'src/assets/json/fase_1.json');
-        this.load.image('fase_1_plataformas', 'src/assets/img/plataforma_fase_1.png');
-        this.load.image('fundo_fase_1', ['src/assets/img/fase_1_bg.png', 'src/assets/img/fase_n_1_bg.png']);
-        this.load.audio('bgMusic', 'src/assets/audio/sound.mp3');
+
     }
 
     create() {
