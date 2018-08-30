@@ -1,15 +1,24 @@
-const Menu = new Phaser.Scene('menu');
+/// <reference path="../../phaser.d.ts" />
 
-Menu.preload = function() {
+class MainMenu extends Phaser.Scene {
+    constructor() {
+        super({
+            key: 'MainMenu',
+            pixelArt: true
+        })
+    }
 
+    preload() {
+        
+    }
+
+    create() {
+
+    }
+
+    update() {
+
+    }
 }
 
-Menu.create = function() {
-
-}
-
-Menu.update = function() {
-
-}
-
-export default Menu;
+export default MainMenu;

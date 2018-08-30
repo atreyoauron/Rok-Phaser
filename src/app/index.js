@@ -1,11 +1,13 @@
 import FaseUm from './fase1.js';
 import FaseDois from './fase2.js';
+import SplashScreen from './splashScreen.js';
+import Creditos from './creditos.js';
+import MainMenu from './menu.js';
 
-const config = {
-    type: Phaser.AUTO,
-    width: 640,
-    height: 360,
-    scene: [ FaseUm, FaseDois ]
+export {
+    FaseUm,
+    FaseDois,
+    SplashScreen,
+    Creditos,
+    MainMenu
 }
-
-const game = new Phaser.Game(config);
