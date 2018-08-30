@@ -22,6 +22,36 @@ class MainMenu extends Phaser.Scene {
         rokLogo.setScale(0.3);
         rokLogo.setX(this.sys.game.config.width / 2 - (rokLogo.width * rokLogo.scaleX / 2));
         rokLogo.setY(50);
+
+        this.make.text({
+            x: this.sys.game.config.width / 2,
+            y: this.sys.game.config.height / 2,
+            text: 'Novo jogo',
+            style: {
+                font: '20px monospace',
+                fill: '#fff'
+            }
+        });
+        
+        this.make.text({
+            x: this.sys.game.config.width / 2,
+            y: this.sys.game.config.height / 2,
+            text: 'Continuar',
+            style: {
+                font: '20px monospace',
+                fill: '#fff'
+            }
+        });
+        
+        this.make.text({
+            x: this.sys.game.config.width / 2,
+            y: this.sys.game.config.height / 2,
+            text: 'Opções',
+            style: {
+                font: '20px monospace',
+                fill: '#fff'
+            }
+        });        
     }
 
     update() {
