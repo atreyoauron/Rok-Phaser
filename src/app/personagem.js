@@ -6,6 +6,14 @@ class Odin extends MainCharacter {
     constructor(config) {
         super(config);
         this.body.setVelocity(0, 0).setCollideWorldBounds(true);
+
+        this.anims.play('standing');
+    }
+
+    update() {
+        if(this.input.keyboard.checkDown('RIGHT')) {
+            console.log('right')
+        }
     }
 }
 

@@ -4,18 +4,17 @@ class MainCharacter extends Phaser.GameObjects.Sprite {
         config.scene.physics.world.enable(this);
         config.scene.add.existing(this);
         this.body.setVelocity(0, 0).setCollideWorldBounds(true);
+        this.cursors;  
+        this.right;        
+        this.left;        
+        this.up;        
+        this.space;             
     }
 
-    preload() {
-    }
-
-    create() {
-
-    }
-    update() {
-        
-    }
-    destroy() { }
+    preload() {}
+    create() {}
+    update() {}
+    destroy() {}
 
     jump(context) {
         const bodyRule = this.body.onFloor() || this.body.touching.down;
@@ -33,11 +32,15 @@ class MainCharacter extends Phaser.GameObjects.Sprite {
                 this.body.setVelocityY(-330);
                 this.setData('isDoubleJumping', true);
             }
-        }        
+        }
     }
 
     createCursorMovement(context) {
-        var cursors = context.input.keyboard.createCursorKeys();
+        context.input.enabled = true;
+        this.right = context.input.keyboard.addKey('RIGHT');        
+        this.left = context.input.keyboard.addKey('LEFT');        
+        this.up = context.input.keyboard.addKey('UP');        
+        this.space = context.input.keyboard.addKey('SPACE');   
 
         context.input.keyboard.on('keydown_UP', function () {
             this.jump(this);
@@ -45,16 +48,41 @@ class MainCharacter extends Phaser.GameObjects.Sprite {
 
         context.input.keyboard.on('keydown_SPACE', function() {
             this.jump(this);
-        }, this);
+        }, this);   
+    }
 
-        if (cursors.right.isDown) {
+    checkCursorMoviment(sceneName) {
+        if(this.right.isDown) {
+            console.log(sceneName + ' : right is down');
+        }
+        if(this.left.isDown) {
+            console.log(sceneName + ' : left is down');
+        }        
+
+        if(this.right.isDown && this.left.isDown) {
+        this.body.setVelocityX(0);  
+        }
+
+        if (this.right.isDown) {
             this.body.setVelocityX(160);
-        } else if (cursors.left.isDown) {
-            console.log('is down');
+        } else if (this.left.isDown) {
             this.body.setVelocityX(-160)
         } else {
             this.body.setVelocityX(0);
-        }      
+        }
+    }
+
+    removeKeys(context) {
+        context.input.enabled = false;
+        this.right.isDown = false;
+        this.left.isDown = false;
+        this.up.isDown = false;
+        this.space.isDown = false;
+        
+        context.input.keyboard.removeKey('RIGHT');        
+        context.input.keyboard.removeKey('LEFT');        
+        context.input.keyboard.removeKey('UP');        
+        context.input.keyboard.removeKey('SPACE');
     }
 
     configureMainCharacter() {

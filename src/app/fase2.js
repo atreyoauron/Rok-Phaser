@@ -1,7 +1,5 @@
 /// <reference path="../../phaser.d.ts" />
 
-import { Odin } from './personagem.js';
-
 class FaseDois extends Phaser.Scene {
     constructor() {
         super({
@@ -18,8 +16,8 @@ class FaseDois extends Phaser.Scene {
     }
 
     init(config) {
-        let faseUm = this.scene.get('faseum');
-        this.odin = faseUm.odin;
+        let preload = this.scene.get('preloading');
+        this.odin = preload.odin;
 
         if (config) {
             this.odin.body.setVelocityX(0);
@@ -27,13 +25,11 @@ class FaseDois extends Phaser.Scene {
             this.odin.y = config.odiny;
             this.physics.world.enable(this.odin);
             this.odin.body.setVelocity(0, 0).setCollideWorldBounds(true);
-            this.odin = this.add.existing(this.odin);            
+            this.odin = this.add.existing(this.odin);
         }
-    } 
+    }
 
     preload() {
-        this.load.tilemapTiledJSON('fase_2', 'src/assets/json/fase_2.json');
-        this.load.image('plataformas', 'src/assets/img/plataforma_fase_1.png');
 
     }
 
@@ -42,38 +38,31 @@ class FaseDois extends Phaser.Scene {
         const screenHeight = this.sys.game.config.height;
         this.cameras.main.setBackgroundColor('rgba(10, 230, 255, 1)');
 
-
-
         var map = this.add.tilemap('fase_2');
 
         var tileset = map.addTilesetImage('plataformas');
-        this.ground = map.createStaticLayer('plataformas', tileset);        
-        this.ground.setCollisionByProperty({collider: true});        
-
-        this.input.keyboard.on('keydown_ONE', function() {
-            this.scene.start('faseum');
-        }, this);
-
-
+        this.ground = map.createStaticLayer('plataformas', tileset);
+        this.ground.setCollisionByProperty({ collider: true });
         this.physics.add.collider(this.odin, [this.ground]);
+        this.odin.createCursorMovement(this);
     }
 
     update() {
-        this.odin.createCursorMovement(this);
-
-        if (this.odin.x >= 633) {
-            this.odin.body.setVelocityX(0);
+        if (this.odin.x + this.odin.width >= 626) {
+            this.odin.removeKeys(this);
             this.scene.start('fasedois', {
                 odinx: 20,
                 odiny: this.odin.y - 5
             });
-        } else if (this.odin.x <= 7) {
-            this.odin.body.setVelocityX(0);
+        } else if (this.odin.x <= 14) {
+            this.odin.removeKeys(this);
             this.scene.start('faseum', {
-                odinx: 500,
+                odinx: 640 - this.odin.width - 20,
                 odiny: this.odin.y - 5
             });
-        }        
+        } else {
+            this.odin.checkCursorMoviment(this.scene.key);
+        }
     }
 }
 

@@ -1,10 +1,16 @@
 /// <reference path="../../phaser.d.ts" />
+import { Odin } from './personagem.js';
 
 class Preloading extends Phaser.Scene {
     constructor() {
         super({
             key: 'preloading',
-            pixelArt: true
+            pixelArt: true,
+            physics: {
+                arcade: {
+                    gravity: { y: 700 } 
+                }
+            }            
         })
     }
 
@@ -63,20 +69,42 @@ class Preloading extends Phaser.Scene {
 
 
         this.load.image('light', 'src/assets/img/light.png');
-        this.load.image('odin',['src/assets/img/odin.png', 'src/assets/img/odin.png']);
+        this.load.spritesheet('odin', 'src/assets/img/Odin_Idle_Sheet.png', {
+            frameWidth: 28,
+            frameHeight: 42
+        });
         this.load.tilemapTiledJSON('fase_1', 'src/assets/json/fase_1.json');
         this.load.image('fase_1_plataformas', 'src/assets/img/plataforma_fase_1.png');
         this.load.image('fundo_fase_1', ['src/assets/img/fase_1_bg.png', 'src/assets/img/fase_n_1_bg.png']);
         this.load.audio('bgMusic', 'src/assets/audio/sound.mp3');
         this.load.image('rok_logo', 'src/assets/img/rok-logo.png');     
+        this.load.tilemapTiledJSON('fase_2', 'src/assets/json/fase_2.json');
+        this.load.image('plataformas', 'src/assets/img/plataforma_fase_1.png');
     }
 
     create() {
+        this.anims.create({
+            key: 'standing',
+            frames: this.anims.generateFrameNumbers('odin', {start: 0, end: 7}),
+            frameRate: 10,
+            repeat: -1
+        })
 
+        this.odin = new Odin({
+            scene: this,
+            x: this.sys.game.config.width / 2,
+            y: this.sys.game.config.height / 2,
+            key: 'odin'
+        });
+        this.odin.x = -100;
+        this.odin.y = -100;
+        this.odin.create();
+        this.odin.configureMainCharacter(); 
+        this.cursors = this.input.keyboard.createCursorKeys(this);       
     }
 
     update() {
-
+        
     }
 }
 

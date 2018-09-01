@@ -72,7 +72,7 @@ class MainMenu extends Phaser.Scene {
             this.activeIndex--;
             
             if (this.activeIndex < 0) {
-                this.activeIndex = 0;
+                this.activeIndex = 2;
             }
 
             this.selectedMenu = this.menuItens[this.activeIndex];
@@ -84,7 +84,7 @@ class MainMenu extends Phaser.Scene {
             this.activeIndex++;
             
             if (this.activeIndex > 2) {
-                this.activeIndex = 2;
+                this.activeIndex = 0;
             }
 
             this.selectedMenu = this.menuItens[this.activeIndex];
@@ -96,7 +96,6 @@ class MainMenu extends Phaser.Scene {
                 case(0):
                     this.cameras.main.fadeOut(1000, 0, 0, 0, function() {
                     }, this);
-                    // this.scene.start('faseum');
                     break;
                 case(1):
                     console.log('continuar jogo');
