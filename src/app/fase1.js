@@ -25,21 +25,20 @@ class FaseUm extends Phaser.Scene {
     }
 
     init(config) {
-        this.preloadCache = this.scene.get('preloading');
-
-        this.odin = this.preloadCache.odin;
+        let preload = this.scene.get('preloading');
+        this.odin = preload.odin;
         this.physics.world.enable(this.odin);
         this.odin.body.setVelocity(0, 0).setCollideWorldBounds(true);
 
         if (config.odinx) {
-            this.hasConfig = true;
+            this.odin.removeKeys(this);
             this.odin.x = config.odinx;
             this.odin.y = config.odiny;
-            this.odin.body.setVelocityX(0);
         } else {
             this.odin.x = this.sys.game.config.width / 2;
             this.odin.y = this.sys.game.config.height / 2;            
         }
+
     }
 
     preload() {
@@ -65,31 +64,24 @@ class FaseUm extends Phaser.Scene {
         this.ground = map.createStaticLayer('plataforma_fase_1', tileset);        
         this.ground.setCollisionByProperty({collider: true})
 
-        this.odin = this.add.existing(this.odin);
         this.odin.createCursorMovement(this);
         this.physics.add.collider(this.odin, [this.ground]);
+        this.odin = this.add.existing(this.odin);
     }
 
     update() {
         if (this.odin.x >= 626) {
-            this.odin.removeKeys(this);
-            this.time.addEvent({
-                delay: 100,
-                repeat: -1,
-                loop: -1,
-                callback: () => {
-                    this.changeScene('fasedois');
-                }
-            })
+            this.changeScene('fasedois');
         } else {
             this.odin.checkCursorMoviment(this.scene.key);            
         }
     }
 
     changeScene(cena) {
+        this.scene.stop('faseum');
         this.scene.start(cena, {
             odinx: this.odin.width,
-            odiny: this.odin.y - 5
+            odiny: this.odin.y
         });
     }
 }

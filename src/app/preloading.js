@@ -96,6 +96,7 @@ class Preloading extends Phaser.Scene {
             y: this.sys.game.config.height / 2,
             key: 'odin'
         });
+
         this.odin.x = -100;
         this.odin.y = -100;
         this.odin.create();

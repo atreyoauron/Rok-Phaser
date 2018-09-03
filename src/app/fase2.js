@@ -18,14 +18,15 @@ class FaseDois extends Phaser.Scene {
     init(config) {
         let preload = this.scene.get('preloading');
         this.odin = preload.odin;
-
+        this.scene.stop('faseum');
+        
         if (config) {
+            this.odin.removeKeys(this);
             this.odin.body.setVelocityX(0);
             this.odin.x = config.odinx;
             this.odin.y = config.odiny;
             this.physics.world.enable(this.odin);
             this.odin.body.setVelocity(0, 0).setCollideWorldBounds(true);
-            this.odin = this.add.existing(this.odin);
         }
     }
 
@@ -44,21 +45,20 @@ class FaseDois extends Phaser.Scene {
         this.ground = map.createStaticLayer('plataformas', tileset);
         this.ground.setCollisionByProperty({ collider: true });
         this.physics.add.collider(this.odin, [this.ground]);
+        this.odin = this.add.existing(this.odin);
         this.odin.createCursorMovement(this);
     }
 
     update() {
         if (this.odin.x + this.odin.width >= 626) {
-            this.odin.removeKeys(this);
             this.scene.start('fasedois', {
                 odinx: 20,
                 odiny: this.odin.y - 5
             });
         } else if (this.odin.x <= 14) {
-            this.odin.removeKeys(this);
             this.scene.start('faseum', {
-                odinx: 640 - this.odin.width - 20,
-                odiny: this.odin.y - 5
+                odinx: 640 - this.odin.width,
+                odiny: this.odin.y
             });
         } else {
             this.odin.checkCursorMoviment(this.scene.key);

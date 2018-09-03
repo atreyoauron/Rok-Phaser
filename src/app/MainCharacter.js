@@ -36,6 +36,7 @@ class MainCharacter extends Phaser.GameObjects.Sprite {
     }
 
     createCursorMovement(context) {
+        
         context.input.enabled = true;
         this.right = context.input.keyboard.addKey('RIGHT');        
         this.left = context.input.keyboard.addKey('LEFT');        
@@ -52,13 +53,6 @@ class MainCharacter extends Phaser.GameObjects.Sprite {
     }
 
     checkCursorMoviment(sceneName) {
-        if(this.right.isDown) {
-            console.log(sceneName + ' : right is down');
-        }
-        if(this.left.isDown) {
-            console.log(sceneName + ' : left is down');
-        }        
-
         if(this.right.isDown && this.left.isDown) {
         this.body.setVelocityX(0);  
         }
@@ -83,6 +77,11 @@ class MainCharacter extends Phaser.GameObjects.Sprite {
         context.input.keyboard.removeKey('LEFT');        
         context.input.keyboard.removeKey('UP');        
         context.input.keyboard.removeKey('SPACE');
+
+        // console.log('tecla %s, status: %s, cena: %s', 'right', this.right.isDown, context.scene.key);
+        // console.log('tecla %s, status: %s, cena: %s', 'left', this.left.isDown, context.scene.key);
+        // console.log('tecla %s, status: %s, cena: %s', 'up', this.up.isDown, context.scene.key);
+        // console.log('tecla %s, status: %s, cena: %s', 'space', this.space.isDown, context.scene.key);        
     }
 
     configureMainCharacter() {
