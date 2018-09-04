@@ -6,8 +6,7 @@ class FaseDois extends Phaser.Scene {
             key: 'fasedois',
             physics: {
                 arcade: {
-                    gravity: { y: 700 },
-                    debug: true
+                    gravity: { y: 700 }
                 }
             }
         })
@@ -45,11 +44,29 @@ class FaseDois extends Phaser.Scene {
         this.physics.add.collider(this.odin, [this.ground]);
         this.odin = this.add.existing(this.odin);
 
-        const barril = this.physics.add.sprite(630, 0, 'barril');
+        const barril = this.physics.add.sprite(630, 20, 'barril');
         barril.anims.play('rolling');
         barril.setVelocityX(-120);
 
-        this.physics.add.collider(barril, [this.ground]);
+        this.physics.add.collider(barril, [this.ground], function() {
+            if (barril.anims.currentAnim.key !== 'barril-exploding') {
+                if(barril.body.onWall()) {
+                    barril.setVelocityX(0);
+                    barril.anims.play('barril-exploding');
+                    barril.on('animationcomplete', function(animation, frame) {
+                        console.log(animation);
+                        console.log(frame);
+
+                        if (animation.key == 'barril-exploding') {
+                            barril.setX(630);
+                            barril.setY(0);
+                            barril.anims.play('rolling');
+                            barril.setVelocityX(-120);
+                        };
+                    });
+                }
+            }
+        });
         this.physics.add.collider(this.odin, barril, function() {
             barril.setVelocityX(0);
             barril.anims.play('barril-exploding');

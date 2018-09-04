@@ -16,12 +16,11 @@ class FaseTres extends Phaser.Scene {
     }
 
     init(config) {
-        let preload = this.scene.get('preloading');
-        this.odin = preload.odin;
+        this.common = this.scene.get('preloading');
+        this.odin = this.common.odin;
         this.scene.stop('fasedois');
         
         if (config) {
-            this.odin.removeKeys(this);
             this.odin.body.setVelocityX(0);
             this.odin.x = config.odinx;
             this.odin.y = config.odiny;
@@ -50,6 +49,8 @@ class FaseTres extends Phaser.Scene {
     }
 
     update() {
+        this.odin.checkCursorMoviment(this.common);
+
         if (this.odin.x >= 636) {
             this.scene.start('fasequatro', {
                 odinx: 20,

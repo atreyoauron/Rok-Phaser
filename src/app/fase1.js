@@ -7,7 +7,8 @@ class FaseUm extends Phaser.Scene {
             pixelArt: true,
             physics: {
                 arcade: {
-                    gravity: { y: 700 } 
+                    gravity: { y: 700 },
+                    overlapBias: 4
                 }
             }
         });
@@ -60,6 +61,7 @@ class FaseUm extends Phaser.Scene {
         this.ground.setCollisionByProperty({collider: true})
 
         this.physics.add.collider(this.odin, [this.ground]);
+
         this.odin = this.add.existing(this.odin);
     }
 

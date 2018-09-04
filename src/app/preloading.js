@@ -107,14 +107,14 @@ class Preloading extends Phaser.Scene {
         this.anims.create({
             key: 'rolling',
             frames: this.anims.generateFrameNumbers('barril', {start: 0, end: 7}),
-            frameRate: 10,
+            frameRate: 7,
             repeat: -1
         });    
         
         this.anims.create({
             key: 'barril-exploding',
             frames: this.anims.generateFrameNumbers('barril-explodir', {start: 0, end: 5}),
-            frameRate: 10,
+            frameRate: 15,
             repeat: 0
         });            
 
