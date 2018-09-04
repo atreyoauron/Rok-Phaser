@@ -73,6 +73,14 @@ class Preloading extends Phaser.Scene {
             frameWidth: 28,
             frameHeight: 42
         });
+        this.load.spritesheet('barril', 'src/assets/img/barril.png', {
+            frameWidth: 32,
+            frameHeight: 24
+        });   
+        this.load.spritesheet('barril-explodir', 'src/assets/img/barril-explodir.png', {
+            frameWidth: 24,
+            frameHeight: 24
+        });                
         this.load.tilemapTiledJSON('fase_1', 'src/assets/json/fase_1.json');
         this.load.tilemapTiledJSON('fase_2', 'src/assets/json/fase_2.json');
         this.load.tilemapTiledJSON('fase_3', 'src/assets/json/fase_3.json');
@@ -92,7 +100,21 @@ class Preloading extends Phaser.Scene {
             frames: this.anims.generateFrameNumbers('odin', {start: 0, end: 7}),
             frameRate: 10,
             repeat: -1
-        })
+        });
+
+        this.anims.create({
+            key: 'rolling',
+            frames: this.anims.generateFrameNumbers('barril', {start: 0, end: 7}),
+            frameRate: 10,
+            repeat: -1
+        });    
+        
+        this.anims.create({
+            key: 'barril-exploding',
+            frames: this.anims.generateFrameNumbers('barril-explodir', {start: 0, end: 5}),
+            frameRate: 10,
+            repeat: 0
+        });            
 
         this.odin = new Odin({
             scene: this,
@@ -100,8 +122,6 @@ class Preloading extends Phaser.Scene {
             y: this.sys.game.config.height / 2,
             key: 'odin'
         });
-
-        this.odin.body.collideWorldBounds
 
         this.odin.x = -100;
         this.odin.y = -100;

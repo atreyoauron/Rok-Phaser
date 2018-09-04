@@ -46,11 +46,6 @@ class FaseUm extends Phaser.Scene {
     }
 
     create() {
-        if(!window.bgMusic) {
-            window.bgMusic = this.sound.add('bgMusic');
-            window.bgMusic.play();
-        }
-
         const screenWidth = this.sys.game.config.width;
         const screenHeight = this.sys.game.config.height;
         this.lights.addLight(screenWidth / 2, screenHeight / 2, 200);
@@ -59,7 +54,7 @@ class FaseUm extends Phaser.Scene {
 
         const fundo = this.add.image(0,0, 'fundo_fase_1');
         fundo.setOrigin(0);
-
+        
         var tileset = map.addTilesetImage('fase_1_plataformas');
         this.ground = map.createStaticLayer('plataforma_fase_1', tileset);        
         this.ground.setCollisionByProperty({collider: true})

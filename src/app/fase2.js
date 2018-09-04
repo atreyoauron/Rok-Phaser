@@ -47,6 +47,17 @@ class FaseDois extends Phaser.Scene {
         this.physics.add.collider(this.odin, [this.ground]);
         this.odin = this.add.existing(this.odin);
         this.odin.createCursorMovement(this);
+
+        const barril = this.physics.add.sprite(630, 0, 'barril');
+        barril.anims.play('rolling');
+        barril.setVelocityX(-120);
+
+        this.physics.add.collider(barril, [this.ground]);
+        this.physics.add.collider(this.odin, barril, function() {
+            barril.setVelocityX(0);
+            barril.anims.play('barril-exploding');
+        });
+
     }
 
     update() {
