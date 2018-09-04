@@ -13,15 +13,15 @@ class FaseDois extends Phaser.Scene {
         })
 
         this.odin;
+        this.common;
     }
 
     init(config) {
-        let preload = this.scene.get('preloading');
-        this.odin = preload.odin;
+        this.common = this.scene.get('preloading');
+        this.odin = this.common.odin;
         this.scene.stop('faseum');
         
         if (config) {
-            this.odin.removeKeys(this);
             this.odin.body.setVelocityX(0);
             this.odin.x = config.odinx;
             this.odin.y = config.odiny;
@@ -30,9 +30,7 @@ class FaseDois extends Phaser.Scene {
         }
     }
 
-    preload() {
-
-    }
+    preload() {}
 
     create() {
         const screenWidth = this.sys.game.config.width;
@@ -46,7 +44,6 @@ class FaseDois extends Phaser.Scene {
         this.ground.setCollisionByProperty({ collider: true });
         this.physics.add.collider(this.odin, [this.ground]);
         this.odin = this.add.existing(this.odin);
-        this.odin.createCursorMovement(this);
 
         const barril = this.physics.add.sprite(630, 0, 'barril');
         barril.anims.play('rolling');
@@ -61,6 +58,8 @@ class FaseDois extends Phaser.Scene {
     }
 
     update() {
+        this.odin.checkCursorMoviment(this.common);
+
         if (this.odin.x >= 636) {
             this.scene.start('fasetres', {
                 odinx: 20,
@@ -71,8 +70,6 @@ class FaseDois extends Phaser.Scene {
                 odinx: 640 - this.odin.width - 20,
                 odiny: this.odin.y
             });
-        } else {
-            this.odin.checkCursorMoviment(this.scene.key);
         }
     }
 }

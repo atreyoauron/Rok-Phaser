@@ -10,6 +10,12 @@ class MainMenu extends Phaser.Scene {
         this.menuItens = [];
         this.selectedMenu = null;
         this.activeIndex = 0;
+        this.down;
+        this.up;
+    }
+
+    init() {
+        
     }
 
     preload() {
@@ -17,6 +23,8 @@ class MainMenu extends Phaser.Scene {
     }
 
     create() {
+        this.scene.pause('preloading');
+
         const splash = this.add.image(0, 0, 'fundo-splash');
         splash.setOrigin(0);
         splash.setAlpha(0.1);
@@ -68,6 +76,7 @@ class MainMenu extends Phaser.Scene {
         this.selectedMenu.setColor('#00ff00');
 
         this.input.keyboard.on('keydown_UP', function() {
+            console.log('down');
             this.selectedMenu.setColor('#ffffff');
             this.activeIndex--;
             
@@ -80,6 +89,8 @@ class MainMenu extends Phaser.Scene {
         }, this);
 
         this.input.keyboard.on('keydown_DOWN', function() {
+            console.log('down');
+
             this.selectedMenu.setColor('#ffffff');
             this.activeIndex++;
             
@@ -90,6 +101,8 @@ class MainMenu extends Phaser.Scene {
             this.selectedMenu = this.menuItens[this.activeIndex];
             this.selectedMenu.setColor('#00ff00');        
         }, this);
+
+        console.log(this);
 
         this.input.keyboard.on('keydown_ENTER', function() {
             switch(this.activeIndex) {

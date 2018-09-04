@@ -12,6 +12,9 @@ class Preloading extends Phaser.Scene {
                 }
             }            
         })
+
+        window.menuRestarted = false;
+        this.cursors;
     }
 
     preload() {
@@ -62,11 +65,10 @@ class Preloading extends Phaser.Scene {
         this.load.on('complete', function() {
             this.cameras.main.fadeOut(1000, 0, 0, 0, function() {
                 if (this.cameras.main.fadeEffect.progress === 1) {
-                    this.scene.start('MainMenu');
+                    this.scene.launch('MainMenu');
                 }
             });
         }, this);
-
 
         this.load.image('light', 'src/assets/img/light.png');
         this.load.spritesheet('odin', 'src/assets/img/Odin_Idle_Sheet.png', {
@@ -98,7 +100,7 @@ class Preloading extends Phaser.Scene {
         this.anims.create({
             key: 'standing',
             frames: this.anims.generateFrameNumbers('odin', {start: 0, end: 7}),
-            frameRate: 10,
+            frameRate: 7,
             repeat: -1
         });
 
@@ -127,11 +129,32 @@ class Preloading extends Phaser.Scene {
         this.odin.y = -100;
         this.odin.create();
         this.odin.configureMainCharacter(); 
-        this.cursors = this.input.keyboard.createCursorKeys(this);       
+        this.cursors = this.input.keyboard.createCursorKeys(this); 
+        this.createCursorMovement();      
     }
 
     update() {
-        
+
+    }
+
+    createCursorMovement() {
+        this.cursors = this.input.keyboard.createCursorKeys();
+    }
+
+    keyUpPressed(callback, context) {
+        this.input.keyboard.on('keydown_UP', function() {
+            if (callback) {
+                return callback();                
+            }
+        });
+    }
+
+    keyDownPressed(callback, context) {
+        this.input.keyboard.on('keydown_DOWN', function() {
+            if(callback) {
+                return callback();
+            };
+        });        
     }
 }
 

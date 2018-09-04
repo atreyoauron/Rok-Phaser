@@ -10,7 +10,7 @@ class FaseUm extends Phaser.Scene {
                     gravity: { y: 700 } 
                 }
             }
-        })
+        });
 
         this.bg;
         this.odin;
@@ -21,17 +21,17 @@ class FaseUm extends Phaser.Scene {
         this.config;
         this.hasConfig = false;
         this.firstTime = true;
-        this.right;
+        this.common;
     }
 
     init(config) {
-        let preload = this.scene.get('preloading');
-        this.odin = preload.odin;
+        this.scene.resume('preloading');        
+        this.common = this.scene.get('preloading');
+        this.odin = this.common.odin;
         this.physics.world.enable(this.odin);
         this.odin.body.setVelocity(0, 0);
 
         if (config.odinx) {
-            this.odin.removeKeys(this);
             this.odin.x = config.odinx;
             this.odin.y = config.odiny;
         } else {
@@ -59,16 +59,15 @@ class FaseUm extends Phaser.Scene {
         this.ground = map.createStaticLayer('plataforma_fase_1', tileset);        
         this.ground.setCollisionByProperty({collider: true})
 
-        this.odin.createCursorMovement(this);
         this.physics.add.collider(this.odin, [this.ground]);
         this.odin = this.add.existing(this.odin);
     }
 
     update() {
+        this.odin.checkCursorMoviment(this.common);
+
         if (this.odin.x >= 636) {
             this.changeScene('fasedois');
-        } else {
-            this.odin.checkCursorMoviment(this.scene.key);            
         }
     }
 
