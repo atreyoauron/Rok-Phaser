@@ -1,9 +1,9 @@
 /// <reference path="../../phaser.d.ts" />
 
-class FaseDois extends Phaser.Scene {
+class FaseQuatro extends Phaser.Scene {
     constructor() {
         super({
-            key: 'fasedois',
+            key: 'fasecinco',
             physics: {
                 arcade: {
                     gravity: { y: 700 },
@@ -18,7 +18,7 @@ class FaseDois extends Phaser.Scene {
     init(config) {
         let preload = this.scene.get('preloading');
         this.odin = preload.odin;
-        this.scene.stop('faseum');
+        this.scene.stop('fasequatro');
         
         if (config) {
             this.odin.removeKeys(this);
@@ -39,7 +39,7 @@ class FaseDois extends Phaser.Scene {
         const screenHeight = this.sys.game.config.height;
         this.cameras.main.setBackgroundColor('rgba(10, 230, 255, 1)');
 
-        var map = this.add.tilemap('fase_2');
+        var map = this.add.tilemap('fase_5');
 
         var tileset = map.addTilesetImage('plataformas');
         this.ground = map.createStaticLayer('plataformas', tileset);
@@ -51,12 +51,12 @@ class FaseDois extends Phaser.Scene {
 
     update() {
         if (this.odin.x >= 636) {
-            this.scene.start('fasetres', {
+            this.scene.start('faseum', {
                 odinx: 20,
                 odiny: this.odin.y - 5
             });
         } else if (this.odin.x <= 14) {
-            this.scene.start('faseum', {
+            this.scene.start('fasequatro', {
                 odinx: 640 - this.odin.width - 20,
                 odiny: this.odin.y
             });
@@ -66,4 +66,4 @@ class FaseDois extends Phaser.Scene {
     }
 }
 
-export default FaseDois;
+export default FaseQuatro;

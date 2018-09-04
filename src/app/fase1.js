@@ -28,7 +28,7 @@ class FaseUm extends Phaser.Scene {
         let preload = this.scene.get('preloading');
         this.odin = preload.odin;
         this.physics.world.enable(this.odin);
-        this.odin.body.setVelocity(0, 0).setCollideWorldBounds(true);
+        this.odin.body.setVelocity(0, 0);
 
         if (config.odinx) {
             this.odin.removeKeys(this);
@@ -70,7 +70,7 @@ class FaseUm extends Phaser.Scene {
     }
 
     update() {
-        if (this.odin.x >= 626) {
+        if (this.odin.x >= 636) {
             this.changeScene('fasedois');
         } else {
             this.odin.checkCursorMoviment(this.scene.key);            

@@ -74,11 +74,15 @@ class Preloading extends Phaser.Scene {
             frameHeight: 42
         });
         this.load.tilemapTiledJSON('fase_1', 'src/assets/json/fase_1.json');
+        this.load.tilemapTiledJSON('fase_2', 'src/assets/json/fase_2.json');
+        this.load.tilemapTiledJSON('fase_3', 'src/assets/json/fase_3.json');
+        this.load.tilemapTiledJSON('fase_4', 'src/assets/json/fase_4.json');
+        this.load.tilemapTiledJSON('fase_5', 'src/assets/json/fase_5.json');
+        this.load.tilemapTiledJSON('fase_6', 'src/assets/json/fase_6.json');
         this.load.image('fase_1_plataformas', 'src/assets/img/plataforma_fase_1.png');
         this.load.image('fundo_fase_1', ['src/assets/img/fase_1_bg.png', 'src/assets/img/fase_n_1_bg.png']);
         this.load.audio('bgMusic', 'src/assets/audio/sound.mp3');
         this.load.image('rok_logo', 'src/assets/img/rok-logo.png');     
-        this.load.tilemapTiledJSON('fase_2', 'src/assets/json/fase_2.json');
         this.load.image('plataformas', 'src/assets/img/plataforma_fase_1.png');
     }
 
@@ -96,6 +100,8 @@ class Preloading extends Phaser.Scene {
             y: this.sys.game.config.height / 2,
             key: 'odin'
         });
+
+        this.odin.body.collideWorldBounds
 
         this.odin.x = -100;
         this.odin.y = -100;

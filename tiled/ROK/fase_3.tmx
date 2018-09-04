@@ -1,0 +1,453 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" tiledversion="1.1.6" orientation="orthogonal" renderorder="right-down" width="43" height="24" tilewidth="15" tileheight="15" infinite="0" nextobjectid="5">
+ <tileset firstgid="1" name="plataformas" tilewidth="15" tileheight="15" tilecount="1032" columns="43">
+  <image source="../../src/assets/img/plataforma_fase_1.png" width="645" height="360"/>
+  <tile id="473">
+   <properties>
+    <property name="collider" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="474">
+   <properties>
+    <property name="collider" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="475">
+   <properties>
+    <property name="collider" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="476">
+   <properties>
+    <property name="collider" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="477">
+   <properties>
+    <property name="collider" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="478">
+   <properties>
+    <property name="collider" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="479">
+   <properties>
+    <property name="collider" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="480">
+   <properties>
+    <property name="collider" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="481">
+   <properties>
+    <property name="collider" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="482">
+   <properties>
+    <property name="collider" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="483">
+   <properties>
+    <property name="collider" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="484">
+   <properties>
+    <property name="collider" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="485">
+   <properties>
+    <property name="collider" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="486">
+   <properties>
+    <property name="collider" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="487">
+   <properties>
+    <property name="collider" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="488">
+   <properties>
+    <property name="collider" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="499">
+   <properties>
+    <property name="collider" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="500">
+   <properties>
+    <property name="collider" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="501">
+   <properties>
+    <property name="collider" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="502">
+   <properties>
+    <property name="collider" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="503">
+   <properties>
+    <property name="collider" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="504">
+   <properties>
+    <property name="collider" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="505">
+   <properties>
+    <property name="collider" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="506">
+   <properties>
+    <property name="collider" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="507">
+   <properties>
+    <property name="collider" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="508">
+   <properties>
+    <property name="collider" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="509">
+   <properties>
+    <property name="collider" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="510">
+   <properties>
+    <property name="collider" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="511">
+   <properties>
+    <property name="collider" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="512">
+   <properties>
+    <property name="collider" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="513">
+   <properties>
+    <property name="collider" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="514">
+   <properties>
+    <property name="collider" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="515">
+   <properties>
+    <property name="collider" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="872">
+   <properties>
+    <property name="collider" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="873">
+   <properties>
+    <property name="collider" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="915">
+   <properties>
+    <property name="collider" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="916">
+   <properties>
+    <property name="collider" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="958">
+   <properties>
+    <property name="collider" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="959">
+   <properties>
+    <property name="collider" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="989">
+   <properties>
+    <property name="collider" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="990">
+   <properties>
+    <property name="collider" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="991">
+   <properties>
+    <property name="collider" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="992">
+   <properties>
+    <property name="collider" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="993">
+   <properties>
+    <property name="collider" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="994">
+   <properties>
+    <property name="collider" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="995">
+   <properties>
+    <property name="collider" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="996">
+   <properties>
+    <property name="collider" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="997">
+   <properties>
+    <property name="collider" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="998">
+   <properties>
+    <property name="collider" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="999">
+   <properties>
+    <property name="collider" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="1000">
+   <properties>
+    <property name="collider" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="1001">
+   <properties>
+    <property name="collider" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="1002">
+   <properties>
+    <property name="collider" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="1003">
+   <properties>
+    <property name="collider" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="1004">
+   <properties>
+    <property name="collider" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="1005">
+   <properties>
+    <property name="collider" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="1006">
+   <properties>
+    <property name="collider" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="1007">
+   <properties>
+    <property name="collider" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="1008">
+   <properties>
+    <property name="collider" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="1009">
+   <properties>
+    <property name="collider" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="1010">
+   <properties>
+    <property name="collider" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="1011">
+   <properties>
+    <property name="collider" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="1012">
+   <properties>
+    <property name="collider" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="1013">
+   <properties>
+    <property name="collider" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="1014">
+   <properties>
+    <property name="collider" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="1015">
+   <properties>
+    <property name="collider" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="1016">
+   <properties>
+    <property name="collider" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="1017">
+   <properties>
+    <property name="collider" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="1018">
+   <properties>
+    <property name="collider" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="1019">
+   <properties>
+    <property name="collider" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="1020">
+   <properties>
+    <property name="collider" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="1021">
+   <properties>
+    <property name="collider" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="1022">
+   <properties>
+    <property name="collider" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="1023">
+   <properties>
+    <property name="collider" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="1024">
+   <properties>
+    <property name="collider" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="1025">
+   <properties>
+    <property name="collider" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="1026">
+   <properties>
+    <property name="collider" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="1027">
+   <properties>
+    <property name="collider" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="1028">
+   <properties>
+    <property name="collider" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="1029">
+   <properties>
+    <property name="collider" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="1030">
+   <properties>
+    <property name="collider" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="1031">
+   <properties>
+    <property name="collider" type="bool" value="true"/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="1033" name="fase_3" tilewidth="640" tileheight="360" tilecount="1" columns="0">
+  <grid orientation="orthogonal" width="1" height="1"/>
+  <tile id="0">
+   <image width="640" height="360" source="../../src/assets/img/images/fase_3.png"/>
+  </tile>
+ </tileset>
+ <objectgroup name="fundo" locked="1">
+  <object id="4" gid="1033" x="0" y="360" width="640" height="360"/>
+ </objectgroup>
+ <layer name="plataformas" width="43" height="24">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,474,475,476,477,478,474,475,476,477,478,479,480,
+0,0,0,0,0,0,0,0,474,475,474,475,476,477,478,479,480,0,0,0,0,0,0,0,0,0,0,0,0,0,0,916,0,0,0,0,0,0,0,0,0,0,0,
+474,475,476,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,474,475,474,475,476,477,478,479,480,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,476,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,476,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,916,916,916,916,
+0,0,0,0,0,0,0,0,0,0,0,0,0,476,476,476,0,0,0,0,0,0,474,475,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,916,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,916,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,482,0,0,0,0,0,0,916,
+474,474,474,474,474,474,474,474,474,474,474,474,474,474,474,474,474,474,474,474,474,474,474,474,474,474,474,474,474,474,474,474,474,474,474,482,0,0,0,0,0,0,916,
+959,960,960,960,960,960,960,960,960,960,960,960,960,960,960,960,960,960,960,960,960,960,960,960,960,960,960,960,960,960,960,960,960,960,916,916,916,916,0,0,0,0,916,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,916,0,0,0,0,0,0,0,916,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,916,0,0,0,0,0,0,0,916,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,916,0,0,0,0,0,0,0,916,
+0,0,0,0,0,0,0,0,0,0,874,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,916,0,0,0,0,0,0,0,916,
+0,0,0,0,0,0,0,0,0,0,873,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,873,0,0,0,0,0,916,0,0,0,0,0,0,0,916,
+0,0,0,0,0,0,0,0,0,0,916,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,916,0,0,0,0,0,916,0,0,0,0,0,0,0,916,
+0,0,0,0,0,0,0,0,0,0,959,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,959,0,0,0,0,0,916,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,873,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,873,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,916,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,916,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,959,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,959,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+990,991,992,993,994,995,996,997,998,999,1000,1001,1002,1003,1004,1005,1006,1007,1008,1009,1010,1011,1012,1013,1014,1015,1013,1017,1018,1019,1020,1021,1022,1023,1024,1025,1026,1027,1028,1029,1030,1031,1032
+</data>
+ </layer>
+</map>
