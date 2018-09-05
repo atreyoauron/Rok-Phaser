@@ -1,19 +1,18 @@
-/// <reference path="../../phaser.d.ts" />
-
 class BarrelSpawner extends Phaser.Physics.Arcade.Group {
     constructor(config) {
-        super(config.scene, config.x, config.y, config.texture);
+        super(config.scene, config.groupConfig, config.groupMultipleConfig, config.customConfig);
+        this.config = config;
     }
 
-    createBarrelSpawner(speedDirection, barrelX, barrelY, colliderList) {
-        const barrelGroup = this.physics.add.group();
-        
+    createBarrelSpawner() {
+        this.barrelGroup = this.config.scene.physics.add.group();
+
         this.queueBarrel(this.createNewBarrel, {
-            speedDirection: speedDirection, 
-            barrelX: barrelX, 
-            barrelY: barrelY, 
-            barrelGroup: barrelGroup, 
-            colliderList: colliderList
+            speedDirection: this.config.customConfig.speedDirection, 
+            barrelX: this.config.customConfig.x, 
+            barrelY: this.config.customConfig.y, 
+            barrelGroup: this.barrelGroup,
+            colliderList: this.config.customConfig.colliders
         });
     }
 
@@ -21,7 +20,7 @@ class BarrelSpawner extends Phaser.Physics.Arcade.Group {
         const barril = config.barrelGroup.create(config.barrelX, config.barrelY, 'barril');
         barril.anims.play('rolling');
         barril.setVelocityX(config.speedDirection);
-        this.physics.add.collider(config.barrelGroup, [...config.colliderList], function (barrel, collider) {
+        this.config.scene.physics.add.collider(config.barrelGroup, [...config.colliderList], function (barrel, collider) {
             barrel.body.setGravityY(0);
             if (barrel.anims.currentAnim.key !== 'barril-exploding') {
                 if (barrel.body.onWall()) {
@@ -48,10 +47,12 @@ class BarrelSpawner extends Phaser.Physics.Arcade.Group {
     }
 
     queueBarrel(callback, ...args) {
-        this.time.addEvent({
+        this.config.scene.time.addEvent({
             delay: 2000,
             repeat: -1,
             callback: callback.bind(this, ...args)
         })
-    }    
+    }  
 }
+
+export default BarrelSpawner;

@@ -59,7 +59,7 @@ class Preloading extends Phaser.Scene {
         }, this);
 
         this.load.on('fileprogress', function(file) {
-            console.log(file.src);
+            // console.log(file.src);
         });
 
         this.load.on('complete', function() {
