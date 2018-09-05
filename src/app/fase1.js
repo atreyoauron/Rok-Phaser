@@ -1,5 +1,7 @@
 /// <reference path="../../phaser.d.ts" />
 
+import CrowSpawner from './crow-spawner.js';
+
 class FaseUm extends Phaser.Scene {
     constructor() {
         super({
@@ -59,10 +61,32 @@ class FaseUm extends Phaser.Scene {
         var tileset = map.addTilesetImage('fase_1_plataformas');
         this.ground = map.createStaticLayer('plataforma_fase_1', tileset);        
         this.ground.setCollisionByProperty({collider: true})
-
         this.physics.add.collider(this.odin, [this.ground]);
-
         this.odin = this.add.existing(this.odin);
+
+        const crow = new CrowSpawner({
+            scene: this,
+            groupConfig: {
+                defaultKey: 'barril',
+                maxSize: 15,    
+            },
+            groupMultipleConfig: {},
+            customConfig: {
+                x: 400,
+                y: 300,
+                bounce: {
+                    x: 0,
+                    y: 1
+                },
+                speedDirection: {
+                    x: 0,
+                    y: -120
+                },
+                colliders: [this.ground]                 
+            }            
+        });     
+        
+        crow.createCrow();
     }
 
     update() {

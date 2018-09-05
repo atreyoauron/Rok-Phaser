@@ -14,8 +14,7 @@ class MainCharacter extends Phaser.GameObjects.Sprite {
     destroy() {}
 
     jump() {
-        const bodyRule = this.body.onFloor() || this.body.touching.down;     
-
+        const bodyRule = this.body.onFloor() || this.body.touching.down;
         if ((bodyRule)) {
             this.setData('isDoubleJumping', false);
             this.body.setVelocityY(-280);

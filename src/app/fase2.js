@@ -61,6 +61,23 @@ class FaseDois extends Phaser.Scene {
         });
 
         barrelOne.createBarrelSpawner(); 
+
+        const barrelTwo = new BarrelSpawner({
+            scene: this,
+            groupConfig: {
+                defaultKey: 'barril',
+                maxSize: 15,    
+            },
+            groupMultipleConfig: {},
+            customConfig: {
+                x: 500,
+                y: 0,
+                speedDirection: -120,
+                colliders: [this.ground, this.odin]                 
+            }
+        });
+
+        barrelTwo.createBarrelSpawner();         
     }
 
     update() {
