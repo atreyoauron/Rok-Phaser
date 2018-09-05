@@ -8,7 +8,7 @@ class FaseUm extends Phaser.Scene {
             physics: {
                 arcade: {
                     gravity: { y: 700 },
-                    overlapBias: 4
+                    debug: true
                 }
             }
         });

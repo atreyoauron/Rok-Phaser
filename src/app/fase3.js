@@ -13,6 +13,7 @@ class FaseTres extends Phaser.Scene {
         })
 
         this.odin;
+        this.common;
     }
 
     init(config) {
@@ -45,7 +46,6 @@ class FaseTres extends Phaser.Scene {
         this.ground.setCollisionByProperty({ collider: true });
         this.physics.add.collider(this.odin, [this.ground]);
         this.odin = this.add.existing(this.odin);
-        this.odin.createCursorMovement(this);
     }
 
     update() {
@@ -61,8 +61,6 @@ class FaseTres extends Phaser.Scene {
                 odinx: 640 - this.odin.width - 20,
                 odiny: this.odin.y
             });
-        } else {
-            this.odin.checkCursorMoviment(this.scene.key);
         }
     }
 }

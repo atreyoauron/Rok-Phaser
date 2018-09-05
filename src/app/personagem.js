@@ -7,6 +7,7 @@ class Odin extends MainCharacter {
         super(config);
         this.body.setVelocity(0, 0);
         this.anims.play('standing');
+        this.setName('mainCharacter');
     }
 
     create() {

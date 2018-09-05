@@ -13,13 +13,14 @@ class FaseDois extends Phaser.Scene {
 
         this.odin;
         this.common;
+        this.barrelGroup;
     }
 
     init(config) {
         this.common = this.scene.get('preloading');
         this.odin = this.common.odin;
         this.scene.stop('faseum');
-        
+
         if (config) {
             this.odin.body.setVelocityX(0);
             this.odin.x = config.odinx;
@@ -29,7 +30,7 @@ class FaseDois extends Phaser.Scene {
         }
     }
 
-    preload() {}
+    preload() { }
 
     create() {
         const screenWidth = this.sys.game.config.width;
@@ -43,35 +44,8 @@ class FaseDois extends Phaser.Scene {
         this.ground.setCollisionByProperty({ collider: true });
         this.physics.add.collider(this.odin, [this.ground]);
         this.odin = this.add.existing(this.odin);
-
-        const barril = this.physics.add.sprite(630, 20, 'barril');
-        barril.anims.play('rolling');
-        barril.setVelocityX(-120);
-
-        this.physics.add.collider(barril, [this.ground], function() {
-            if (barril.anims.currentAnim.key !== 'barril-exploding') {
-                if(barril.body.onWall()) {
-                    barril.setVelocityX(0);
-                    barril.anims.play('barril-exploding');
-                    barril.on('animationcomplete', function(animation, frame) {
-                        console.log(animation);
-                        console.log(frame);
-
-                        if (animation.key == 'barril-exploding') {
-                            barril.setX(630);
-                            barril.setY(0);
-                            barril.anims.play('rolling');
-                            barril.setVelocityX(-120);
-                        };
-                    });
-                }
-            }
-        });
-        this.physics.add.collider(this.odin, barril, function() {
-            barril.setVelocityX(0);
-            barril.anims.play('barril-exploding');
-        });
-
+    
+        this.createBarrelSpawner(-120, 630, 0, [this.ground, this.odin]);
     }
 
     update() {
@@ -89,6 +63,56 @@ class FaseDois extends Phaser.Scene {
             });
         }
     }
+
+    createBarrelSpawner(speedDirection, barrelX, barrelY, colliderList) {
+        const barrelGroup = this.physics.add.group();
+        
+        this.queueBarrel(this.createNewBarrel, {
+            speedDirection: speedDirection, 
+            barrelX: barrelX, 
+            barrelY: barrelY, 
+            barrelGroup: barrelGroup, 
+            colliderList: colliderList
+        });
+    }
+
+    createNewBarrel(config) {
+        const barril = config.barrelGroup.create(config.barrelX, config.barrelY, 'barril');
+        barril.anims.play('rolling');
+        barril.setVelocityX(config.speedDirection);
+        this.physics.add.collider(config.barrelGroup, [...config.colliderList], function (barrel, collider) {
+            barrel.body.setGravityY(0);
+            if (barrel.anims.currentAnim.key !== 'barril-exploding') {
+                if (barrel.body.onWall()) {
+                    this.killBarrel(barrel);
+                    return;
+                }
+                
+                if(barrel.body.touching.left || barrel.body.touching.right) {
+                    this.killBarrel(collider);
+                    return;
+                }
+            }            
+        }, null, this);
+    }
+
+    killBarrel(barrel) {
+        barrel.body.setVelocityX(0);
+        barrel.anims.play('barril-exploding');      
+        barrel.on('animationcomplete', function (animation, frame) {
+            if (animation.key == 'barril-exploding') {
+                barrel.destroy();
+            };
+        });    
+    }
+
+    queueBarrel(callback, ...args) {
+        this.time.addEvent({
+            delay: 2000,
+            repeat: -1,
+            callback: callback.bind(this, ...args)
+        })
+    }            
 }
 
 export default FaseDois;
