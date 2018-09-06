@@ -28,6 +28,9 @@ class FaseUm extends Phaser.Scene {
     }
 
     init(config) {
+        this.physics.world.OVERLAP_BIAS = 10;
+        this.physics.world.TILE_BIAS = 10;
+        
         this.scene.resume('preloading');        
         this.common = this.scene.get('preloading');
         this.odin = this.common.odin;
@@ -64,29 +67,29 @@ class FaseUm extends Phaser.Scene {
         this.physics.add.collider(this.odin, [this.ground]);
         this.odin = this.add.existing(this.odin);
 
-        const crow = new CrowSpawner({
-            scene: this,
-            groupConfig: {
-                defaultKey: 'barril',
-                maxSize: 15,    
-            },
-            groupMultipleConfig: {},
-            customConfig: {
-                x: 400,
-                y: 300,
-                bounce: {
-                    x: 0,
-                    y: 1
-                },
-                speedDirection: {
-                    x: 0,
-                    y: -120
-                },
-                colliders: [this.ground]                 
-            }            
-        });     
+        // const crow = new CrowSpawner({
+        //     scene: this,
+        //     groupConfig: {
+        //         defaultKey: 'barril',
+        //         maxSize: 15,    
+        //     },
+        //     groupMultipleConfig: {},
+        //     customConfig: {
+        //         x: 400,
+        //         y: 300,
+        //         bounce: {
+        //             x: 0,
+        //             y: 1
+        //         },
+        //         speedDirection: {
+        //             x: 0,
+        //             y: -120
+        //         },
+        //         colliders: [this.ground]                 
+        //     }            
+        // });     
         
-        crow.createCrow();
+        // crow.createCrow();
     }
 
     update() {

@@ -1,4 +1,5 @@
 /// <reference path="../../phaser.d.ts" />
+import BarrelSpawner from './barrel-spawner.js';
 
 class FaseTres extends Phaser.Scene {
     constructor() {
@@ -46,6 +47,38 @@ class FaseTres extends Phaser.Scene {
         this.ground.setCollisionByProperty({ collider: true });
         this.physics.add.collider(this.odin, [this.ground]);
         this.odin = this.add.existing(this.odin);
+
+        const barrelOne = new BarrelSpawner({
+            scene: this,
+            groupConfig: {
+                defaultKey: 'barril',
+                maxSize: 15,    
+            },
+            groupMultipleConfig: {},
+            customConfig: {
+                x: 0,
+                y: 71,
+                speedDirection: 120,
+                colliders: [this.ground, this.odin]                 
+            }
+        });
+        const barrelTwo = new BarrelSpawner({
+            scene: this,
+            groupConfig: {
+                defaultKey: 'barril',
+                maxSize: 15,    
+            },
+            groupMultipleConfig: {},
+            customConfig: {
+                x: 130,
+                y: 0,
+                speedDirection: 120,
+                colliders: [this.ground, this.odin]                 
+            }
+        });
+
+        barrelOne.createBarrelSpawner();        
+        barrelTwo.createBarrelSpawner();        
     }
 
     update() {

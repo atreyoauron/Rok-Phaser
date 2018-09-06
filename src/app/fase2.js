@@ -7,7 +7,8 @@ class FaseDois extends Phaser.Scene {
             key: 'fasedois',
             physics: {
                 arcade: {
-                    gravity: { y: 700 }
+                    gravity: { y: 700 },
+                    debug: true                    
                 }
             }
         })
@@ -18,6 +19,8 @@ class FaseDois extends Phaser.Scene {
     }
 
     init(config) {
+        this.physics.world.OVERLAP_BIAS = 10;
+        this.physics.world.TILE_BIAS = 10;
         this.common = this.scene.get('preloading');
         this.odin = this.common.odin;
         this.scene.stop('faseum');
@@ -49,35 +52,18 @@ class FaseDois extends Phaser.Scene {
             scene: this,
             groupConfig: {
                 defaultKey: 'barril',
-                maxSize: 15,    
+                maxSize: 2,    
             },
             groupMultipleConfig: {},
             customConfig: {
-                x: 630,
-                y: 0,
-                speedDirection: -120,
+                x: 645,
+                y: 71,
+                speedDirection: -400,
                 colliders: [this.ground, this.odin]                 
             }
         });
 
-        barrelOne.createBarrelSpawner(); 
-
-        const barrelTwo = new BarrelSpawner({
-            scene: this,
-            groupConfig: {
-                defaultKey: 'barril',
-                maxSize: 15,    
-            },
-            groupMultipleConfig: {},
-            customConfig: {
-                x: 500,
-                y: 0,
-                speedDirection: -120,
-                colliders: [this.ground, this.odin]                 
-            }
-        });
-
-        barrelTwo.createBarrelSpawner();         
+        barrelOne.createBarrelSpawner();    
     }
 
     update() {

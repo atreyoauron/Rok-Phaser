@@ -4,6 +4,8 @@ class MainCharacter extends Phaser.GameObjects.Sprite {
         config.scene.physics.world.enable(this);
         config.scene.add.existing(this);
         this.body.setVelocity(0, 0);
+        this.setOrigin(0.5);
+        this.body.setSize(this.body.sourceWidth * 0.5, this.body.height, this.body.sourceWidth * 0.5, this.height)
         this.common;      
     }
 
@@ -41,8 +43,10 @@ class MainCharacter extends Phaser.GameObjects.Sprite {
         }
 
         if (context.cursors.right.isDown) {
+            this.flipX = false;
             this.body.setVelocityX(100);
         } else if (context.cursors.left.isDown) {
+            this.flipX = true;
             this.body.setVelocityX(-100);
         } else {
             this.body.setVelocityX(0);

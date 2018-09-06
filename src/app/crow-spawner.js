@@ -20,8 +20,6 @@ class CrowSpawner extends Phaser.Physics.Arcade.Group {
     }
 
     createNewCrow(config) {
-        console.log(config);
-
         const crow = config.crowGroup.create(config.x, config.y, 'barril');
         crow.anims.play('rolling');
         crow.setVelocity(config.speedDirection.x, config.speedDirection.y);
@@ -34,11 +32,6 @@ class CrowSpawner extends Phaser.Physics.Arcade.Group {
                     this.kill(crow);
                     return;
                 }    
-                console.log(crow.body.touching);
-
-                if(crow.body.touching.top) {
-                    console.log('touching top');
-                }
 
                 if(crow.body.touching.left || crow.body.touching.right) {
                     this.kill(collider);

@@ -1,4 +1,5 @@
 /// <reference path="../../phaser.d.ts" />
+import BarrelSpawner from './barrel-spawner.js';
 
 class FaseQuatro extends Phaser.Scene {
     constructor() {
@@ -7,7 +8,6 @@ class FaseQuatro extends Phaser.Scene {
             physics: {
                 arcade: {
                     gravity: { y: 700 },
-                    debug: true
                 }
             }
         })
@@ -46,6 +46,103 @@ class FaseQuatro extends Phaser.Scene {
         this.ground.setCollisionByProperty({ collider: true });
         this.physics.add.collider(this.odin, [this.ground]);
         this.odin = this.add.existing(this.odin);
+
+        const barrelOne = new BarrelSpawner({
+            scene: this,
+            groupConfig: {
+                defaultKey: 'barril',
+                maxSize: 2,    
+            },
+            groupMultipleConfig: {},
+            customConfig: {
+                x: 640,
+                y: 23,
+                speedDirection: -70,
+                colliders: [this.ground, this.odin]                 
+            }
+        });
+
+        const barrelTwo = new BarrelSpawner({
+            scene: this,
+            groupConfig: {
+                defaultKey: 'barril',
+                maxSize: 2,    
+            },
+            groupMultipleConfig: {},
+            customConfig: {
+                x: 640,
+                y: 70,
+                speedDirection: -80,
+                colliders: [this.ground, this.odin]                 
+            }
+        });   
+        
+        const barrelThree = new BarrelSpawner({
+            scene: this,
+            groupConfig: {
+                defaultKey: 'barril',
+                maxSize: 2,    
+            },
+            groupMultipleConfig: {},
+            customConfig: {
+                x: 640,
+                y: 117,
+                speedDirection: -90,
+                colliders: [this.ground, this.odin]                 
+            }
+        });  
+        
+        const barrelFour = new BarrelSpawner({
+            scene: this,
+            groupConfig: {
+                defaultKey: 'barril',
+                maxSize: 2,    
+            },
+            groupMultipleConfig: {},
+            customConfig: {
+                x: 640,
+                y: 158,
+                speedDirection: -100,
+                colliders: [this.ground, this.odin]                 
+            }
+        });          
+
+        const barrelFive = new BarrelSpawner({
+            scene: this,
+            groupConfig: {
+                defaultKey: 'barril',
+                maxSize: 3,    
+            },
+            groupMultipleConfig: {},
+            customConfig: {
+                x: 354,
+                y: 0,
+                speedDirection: -120,
+                colliders: [this.ground, this.odin]                 
+            }
+        }); 
+        
+        const barrelSix = new BarrelSpawner({
+            scene: this,
+            groupConfig: {
+                defaultKey: 'barril',
+                maxSize: 2,    
+            },
+            groupMultipleConfig: {},
+            customConfig: {
+                x: 27,
+                y: 148,
+                speedDirection: 250,
+                colliders: [this.ground, this.odin]                 
+            }
+        });
+
+        barrelOne.createBarrelSpawner();          
+        barrelTwo.createBarrelSpawner();          
+        barrelThree.createBarrelSpawner();          
+        barrelFour.createBarrelSpawner();          
+        barrelFive.createBarrelSpawner();          
+        barrelSix.createBarrelSpawner();          
     }
 
     update() {

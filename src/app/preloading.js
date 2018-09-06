@@ -134,7 +134,10 @@ class Preloading extends Phaser.Scene {
     }
 
     update() {
-
+        if(this.input.activePointer.isDown) {
+            console.log(this.input.activePointer.x);
+            console.log(this.input.activePointer.y);
+        }
     }
 
     createCursorMovement() {
