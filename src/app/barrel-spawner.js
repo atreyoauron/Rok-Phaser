@@ -2,6 +2,7 @@
 
 class BarrelSpawner extends Phaser.GameObjects.Group {
     constructor(config) {
+        console.log(config);
         super(config.scene, config.groupConfig, config.groupMultipleConfig, config.customConfig);
         this.config = config;
     }
@@ -15,7 +16,8 @@ class BarrelSpawner extends Phaser.GameObjects.Group {
             barrelX: this.config.customConfig.x,
             barrelY: this.config.customConfig.y,
             barrelGroup: this.barrelGroup,
-            colliderList: this.config.customConfig.colliders
+            colliderList: this.config.customConfig.colliders,
+            overlapList: this.config.customConfig.overlaps
         });
     }
 
@@ -28,18 +30,28 @@ class BarrelSpawner extends Phaser.GameObjects.Group {
 
         const barril = this.barrelGroup.getFirstDead(true, config.barrelX, config.barrelY, 'barril');
         if (barril === null) return;
-        
+
         barril.active = true;
         barril.visible = true;
 
         if (barril) {
             barril.anims.play('rolling');
             barril.setVelocityX(config.speedDirection);
-    
+
             if (config.speedDirection > 0) {
                 barril.flipX = true;
             }
-    
+
+            this.config.scene.physics.add.overlap(config.barrelGroup, [...config.overlapList], function (collider, barrel) {
+                barrel.body.setGravityY(0);
+                if (barrel.anims.currentAnim.key !== 'barril-exploding') {
+                    if (barrel.body.touching.left || barrel.body.touching.right || barrel.body.touching.up) {
+                        this.killBarrel(barrel, config.barrelGroup);
+                        return;
+                    }
+                }
+            }, null, this);
+
             this.config.scene.physics.add.collider(config.barrelGroup, [...config.colliderList], function (barrel, collider) {
                 barrel.body.setGravityY(0);
                 if (barrel.anims.currentAnim.key !== 'barril-exploding') {
@@ -47,13 +59,8 @@ class BarrelSpawner extends Phaser.GameObjects.Group {
                         this.killBarrel(barrel, config.barrelGroup);
                         return;
                     }
-    
-                    if (barrel.body.touching.left || barrel.body.touching.right || barrel.body.touching.up) {
-                        this.killBarrel(collider, config.barrelGroup);
-                        return;
-                    }
                 }
-            }, null, this);            
+            }, null, this);
         }
     }
 

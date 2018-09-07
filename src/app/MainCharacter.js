@@ -9,11 +9,12 @@ class MainCharacter extends Phaser.GameObjects.Sprite {
         this.common;      
     }
 
-    preload() {}
-    create() {}
-    update() {
+    createJump(){
+        this.scene.input.keyboard.addKey('SPACE');        
+        this.scene.input.keyboard.on('keydown_SPACE', function() {
+            this.jump();
+        }, this);        
     }
-    destroy() {}
 
     jump() {
         const bodyRule = this.body.onFloor() || this.body.touching.down;
@@ -36,10 +37,6 @@ class MainCharacter extends Phaser.GameObjects.Sprite {
     checkCursorMoviment(context) {
         if(context.cursors.right.isDown && context.cursors.left.isDown) {
             this.body.setVelocityX(0);  
-        }
-
-        if(context.cursors.up.isDown || context.cursors.space.isDown) {
-            this.jump();
         }
 
         if (context.cursors.right.isDown) {

@@ -52,28 +52,30 @@ class FaseTres extends Phaser.Scene {
             scene: this,
             groupConfig: {
                 defaultKey: 'barril',
-                maxSize: 15,    
+                maxSize: 1,    
             },
             groupMultipleConfig: {},
             customConfig: {
                 x: 0,
                 y: 71,
                 speedDirection: 120,
-                colliders: [this.ground, this.odin]                 
+                colliders: [this.ground],
+                overlaps: [this.odin],
             }
         });
         const barrelTwo = new BarrelSpawner({
             scene: this,
             groupConfig: {
                 defaultKey: 'barril',
-                maxSize: 15,    
+                maxSize: 1,    
             },
             groupMultipleConfig: {},
             customConfig: {
                 x: 130,
                 y: 0,
                 speedDirection: 120,
-                colliders: [this.ground, this.odin]                 
+                colliders: [this.ground],
+                overlaps: [this.odin],
             }
         });
 

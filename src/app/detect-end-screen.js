@@ -13,7 +13,6 @@ if(
 
 if(this.odin.x - this.odin.width < (this.cameras.main.scrollX)) {
     if (this.cameras.main.scrollX - this.odin.width < 0) {
-        console.log('caindo aqui');
         return;
     }
 

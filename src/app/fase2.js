@@ -19,8 +19,6 @@ class FaseDois extends Phaser.Scene {
     }
 
     init(config) {
-        this.physics.world.OVERLAP_BIAS = 10;
-        this.physics.world.TILE_BIAS = 10;
         this.common = this.scene.get('preloading');
         this.odin = this.common.odin;
         this.scene.stop('faseum');
@@ -42,7 +40,6 @@ class FaseDois extends Phaser.Scene {
         this.cameras.main.setBackgroundColor('rgba(10, 230, 255, 1)');
 
         var map = this.add.tilemap('fase_2');
-
         var tileset = map.addTilesetImage('plataformas');
         this.ground = map.createStaticLayer('plataformas', tileset);
         this.ground.setCollisionByProperty({ collider: true });
@@ -59,7 +56,8 @@ class FaseDois extends Phaser.Scene {
                 x: 645,
                 y: 71,
                 speedDirection: -400,
-                colliders: [this.ground, this.odin]                 
+                colliders: [this.ground],
+                overlaps: [this.odin],
             }
         });
 

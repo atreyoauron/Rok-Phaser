@@ -8,9 +8,9 @@ class Preloading extends Phaser.Scene {
             pixelArt: true,
             physics: {
                 arcade: {
-                    gravity: { y: 700 } 
+                    gravity: { y: 700 }
                 }
-            }            
+            }
         })
 
         window.menuRestarted = false;
@@ -52,18 +52,18 @@ class Preloading extends Phaser.Scene {
         progressBar.setDepth(2)
         progressBox.setDepth(1);
 
-        this.load.on('progress', function(value) {
+        this.load.on('progress', function (value) {
             progressBar.fillStyle(0x00ff00, 1);
             progressBar.fillRect(this.sys.game.config.width / 2 - 145, this.sys.game.config.height / 2 - 20, 290 * value, 40);
             percentText.setText(parseInt(value * 100) + '%');
         }, this);
 
-        this.load.on('fileprogress', function(file) {
+        this.load.on('fileprogress', function (file) {
             // console.log(file.src);
         });
 
-        this.load.on('complete', function() {
-            this.cameras.main.fadeOut(1000, 0, 0, 0, function() {
+        this.load.on('complete', function () {
+            this.cameras.main.fadeOut(1000, 0, 0, 0, function () {
                 if (this.cameras.main.fadeEffect.progress === 1) {
                     this.scene.launch('MainMenu');
                 }
@@ -78,11 +78,11 @@ class Preloading extends Phaser.Scene {
         this.load.spritesheet('barril', 'src/assets/img/barril.png', {
             frameWidth: 32,
             frameHeight: 24
-        });   
+        });
         this.load.spritesheet('barril-explodir', 'src/assets/img/barril-explodir.png', {
             frameWidth: 24,
             frameHeight: 24
-        });                
+        });
         this.load.tilemapTiledJSON('fase_1', 'src/assets/json/fase_1.json');
         this.load.tilemapTiledJSON('fase_2', 'src/assets/json/fase_2.json');
         this.load.tilemapTiledJSON('fase_3', 'src/assets/json/fase_3.json');
@@ -92,31 +92,32 @@ class Preloading extends Phaser.Scene {
         this.load.image('fase_1_plataformas', 'src/assets/img/plataforma_fase_1.png');
         this.load.image('fundo_fase_1', ['src/assets/img/fase_1_bg.png', 'src/assets/img/fase_n_1_bg.png']);
         this.load.audio('bgMusic', 'src/assets/audio/sound.mp3');
-        this.load.image('rok_logo', 'src/assets/img/rok-logo.png');     
+        this.load.image('rok_logo', 'src/assets/img/rok-logo.png');
+        this.load.image('tridente', 'src/assets/img/tridente.png');
         this.load.image('plataformas', 'src/assets/img/plataforma_fase_1.png');
     }
 
     create() {
         this.anims.create({
             key: 'standing',
-            frames: this.anims.generateFrameNumbers('odin', {start: 0, end: 7}),
+            frames: this.anims.generateFrameNumbers('odin', { start: 0, end: 7 }),
             frameRate: 7,
             repeat: -1
         });
 
         this.anims.create({
             key: 'rolling',
-            frames: this.anims.generateFrameNumbers('barril', {start: 0, end: 7}),
+            frames: this.anims.generateFrameNumbers('barril', { start: 0, end: 7 }),
             frameRate: 7,
             repeat: -1
-        });    
-        
+        });
+
         this.anims.create({
             key: 'barril-exploding',
-            frames: this.anims.generateFrameNumbers('barril-explodir', {start: 0, end: 5}),
+            frames: this.anims.generateFrameNumbers('barril-explodir', { start: 0, end: 5 }),
             frameRate: 15,
             repeat: 0
-        });            
+        });
 
         this.odin = new Odin({
             scene: this,
@@ -128,13 +129,15 @@ class Preloading extends Phaser.Scene {
         this.odin.x = -100;
         this.odin.y = -100;
         this.odin.create();
-        this.odin.configureMainCharacter(); 
-        this.cursors = this.input.keyboard.createCursorKeys(this); 
-        this.createCursorMovement();      
+        this.odin.configureMainCharacter();
+        this.cursors = this.input.keyboard.createCursorKeys(this);
+        this.createCursorMovement();
     }
 
     update() {
-        if(this.input.activePointer.isDown) {
+        this.odin.update();
+
+        if (this.input.activePointer.isDown) {
             console.log(this.input.activePointer.x);
             console.log(this.input.activePointer.y);
         }
@@ -145,19 +148,19 @@ class Preloading extends Phaser.Scene {
     }
 
     keyUpPressed(callback, context) {
-        this.input.keyboard.on('keydown_UP', function() {
+        this.input.keyboard.on('keydown_UP', function () {
             if (callback) {
-                return callback();                
+                return callback();
             }
         });
     }
 
     keyDownPressed(callback, context) {
-        this.input.keyboard.on('keydown_DOWN', function() {
-            if(callback) {
+        this.input.keyboard.on('keydown_DOWN', function () {
+            if (callback) {
                 return callback();
             };
-        });        
+        });
     }
 }
 

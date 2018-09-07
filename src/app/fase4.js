@@ -13,7 +13,7 @@ class FaseQuatro extends Phaser.Scene {
         })
 
         this.odin;
-        this.common;        
+        this.common;
     }
 
     init(config) {
@@ -58,7 +58,8 @@ class FaseQuatro extends Phaser.Scene {
                 x: 640,
                 y: 23,
                 speedDirection: -70,
-                colliders: [this.ground, this.odin]                 
+                colliders: [this.ground],
+                overlaps: [this.odin],
             }
         });
 
@@ -73,7 +74,8 @@ class FaseQuatro extends Phaser.Scene {
                 x: 640,
                 y: 70,
                 speedDirection: -80,
-                colliders: [this.ground, this.odin]                 
+                colliders: [this.ground],
+                overlaps: [this.odin],                
             }
         });   
         
@@ -88,7 +90,8 @@ class FaseQuatro extends Phaser.Scene {
                 x: 640,
                 y: 117,
                 speedDirection: -90,
-                colliders: [this.ground, this.odin]                 
+                colliders: [this.ground],
+                overlaps: [this.odin],               
             }
         });  
         
@@ -103,7 +106,8 @@ class FaseQuatro extends Phaser.Scene {
                 x: 640,
                 y: 158,
                 speedDirection: -100,
-                colliders: [this.ground, this.odin]                 
+                colliders: [this.ground],
+                overlaps: [this.odin],                
             }
         });          
 
@@ -118,7 +122,8 @@ class FaseQuatro extends Phaser.Scene {
                 x: 354,
                 y: 0,
                 speedDirection: -120,
-                colliders: [this.ground, this.odin]                 
+                colliders: [this.ground],
+                overlaps: [this.odin],                
             }
         }); 
         
@@ -133,7 +138,8 @@ class FaseQuatro extends Phaser.Scene {
                 x: 27,
                 y: 148,
                 speedDirection: 250,
-                colliders: [this.ground, this.odin]                 
+                colliders: [this.ground],
+                overlaps: [this.odin],               
             }
         });
 
