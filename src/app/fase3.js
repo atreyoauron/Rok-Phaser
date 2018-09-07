@@ -5,10 +5,11 @@ class FaseTres extends Phaser.Scene {
     constructor() {
         super({
             key: 'fasetres',
+            pixelArt: true,
             physics: {
                 arcade: {
                     gravity: { y: 700 },
-                    debug: true
+                    debug: false
                 }
             }
         })

@@ -15,7 +15,7 @@ class Odin extends MainCharacter {
 
     create() {
         this.createJump();
-        
+
         const crow = new SpearSpawner({
             scene: this,
             groupConfig: {
@@ -48,6 +48,7 @@ class Odin extends MainCharacter {
             }   
 
             const direction = (this.flipX) ? -400 : 400;
+            const xOrigin = (this.flipX) ? this.x - 30 : this.x + 30;
 
             const config = {
                 scene: scene,              
@@ -56,7 +57,7 @@ class Odin extends MainCharacter {
                     y: 0
                 },
                 bounce: 0,
-                x: this.x,
+                x: xOrigin,
                 y: this.y,
                 colliderList: [scene.ground],
             };
@@ -69,6 +70,8 @@ class Odin extends MainCharacter {
             if (scene.scene.key !== 'preloading') {
                 if(scene.scene.settings.active) {
                     return scene;
+                } else {
+                    this.spearGroupCreatedOnThisScene[scene.scene.key] = false;
                 }
             }
         });

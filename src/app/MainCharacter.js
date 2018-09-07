@@ -13,7 +13,12 @@ class MainCharacter extends Phaser.GameObjects.Sprite {
         this.scene.input.keyboard.addKey('SPACE');        
         this.scene.input.keyboard.on('keydown_SPACE', function() {
             this.jump();
-        }, this);        
+        }, this);    
+        
+        this.scene.input.keyboard.addKey('UP');        
+        this.scene.input.keyboard.on('keydown_UP', function() {
+            this.jump();
+        }, this);            
     }
 
     jump() {

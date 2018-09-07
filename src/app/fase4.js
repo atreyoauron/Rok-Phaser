@@ -5,6 +5,7 @@ class FaseQuatro extends Phaser.Scene {
     constructor() {
         super({
             key: 'fasequatro',
+            pixelArt: true,
             physics: {
                 arcade: {
                     gravity: { y: 700 },

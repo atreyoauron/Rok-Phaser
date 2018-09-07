@@ -83,6 +83,10 @@ class Preloading extends Phaser.Scene {
             frameWidth: 24,
             frameHeight: 24
         });
+        this.load.spritesheet('lanca', 'src/assets/img/lanca.png', {
+            frameWidth: 37,
+            frameHeight: 9
+        });        
         this.load.tilemapTiledJSON('fase_1', 'src/assets/json/fase_1.json');
         this.load.tilemapTiledJSON('fase_2', 'src/assets/json/fase_2.json');
         this.load.tilemapTiledJSON('fase_3', 'src/assets/json/fase_3.json');
@@ -93,17 +97,23 @@ class Preloading extends Phaser.Scene {
         this.load.image('fundo_fase_1', ['src/assets/img/fase_1_bg.png', 'src/assets/img/fase_n_1_bg.png']);
         this.load.audio('bgMusic', 'src/assets/audio/sound.mp3');
         this.load.image('rok_logo', 'src/assets/img/rok-logo.png');
-        this.load.image('tridente', 'src/assets/img/tridente.png');
         this.load.image('plataformas', 'src/assets/img/plataforma_fase_1.png');
     }
 
     create() {
         this.anims.create({
+            key: 'lancando',
+            frames: this.anims.generateFrameNumbers('lanca', { start: 0, end: 4 }),
+            frameRate: 8,
+            repeat: -1
+        });
+
+        this.anims.create({
             key: 'standing',
             frames: this.anims.generateFrameNumbers('odin', { start: 0, end: 7 }),
             frameRate: 7,
             repeat: -1
-        });
+        });        
 
         this.anims.create({
             key: 'rolling',
