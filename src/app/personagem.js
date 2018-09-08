@@ -6,7 +6,6 @@ import SpearSpawner from './spear.js';
 class Odin extends MainCharacter {
     constructor(config) {
         super(config);
-        this.body.setVelocity(0, 0);
         this.anims.play('standing');
         this.setName('mainCharacter');
         this.config = config;

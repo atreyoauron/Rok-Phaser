@@ -93,6 +93,10 @@ class Preloading extends Phaser.Scene {
         this.load.tilemapTiledJSON('fase_4', 'src/assets/json/fase_4.json');
         this.load.tilemapTiledJSON('fase_5', 'src/assets/json/fase_5.json');
         this.load.tilemapTiledJSON('fase_6', 'src/assets/json/fase_6.json');
+        this.load.tilemapTiledJSON('fase_7', 'src/assets/json/fase_7.json');
+        this.load.tilemapTiledJSON('fase_8', 'src/assets/json/fase_8.json');
+        this.load.tilemapTiledJSON('fase_9', 'src/assets/json/fase_9.json');
+        this.load.tilemapTiledJSON('fase_10', 'src/assets/json/fase_10.json');
         this.load.image('fase_1_plataformas', 'src/assets/img/plataforma_fase_1.png');
         this.load.image('fundo_fase_1', ['src/assets/img/fase_1_bg.png', 'src/assets/img/fase_n_1_bg.png']);
         this.load.audio('bgMusic', 'src/assets/audio/sound.mp3');
@@ -148,8 +152,8 @@ class Preloading extends Phaser.Scene {
         this.odin.update();
 
         if (this.input.activePointer.isDown) {
-            // console.log(this.input.activePointer.x);
-            // console.log(this.input.activePointer.y);
+            console.log(this.input.activePointer.x);
+            console.log(this.input.activePointer.y);
         }
     }
 

@@ -22,11 +22,9 @@ class FaseQuatro extends Phaser.Scene {
         this.scene.stop('fasequatro');
         
         if (config) {
-            this.odin.body.setVelocityX(0);
             this.odin.x = config.odinx;
             this.odin.y = config.odiny;
             this.physics.world.enable(this.odin);
-            this.odin.body.setVelocity(0, 0);
         }
     }
 
@@ -44,22 +42,33 @@ class FaseQuatro extends Phaser.Scene {
         var tileset = map.addTilesetImage('plataformas');
         this.ground = map.createStaticLayer('plataformas', tileset);
         this.ground.setCollisionByProperty({ collider: true });
-        this.physics.add.collider(this.odin, [this.ground]);
+        this.physics.add.collider(this.odin, [this.ground], function() {
+            this.odin.resetJump();
+        }, null, this);
         this.odin = this.add.existing(this.odin);
     }
 
     update() {
         this.odin.checkCursorMoviment(this.common);
 
-        if (this.odin.x >= 636) {
-            this.scene.start('faseum', {
-                odinx: 20,
-                odiny: this.odin.y - 5
+        if (this.odin.x >= 328 && this.odin.x <= 394 && this.odin.y < 0) {
+            this.scene.start('faseseis', {
+                odinx: 344,
+                odiny: 310 - this.odin.y * 2
             });
-        } else if (this.odin.x <= 14) {
-            this.scene.start('fasequatro', {
-                odinx: 640 - this.odin.width - 20,
+        }
+        
+        if (this.odin.x > 636) {
+            this.scene.start('faseum', {
+                odinx: this.odin.width,
                 odiny: this.odin.y
+            });
+        }
+
+        if (this.odin.x >= 10 && this.odin.x <= 120 && this.odin.y > 360) {
+            this.scene.start('faseoito', {
+                odinx: this.odin.x,
+                odiny: 0
             });
         }
     }

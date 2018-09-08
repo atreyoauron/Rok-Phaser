@@ -7,6 +7,9 @@ import {
     FaseQuatro,
     FaseCinco,
     FaseSeis,
+    FaseSete,
+    FaseOito,
+    FaseNove,
     Creditos,
     Preloading
 } from './index.js'
@@ -26,6 +29,9 @@ const config = {
         FaseQuatro,
         FaseCinco,
         FaseSeis,
+        FaseSete,
+        FaseOito,
+        FaseNove,
         Creditos
     ]
 }

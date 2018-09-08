@@ -13,20 +13,18 @@ class FaseSeis extends Phaser.Scene {
         })
 
         this.odin;
+        this.common;        
     }
 
     init(config) {
-        let preload = this.scene.get('preloading');
-        this.odin = preload.odin;
+        this.common = this.scene.get('preloading');
+        this.odin = this.common.odin;
         this.scene.stop('fasecinco');
         
         if (config) {
-            this.odin.removeKeys(this);
-            this.odin.body.setVelocityX(0);
             this.odin.x = config.odinx;
             this.odin.y = config.odiny;
             this.physics.world.enable(this.odin);
-            this.odin.body.setVelocity(0, 0);
         }
     }
 
@@ -44,24 +42,25 @@ class FaseSeis extends Phaser.Scene {
         var tileset = map.addTilesetImage('plataformas');
         this.ground = map.createStaticLayer('plataformas', tileset);
         this.ground.setCollisionByProperty({ collider: true });
-        this.physics.add.collider(this.odin, [this.ground]);
+        this.physics.add.collider(this.odin, [this.ground], function() {
+            this.odin.resetJump();
+        }, null, this);
         this.odin = this.add.existing(this.odin);
-        this.odin.createCursorMovement(this);
     }
 
     update() {
-        if (this.odin.x >= 636) {
-            this.scene.start('faseum', {
-                odinx: 20,
-                odiny: this.odin.y - 5
-            });
-        } else if (this.odin.x <= 14) {
+        this.odin.checkCursorMoviment(this.common);
+
+        if (this.odin.x >= 314 && this.odin.x <= 375 && this.odin.y > 360) {
             this.scene.start('fasecinco', {
-                odinx: 640 - this.odin.width - 20,
-                odiny: this.odin.y
+                odinx: this.odin.x,
+                odiny: 0
             });
-        } else {
-            this.odin.checkCursorMoviment(this.scene.key);
+        } else if (this.odin.x >= 568 && this.odin.x <= 640 && this.odin.y < 0) {
+            this.scene.start('fasesete', {
+                odinx: this.odin.x,
+                odiny: 360
+            });
         }
     }
 }

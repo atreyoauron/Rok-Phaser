@@ -32,8 +32,8 @@ class FaseUm extends Phaser.Scene {
         this.common = this.scene.get('preloading');
         this.odin = this.common.odin;
         this.physics.world.enable(this.odin);
-        this.odin.body.setVelocity(0, 0);
 
+        console.log(config);
         if (config.odinx) {
             this.odin.x = config.odinx;
             this.odin.y = config.odiny;
@@ -95,6 +95,11 @@ class FaseUm extends Phaser.Scene {
 
         if (this.odin.x >= 636) {
             this.changeScene('fasedois');
+        } else if (this.odin.x <= 14) {
+            this.scene.start('fasecinco', {
+                odinx: 640 - this.odin.width - 20,
+                odiny: this.odin.y
+            });
         }
     }
 

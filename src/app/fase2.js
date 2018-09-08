@@ -25,11 +25,9 @@ class FaseDois extends Phaser.Scene {
         this.scene.stop('faseum');
 
         if (config) {
-            this.odin.body.setVelocityX(0);
             this.odin.x = config.odinx;
             this.odin.y = config.odiny;
             this.physics.world.enable(this.odin);
-            this.odin.body.setVelocity(0, 0);
         }
     }
 

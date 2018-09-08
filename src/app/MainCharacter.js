@@ -5,7 +5,6 @@ class MainCharacter extends Phaser.GameObjects.Sprite {
         super(config.scene, config.x, config.y, config.key);
         config.scene.physics.world.enable(this);
         config.scene.add.existing(this);
-        this.body.setVelocity(0, 0);
         this.setOrigin(0.5);
         this.body.setSize(this.body.sourceWidth * 0.5, this.body.height, this.body.sourceWidth * 0.5, this.height)
         this.common;      
@@ -86,7 +85,7 @@ class MainCharacter extends Phaser.GameObjects.Sprite {
             lifePoints: 400,
             shield: 0,
             itens: {
-                doubleJump: false,
+                doubleJump: true,
                 spear: false,
                 armor: false
             }
