@@ -48,7 +48,6 @@ class MainMenu extends Phaser.Scene {
         newGame.setInteractive();
 
         newGame.on('pointerdown', function() {
-            console.log('start game');
         });
 
         const continuar = this.make.text({
@@ -76,7 +75,6 @@ class MainMenu extends Phaser.Scene {
         this.selectedMenu.setColor('#00ff00');
 
         this.input.keyboard.on('keydown_UP', function() {
-            console.log('down');
             this.selectedMenu.setColor('#ffffff');
             this.activeIndex--;
             
@@ -89,8 +87,6 @@ class MainMenu extends Phaser.Scene {
         }, this);
 
         this.input.keyboard.on('keydown_DOWN', function() {
-            console.log('down');
-
             this.selectedMenu.setColor('#ffffff');
             this.activeIndex++;
             
@@ -101,8 +97,6 @@ class MainMenu extends Phaser.Scene {
             this.selectedMenu = this.menuItens[this.activeIndex];
             this.selectedMenu.setColor('#00ff00');        
         }, this);
-
-        console.log(this);
 
         this.input.keyboard.on('keydown_ENTER', function() {
             switch(this.activeIndex) {

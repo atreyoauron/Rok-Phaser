@@ -2,7 +2,6 @@
 
 class BarrelSpawner extends Phaser.GameObjects.Group {
     constructor(config) {
-        console.log(config);
         super(config.scene, config.groupConfig, config.groupMultipleConfig, config.customConfig);
         this.config = config;
     }

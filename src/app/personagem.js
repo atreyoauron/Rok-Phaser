@@ -84,6 +84,7 @@ class Odin extends MainCharacter {
     }
 
     update() {
+
     }
 
     shootSpear() {

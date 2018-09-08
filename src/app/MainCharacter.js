@@ -1,3 +1,5 @@
+/// <reference path="../../phaser.d.ts" />
+
 class MainCharacter extends Phaser.GameObjects.Sprite {
     constructor(config) {
         super(config.scene, config.x, config.y, config.key);
@@ -7,6 +9,8 @@ class MainCharacter extends Phaser.GameObjects.Sprite {
         this.setOrigin(0.5);
         this.body.setSize(this.body.sourceWidth * 0.5, this.body.height, this.body.sourceWidth * 0.5, this.height)
         this.common;      
+        this.body.wasTouching.none = false
+        this.body.touching.none = false;
     }
 
     createJump(){
@@ -21,20 +25,40 @@ class MainCharacter extends Phaser.GameObjects.Sprite {
         }, this);            
     }
 
-    jump() {
+    resetJump() {
         const bodyRule = this.body.onFloor() || this.body.touching.down;
-        if ((bodyRule)) {
+
+        if(bodyRule) {
             this.setData('isDoubleJumping', false);
-            this.body.setVelocityY(-280);
+            this.setData('jump', false);    
+        }
+    }
+
+    jump() {
+        let bodyRule = this.body.onFloor() || this.body.touching.down;
+        
+        let jump = this.getData('jump');
+        let isDoubleJumping = this.getData('isDoubleJumping');     
+        
+        if (bodyRule) {
+            this.body.setVelocityY(-280);    
+            this.setData('jump', true);
+            return;
         }
 
-        if (!this.body.onFloor() && !this.body.touching.down) {
+        if (!jump && !isDoubleJumping) {
+            this.body.setVelocityY(-280);    
+            this.setData('jump', true);
+            return;
+        }
+
+        if (jump) {
             const itens = this.getData('itens');
-            const isDoubleJumping = this.getData('isDoubleJumping');
 
             if (itens.doubleJump && !isDoubleJumping) {
                 this.body.setVelocityY(-300);
                 this.setData('isDoubleJumping', true);
+                this.setData('jump', false);
             }
         }
     }
@@ -58,6 +82,7 @@ class MainCharacter extends Phaser.GameObjects.Sprite {
         this.setDataEnabled();
         this.setData({
             isDoubleJumping: false,
+            jump: false,
             lifePoints: 400,
             shield: 0,
             itens: {

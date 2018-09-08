@@ -148,8 +148,8 @@ class Preloading extends Phaser.Scene {
         this.odin.update();
 
         if (this.input.activePointer.isDown) {
-            console.log(this.input.activePointer.x);
-            console.log(this.input.activePointer.y);
+            // console.log(this.input.activePointer.x);
+            // console.log(this.input.activePointer.y);
         }
     }
 

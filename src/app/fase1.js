@@ -61,7 +61,9 @@ class FaseUm extends Phaser.Scene {
         var tileset = map.addTilesetImage('fase_1_plataformas');
         this.ground = map.createStaticLayer('plataforma_fase_1', tileset);        
         this.ground.setCollisionByProperty({collider: true})
-        this.physics.add.collider(this.odin, [this.ground]);
+        this.physics.add.collider(this.odin, [this.ground], function() {
+            this.odin.resetJump();
+        }, null, this);
         this.odin = this.add.existing(this.odin);
         // const crow = new CrowSpawner({
         //     scene: this,
