@@ -15,7 +15,7 @@ class Odin extends MainCharacter {
     create() {
         this.createJump();
 
-        const crow = new SpearSpawner({
+        this.spear = new SpearSpawner({
             scene: this,
             groupConfig: {
                 defaultKey: 'tridente',
@@ -45,7 +45,7 @@ class Odin extends MainCharacter {
             const scene = this.getActivatedScene(this.scene.scene.manager.scenes);
             if(!this.spearGroupCreatedOnThisScene[scene.scene.key]) {
                 if (!this.spearGroupCreatedOnThisScene[scene.scene.key]) {
-                    crow.createSpearGroup(scene);
+                    this.spear.createSpearGroup(scene);
                     this.spearGroupCreatedOnThisScene[scene.scene.key] = scene.scene.key;
                 }
             }   
@@ -53,6 +53,7 @@ class Odin extends MainCharacter {
             const direction = (this.flipX) ? -400 : 400;
             const xOrigin = (this.flipX) ? this.x - 30 : this.x + 30;
 
+            const colliders = (scene.crows) ? [scene.ground, scene.crows.crowGroup] : [scene.ground];
             const config = {
                 scene: scene,              
                 speedDirection: {
@@ -62,9 +63,9 @@ class Odin extends MainCharacter {
                 bounce: 0,
                 x: xOrigin,
                 y: this.y,
-                colliderList: [scene.ground],
+                colliderList: colliders,
             };
-            crow.createNewCrow(config);
+            this.spear.createNewSpear(config);
         }, this);
     }
 

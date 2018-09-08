@@ -1,7 +1,5 @@
 /// <reference path="../../phaser.d.ts" />
 
-import CrowSpawner from './crow-spawner.js';
-
 class FaseUm extends Phaser.Scene {
     constructor() {
         super({
@@ -33,7 +31,6 @@ class FaseUm extends Phaser.Scene {
         this.odin = this.common.odin;
         this.physics.world.enable(this.odin);
 
-        console.log(config);
         if (config.odinx) {
             this.odin.x = config.odinx;
             this.odin.y = config.odiny;
@@ -65,29 +62,6 @@ class FaseUm extends Phaser.Scene {
             this.odin.resetJump();
         }, null, this);
         this.odin = this.add.existing(this.odin);
-        // const crow = new CrowSpawner({
-        //     scene: this,
-        //     groupConfig: {
-        //         defaultKey: 'barril',
-        //         maxSize: 15,    
-        //     },
-        //     groupMultipleConfig: {},
-        //     customConfig: {
-        //         x: 400,
-        //         y: 300,
-        //         bounce: {
-        //             x: 0,
-        //             y: 1
-        //         },
-        //         speedDirection: {
-        //             x: 0,
-        //             y: -120
-        //         },
-        //         colliders: [this.ground]                 
-        //     }            
-        // });     
-        
-        // crow.createCrow();
     }
 
     update() {

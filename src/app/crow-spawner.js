@@ -4,16 +4,20 @@ class CrowSpawner extends Phaser.Physics.Arcade.Group {
     constructor(config) {
         super(config.scene, config.groupConfig, config.groupMultipleConfig, config.customConfig);
         this.config = config;
+        this.crowGroup;
     }
 
-    createCrow() {
-        this.crowGroup = this.config.scene.physics.add.group();
+    createCrow(position, direction) {
+        if(!this.crowGroup) {
+            console.log('criando novo grupo');
+            this.crowGroup = this.config.scene.physics.add.group();
+        }
 
         this.createNewCrow({
-            speedDirection: this.config.customConfig.speedDirection, 
+            speedDirection: direction, 
             bounce: this.config.customConfig.bounce,
-            x: this.config.customConfig.x, 
-            y: this.config.customConfig.y, 
+            x: position.x, 
+            y: position.y, 
             crowGroup: this.crowGroup,
             colliderList: this.config.customConfig.colliders
         });

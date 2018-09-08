@@ -1,4 +1,5 @@
 /// <reference path="../../phaser.d.ts" />
+import CrowSpawner from './crow-spawner.js';
 
 class FaseQuatro extends Phaser.Scene {
     constructor() {
@@ -7,7 +8,6 @@ class FaseQuatro extends Phaser.Scene {
             physics: {
                 arcade: {
                     gravity: { y: 700 },
-                    debug: true
                 }
             }
         })
@@ -46,6 +46,31 @@ class FaseQuatro extends Phaser.Scene {
             this.odin.resetJump();
         }, null, this);
         this.odin = this.add.existing(this.odin);
+
+        this.crows = new CrowSpawner({
+            scene: this,
+            groupConfig: {
+                defaultKey: 'barril',
+                maxSize: 15,    
+            },
+            groupMultipleConfig: {},
+            customConfig: {
+                x: 400,
+                y: 300,
+                bounce: {
+                    x: 0,
+                    y: 1
+                },
+                speedDirection: {
+                    x: 0,
+                    y: -120
+                },
+                colliders: [this.ground]                 
+            }            
+        });     
+        
+        this.crows.createCrow({x: 400, y: 214},{ x: 0, y: 50});
+        this.crows.createCrow({x: 400, y: 214},{ x: 0, y: -50});
     }
 
     update() {

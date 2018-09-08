@@ -11,7 +11,7 @@ class SpearSpawner extends Phaser.Physics.Arcade.Group {
         this.spearGroup = scene.physics.add.group();
     }
 
-    createNewCrow(config) {
+    createNewSpear(config) {
         const crow = this.spearGroup.create(config.x, config.y, 'tridente');
         if (config.speedDirection.x < 0) {
             crow.flipX = true;  
@@ -25,15 +25,16 @@ class SpearSpawner extends Phaser.Physics.Arcade.Group {
         crow.anims.play('lancando');
         this.queueBarrel(this.kill, crow, config.scene);
 
-        config.scene.physics.add.collider(this.spearGroup, [...config.colliderList], function (crow, collider) {
-            if (crow.body.onWall()) {
-                this.kill(crow);
+        config.scene.physics.add.collider(this.spearGroup, [...config.colliderList], function (spearCollider, collider) {
+
+            if (spearCollider.body.onWall()) {
+                this.kill(spearCollider);
                 return;
             }
 
-            if (crow.body.touching.left || crow.body.touching.right) {
-                this.kill(collider);
-                return;
+            if(spearCollider.body.touching.left || spearCollider.body.touching.right) {
+                console.log(spearCollider);
+                console.log(collider);    
             }
         }, null, this);
     }
