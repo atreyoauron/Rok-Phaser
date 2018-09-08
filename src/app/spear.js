@@ -33,8 +33,7 @@ class SpearSpawner extends Phaser.Physics.Arcade.Group {
             }
 
             if(spearCollider.body.touching.left || spearCollider.body.touching.right) {
-                console.log(spearCollider);
-                console.log(collider);    
+    
             }
         }, null, this);
     }

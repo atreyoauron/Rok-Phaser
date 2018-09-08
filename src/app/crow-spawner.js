@@ -31,6 +31,18 @@ class CrowSpawner extends Phaser.Physics.Arcade.Group {
         crow.body.setAllowGravity(false);
 
         this.config.scene.physics.add.collider(config.crowGroup, [...config.colliderList], function (crow, collider) {
+            if (collider && collider.visible) {
+                if(collider.properties && collider.properties.breakable) {
+                    const tiles = config.colliderList[0].getTilesWithin(collider.x, collider.y, 100, 100);
+                    console.log(config.colliderList[0]);
+                    tiles.forEach(data => {
+                        if(data.properties && data.properties.breakable) {
+                            config.colliderList[0].removeTileAt(data.x, data.y);
+                        }
+                    })
+                }
+            }
+
             if (crow.anims.currentAnim.key !== 'barril-exploding') {
                 if (crow.body.onWall()) {
                     this.kill(crow);

@@ -8,7 +8,7 @@ class FaseNove extends Phaser.Scene {
                 arcade: {
                     gravity: { y: 700 },
                     debug: true,
-                    tileBias: 120,
+                    // tileBias: 120,
                 }
             }
         })

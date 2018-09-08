@@ -9,6 +9,7 @@ class FaseQuatro extends Phaser.Scene {
             physics: {
                 arcade: {
                     gravity: { y: 700 },
+                    // tileBias: 120,
                 }
             }
         })

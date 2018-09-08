@@ -1,4 +1,5 @@
 /// <reference path="../../phaser.d.ts" />
+import CrowSpawner from './crow-spawner.js';
 
 class FaseSete extends Phaser.Scene {
     constructor() {
@@ -7,7 +8,8 @@ class FaseSete extends Phaser.Scene {
             physics: {
                 arcade: {
                     gravity: { y: 700 },
-                    debug: true
+                    debug: true,
+                    // tileBias: 120,
                 }
             }
         })
@@ -40,12 +42,45 @@ class FaseSete extends Phaser.Scene {
         var map = this.add.tilemap('fase_7');
 
         var tileset = map.addTilesetImage('plataformas');
-        this.ground = map.createStaticLayer('plataformas', tileset);
+        this.ground = map.createDynamicLayer('plataformas', tileset);
         this.ground.setCollisionByProperty({ collider: true });
         this.physics.add.collider(this.odin, [this.ground], function() {
             this.odin.resetJump();
         }, null, this);
         this.odin = this.add.existing(this.odin);
+
+        const spearItem = this.add.zone(565, 213).setSize(30, 30);
+        spearItem.setOrigin(0.5);
+        this.physics.world.enable(spearItem);
+        spearItem.body.setAllowGravity(false);
+        spearItem.body.moves = false;             
+        this.physics.add.overlap(this.odin, spearItem, function() {
+            this.odin.getSpear();
+        }, null, this);
+
+        this.crows = new CrowSpawner({
+            scene: this,
+            groupConfig: {
+                defaultKey: 'barril',
+                maxSize: 15,    
+            },
+            groupMultipleConfig: {},
+            customConfig: {
+                x: 400,
+                y: 300,
+                bounce: {
+                    x: 0,
+                    y: 1
+                },
+                speedDirection: {
+                    x: 0,
+                    y: -120
+                },
+                colliders: [this.ground]                 
+            }            
+        });     
+        
+        this.crows.createCrow({x: 530, y: 214},{ x: 0, y: 50});        
     }
 
     update() {

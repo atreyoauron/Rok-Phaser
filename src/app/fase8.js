@@ -7,7 +7,8 @@ class FaseOito extends Phaser.Scene {
             physics: {
                 arcade: {
                     gravity: { y: 700 },
-                    debug: true
+                    debug: true,
+                    // tileBias: 120,
                 }
             }
         })
