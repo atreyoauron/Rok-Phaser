@@ -39,6 +39,10 @@ class Odin extends MainCharacter {
 
         this.scene.input.keyboard.addKey('C');
         this.scene.input.keyboard.on('keydown_C', function() {
+            const itens = this.getData('itens');
+
+            if(!itens.spear) return;
+
             const scene = this.getActivatedScene(this.scene.scene.manager.scenes);
             if(!this.spearGroupCreatedOnThisScene[scene.scene.key]) {
                 if (!this.spearGroupCreatedOnThisScene[scene.scene.key]) {

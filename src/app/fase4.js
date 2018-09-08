@@ -149,7 +149,16 @@ class FaseQuatro extends Phaser.Scene {
         barrelThree.createBarrelSpawner();          
         barrelFour.createBarrelSpawner();          
         barrelFive.createBarrelSpawner();          
-        barrelSix.createBarrelSpawner();          
+        barrelSix.createBarrelSpawner();
+        
+        const doubleJump = this.add.zone(82, 90).setSize(100, 100);
+        this.physics.world.enable(doubleJump);
+        doubleJump.body.setAllowGravity(false);
+        doubleJump.body.moves = false;             
+        this.physics.add.overlap(this.odin, doubleJump, function() {
+            this.odin.getDoubleJumpItem();
+        }, null, this);
+
     }
 
     update() {
