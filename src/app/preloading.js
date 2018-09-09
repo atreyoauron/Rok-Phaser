@@ -80,8 +80,8 @@ class Preloading extends Phaser.Scene {
             frameHeight: 24
         });
         this.load.spritesheet('crow', 'src/assets/img/bat.png', {
-            frameWidth: 32,
-            frameHeight: 32,
+            frameWidth: 24,
+            frameHeight: 24,
         })
         this.load.spritesheet('barril-explodir', 'src/assets/img/barril-explodir.png', {
             frameWidth: 24,

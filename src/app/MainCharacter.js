@@ -87,7 +87,7 @@ class MainCharacter extends Phaser.GameObjects.Sprite {
             lifePoints: 100,
             shield: 0,
             itens: {
-                doubleJump: false,
+                doubleJump: true,
                 spear: true,
                 armor: false
             }

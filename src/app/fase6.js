@@ -1,4 +1,5 @@
 /// <reference path="../../phaser.d.ts" />
+import CrowSpawner from './crow-spawner.js';
 
 class FaseSeis extends Phaser.Scene {
     constructor() {
@@ -47,6 +48,44 @@ class FaseSeis extends Phaser.Scene {
             this.odin.resetJump();
         }, null, this);
         this.odin = this.add.existing(this.odin);
+
+        this.crows = new CrowSpawner({
+            scene: this,
+            groupConfig: {
+                defaultKey: 'barril',
+                maxSize: 15,    
+            },
+            groupMultipleConfig: {},
+            customConfig: {
+                x: 400,
+                y: 300,
+                bounce: {
+                    x: 1,
+                    y: 1
+                },
+                speedDirection: {
+                    x: 0,
+                    y: -120
+                },
+                colliders: [this.ground]                 
+            }
+        });
+
+        this.crows.createCrow({x: 26, y: 198},{ x: 50, y: 0});        
+
+        this.crows.createCrow({x: 613, y: 325},{ x: 0, y: -50});        
+
+        this.crows.createCrow({x: 253, y: 325},{ x: 0, y: -50});        
+        this.crows.createCrow({x: 190, y: 325},{ x: 0, y: -50});        
+        this.crows.createCrow({x: 128, y: 325},{ x: 0, y: -50});        
+        this.crows.createCrow({x: 71, y: 325},{ x: 0, y: -50});        
+
+        this.crows.createCrow({x: 150, y: 35},{ x: 0, y: -50});        
+        this.crows.createCrow({x: 200, y: 70},{ x: 0, y: -50});        
+        this.crows.createCrow({x: 250, y: 105},{ x: 0, y: -50});        
+        this.crows.createCrow({x: 300, y: 135},{ x: 0, y: -50});        
+
+        this.crows.createCrow({x: 533, y: 35},{ x: 0, y: -50});
     }
 
     update() {
