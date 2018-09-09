@@ -42,7 +42,7 @@ class BarrelSpawner extends Phaser.GameObjects.Group {
             }
 
             this.config.scene.physics.add.overlap(config.barrelGroup, [...config.overlapList], function (collider, barrel) {
-                barrel.body.setGravityY(0);
+                // barrel.body.setGravityY(0);
                 if (barrel.anims.currentAnim.key !== 'barril-exploding') {
                     if (barrel.body.touching.left || barrel.body.touching.right || barrel.body.touching.up) {
                         this.killBarrel(barrel, config.barrelGroup);

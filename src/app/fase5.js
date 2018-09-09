@@ -59,7 +59,7 @@ class FaseQuatro extends Phaser.Scene {
                 x: 400,
                 y: 300,
                 bounce: {
-                    x: 0,
+                    x: 1,
                     y: 1
                 },
                 speedDirection: {
@@ -69,9 +69,29 @@ class FaseQuatro extends Phaser.Scene {
                 colliders: [this.ground]                 
             }            
         });     
-        
+        this.crows.createCrow({x: 440, y: 214},{ x: 0, y: 50});
+        this.crows.createCrow({x: 440, y: 214},{ x: 0, y: -50});        
         this.crows.createCrow({x: 400, y: 214},{ x: 0, y: 50});
         this.crows.createCrow({x: 400, y: 214},{ x: 0, y: -50});
+        this.crows.createCrow({x: 360, y: 214},{ x: 0, y: 50});
+        this.crows.createCrow({x: 360, y: 214},{ x: 0, y: -50});
+        this.crows.createCrow({x: 320, y: 214},{ x: 0, y: 50});
+        this.crows.createCrow({x: 320, y: 214},{ x: 0, y: -50});
+        this.crows.createCrow({x: 280, y: 214},{ x: 0, y: 50});
+        this.crows.createCrow({x: 280, y: 214},{ x: 0, y: -50});
+        this.crows.createCrow({x: 240, y: 214},{ x: 0, y: 50});
+        this.crows.createCrow({x: 240, y: 214},{ x: 0, y: -50});
+        this.crows.createCrow({x: 200, y: 214},{ x: 0, y: 50});
+        this.crows.createCrow({x: 200, y: 214},{ x: 0, y: -50});
+        this.crows.createCrow({x: 160, y: 214},{ x: 0, y: 50});
+        this.crows.createCrow({x: 160, y: 214},{ x: 0, y: -50});
+
+        this.crows.createCrow({x: 20, y: 260},{ x: 50, y: 0});
+        this.crows.createCrow({x: 40, y: 260},{ x: 50, y: 0});
+        this.crows.createCrow({x: 80, y: 300},{ x: -50, y: 0});
+        this.crows.createCrow({x: 100, y: 300},{ x: -50, y: 0});
+        this.crows.createCrow({x: 20, y: 340},{ x: 50, y: 0});
+        this.crows.createCrow({x: 40, y: 340},{ x: 50, y: 0});
     }
 
     update() {

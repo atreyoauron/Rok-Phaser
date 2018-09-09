@@ -31,7 +31,7 @@ class Odin extends MainCharacter {
                 },
                 speedDirection: {
                     x: 0,
-                    y: -120
+                    y: -400
                 }                 
             }            
         });
