@@ -85,6 +85,7 @@ class FaseQuatro extends Phaser.Scene {
         this.crows.createCrow({x: 200, y: 214},{ x: 0, y: -50});
         this.crows.createCrow({x: 160, y: 214},{ x: 0, y: 50});
         this.crows.createCrow({x: 160, y: 214},{ x: 0, y: -50});
+        this.crows.createCrow({x: 210, y: 113},{ x: -50, y: 0});
 
         this.crows.createCrow({x: 20, y: 260},{ x: 50, y: 0});
         this.crows.createCrow({x: 40, y: 260},{ x: 50, y: 0});

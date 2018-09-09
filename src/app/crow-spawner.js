@@ -24,11 +24,11 @@ class CrowSpawner extends Phaser.Physics.Arcade.Group {
     }
 
     createNewCrow(config) {
-        const crow = config.crowGroup.create(config.x, config.y, 'barril');
-        crow.anims.play('rolling');
+        const crow = config.crowGroup.create(config.x, config.y, 'crow');
+        crow.anims.play('crow-flying');
         crow.setVelocity(config.speedDirection.x, config.speedDirection.y);
         crow.setBounce(config.bounce.x, config.bounce.y);
-        crow.body.setAllowGravity(false);
+        crow.setGravityY(-700);
         crow.setName('crow');
         crow.setMaxVelocity(400, 400);
 
@@ -36,7 +36,6 @@ class CrowSpawner extends Phaser.Physics.Arcade.Group {
             if (collider && collider.visible) {
                 if(collider.properties && collider.properties.breakable) {
                     const tiles = config.colliderList[0].getTilesWithin(collider.x, collider.y, 100, 100);
-                    console.log(config.colliderList[0]);
                     tiles.forEach(data => {
                         if(data.properties && data.properties.breakable) {
                             config.colliderList[0].removeTileAt(data.x, data.y);
@@ -45,34 +44,27 @@ class CrowSpawner extends Phaser.Physics.Arcade.Group {
                 }
             }
 
-            if (crow.anims.currentAnim.key !== 'barril-exploding') {
-                if (crow.body.onWall() && crow.data) {
+            if (crow.anims.currentAnim.key !== 'explosion') {
+                console.log(crow.getData('hit'));
+                if (crow.body.onWall() && crow.getData('hit')) {
                     // crow.setVelocityX(0);
+                    crow.setGravityY(-400);
                     this.kill(crow);
                     return;
                 }
-
-                // if(crow.body.touching.left || crow.body.touching.right) {
-                //     this.kill(collider);
-                //     return;
-                // }
             }            
         }, function(obj1, obj2) {
             if(obj1.name === obj2.name) {
                 if(obj1.data || obj2.data) {                    
-                    if(obj1.anims.currentAnim.key === 'barril-exploding') {
+                    if(obj1.anims.currentAnim.key === 'explosion') {
                         this.kill(obj2);
                         return false;
                     }
 
-                    obj1.setDataEnabled();
-                    obj1.setData({hit: true});
-                    obj2.setDataEnabled();
-                    obj2.setData({hit: true});
-                    obj1.setBounce(0, 0);
-                    obj2.setBounce(0, 0);
-                    obj2.body.speed = obj1.body.speed;
-                    obj2.body.velocity = obj1.body.velocity;
+                    if(obj1.getData('hit')) {
+                        obj2.setDataEnabled();
+                        obj2.setData({hit: true});    
+                    }
                     return false;
                 } else {
                     return false;
@@ -90,9 +82,9 @@ class CrowSpawner extends Phaser.Physics.Arcade.Group {
     }
 
     kill(crow) {
-        crow.anims.play('barril-exploding');      
+        crow.anims.play('explosion');      
         crow.on('animationcomplete', function (animation, frame) {
-            if (animation.key == 'barril-exploding') {
+            if (animation.key == 'explosion') {
                 crow.destroy();
             };
         });    

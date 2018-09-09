@@ -72,7 +72,7 @@ class MainCharacter extends Phaser.GameObjects.Sprite {
             this.flipX = false;
             this.body.setVelocityX(100);
         } else if (context.cursors.left.isDown) {
-            console.log(this);
+            // console.log(this);
             this.flipX = true;
             this.body.setVelocityX(-100);
         } else {
@@ -84,10 +84,10 @@ class MainCharacter extends Phaser.GameObjects.Sprite {
         this.setData({
             isDoubleJumping: false,
             jump: false,
-            lifePoints: 400,
+            lifePoints: 100,
             shield: 0,
             itens: {
-                doubleJump: true,
+                doubleJump: false,
                 spear: true,
                 armor: false
             }

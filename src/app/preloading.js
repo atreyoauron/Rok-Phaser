@@ -79,6 +79,10 @@ class Preloading extends Phaser.Scene {
             frameWidth: 32,
             frameHeight: 24
         });
+        this.load.spritesheet('crow', 'src/assets/img/bat.png', {
+            frameWidth: 32,
+            frameHeight: 32,
+        })
         this.load.spritesheet('barril-explodir', 'src/assets/img/barril-explodir.png', {
             frameWidth: 24,
             frameHeight: 24
@@ -113,6 +117,13 @@ class Preloading extends Phaser.Scene {
         });
 
         this.anims.create({
+            key: 'crow-flying',
+            frames: this.anims.generateFrameNumbers('crow', { start: 1, end: 3 }),
+            frameRate: 6,
+            repeat: -1
+        });        
+
+        this.anims.create({
             key: 'standing',
             frames: this.anims.generateFrameNumbers('odin', { start: 0, end: 7 }),
             frameRate: 7,
@@ -127,7 +138,7 @@ class Preloading extends Phaser.Scene {
         });
 
         this.anims.create({
-            key: 'barril-exploding',
+            key: 'explosion',
             frames: this.anims.generateFrameNumbers('barril-explodir', { start: 0, end: 5 }),
             frameRate: 15,
             repeat: 0

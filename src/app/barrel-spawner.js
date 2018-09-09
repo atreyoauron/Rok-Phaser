@@ -10,7 +10,19 @@ class BarrelSpawner extends Phaser.GameObjects.Group {
         this.barrelGroup = this.config.scene.physics.add.group();
         this.barrelGroup.maxSize = this.config.groupConfig.maxSize;
 
-        this.queueBarrel(this.createNewBarrel, {
+        this.config.scene.time.addEvent({
+            delay: 1,
+            repeat: -1,
+            callback: () => {
+                this.barrelGroup.getChildren().forEach(data => {
+                    if (data.body.x > 640 || data.body.y > 360) {
+                        this.killBarrel(data, this.barrelGroup);
+                    }
+                });                
+            }
+        })        
+
+        this.queueBarrel(this.config.customConfig.timing, this.createNewBarrel, {
             speedDirection: this.config.customConfig.speedDirection,
             barrelX: this.config.customConfig.x,
             barrelY: this.config.customConfig.y,
@@ -21,12 +33,6 @@ class BarrelSpawner extends Phaser.GameObjects.Group {
     }
 
     createNewBarrel(config) {
-        config.barrelGroup.getChildren().forEach(data => {
-            if (data.body.x > 655) {
-                this.barrelGroup.killAndHide(data);
-            }
-        });
-
         const barril = this.barrelGroup.getFirstDead(true, config.barrelX, config.barrelY, 'barril');
         if (barril === null) return;
 
@@ -42,8 +48,7 @@ class BarrelSpawner extends Phaser.GameObjects.Group {
             }
 
             this.config.scene.physics.add.overlap(config.barrelGroup, [...config.overlapList], function (collider, barrel) {
-                // barrel.body.setGravityY(0);
-                if (barrel.anims.currentAnim.key !== 'barril-exploding') {
+                if (barrel.anims.currentAnim.key !== 'explosion') {
                     if (barrel.body.touching.left || barrel.body.touching.right || barrel.body.touching.up) {
                         this.killBarrel(barrel, config.barrelGroup);
                         return;
@@ -52,8 +57,7 @@ class BarrelSpawner extends Phaser.GameObjects.Group {
             }, null, this);
 
             this.config.scene.physics.add.collider(config.barrelGroup, [...config.colliderList], function (barrel, collider) {
-                barrel.body.setGravityY(0);
-                if (barrel.anims.currentAnim.key !== 'barril-exploding') {
+                if (barrel.anims.currentAnim.key !== 'explosion') {
                     if (barrel.body.onWall()) {
                         this.killBarrel(barrel, config.barrelGroup);
                         return;
@@ -65,17 +69,17 @@ class BarrelSpawner extends Phaser.GameObjects.Group {
 
     killBarrel(barrel, group) {
         barrel.body.setVelocityX(0);
-        barrel.anims.play('barril-exploding');
+        barrel.anims.play('explosion');
         barrel.on('animationcomplete', function (animation, frame) {
-            if (animation.key == 'barril-exploding') {
+            if (animation.key == 'explosion') {
                 group.killAndHide(barrel);
             };
         });
     }
 
-    queueBarrel(callback, ...args) {
+    queueBarrel(timing = 2000, callback, ...args) {
         this.config.scene.time.addEvent({
-            delay: 2000,
+            delay: timing,
             repeat: -1,
             callback: callback.bind(this, ...args)
         })

@@ -145,12 +145,119 @@ class FaseQuatro extends Phaser.Scene {
             }
         });
 
+        const barrelBottomOne = new BarrelSpawner({
+            scene: this,
+            groupConfig: {
+                defaultKey: 'barril',
+                maxSize: 2,    
+            },
+            groupMultipleConfig: {},
+            customConfig: {
+                x: 225,
+                y: 189,
+                speedDirection: -120,
+                colliders: [this.ground],
+                overlaps: [this.odin],               
+            }
+        });   
+        
+        const barrelBottomTwo = new BarrelSpawner({
+            scene: this,
+            groupConfig: {
+                defaultKey: 'barril',
+                maxSize: 2,    
+            },
+            groupMultipleConfig: {},
+            customConfig: {
+                x: 345,
+                y: 236,
+                speedDirection: -120,
+                colliders: [this.ground],
+                overlaps: [this.odin],               
+            }
+        });           
+
+        const barrelBottomThree = new BarrelSpawner({
+            scene: this,
+            groupConfig: {
+                defaultKey: 'barril',
+                maxSize: 2,    
+            },
+            groupMultipleConfig: {},
+            customConfig: {
+                x: 145,
+                y: 256,
+                timing: 2000,
+                speedDirection: 120,
+                colliders: [this.ground],
+                overlaps: [this.odin],               
+            }
+        });  
+        
+        const barrelBottomFour = new BarrelSpawner({
+            scene: this,
+            groupConfig: {
+                defaultKey: 'barril',
+                maxSize: 2,    
+            },
+            groupMultipleConfig: {},
+            customConfig: {
+                x: 174,
+                y: 256,
+                timing: 2000,
+                speedDirection: 120,
+                colliders: [this.ground],
+                overlaps: [this.odin],               
+            }
+        });
+
+
+        const barrelBottomFive = new BarrelSpawner({
+            scene: this,
+            groupConfig: {
+                defaultKey: 'barril',
+                maxSize: 1,    
+            },
+            groupMultipleConfig: {},
+            customConfig: {
+                x: 388,
+                y: 256,
+                timing: 500,
+                speedDirection: 120,
+                colliders: [this.ground],
+                overlaps: [this.odin],               
+            }
+        });  
+        
+        const barrelBottomSix = new BarrelSpawner({
+            scene: this,
+            groupConfig: {
+                defaultKey: 'barril',
+                maxSize: 1,    
+            },
+            groupMultipleConfig: {},
+            customConfig: {
+                x: 417,
+                y: 256,
+                timing: 500,
+                speedDirection: 120,
+                colliders: [this.ground],
+                overlaps: [this.odin],               
+            }
+        });        
+
         barrelOne.createBarrelSpawner();          
         barrelTwo.createBarrelSpawner();          
         barrelThree.createBarrelSpawner();          
         barrelFour.createBarrelSpawner();          
         barrelFive.createBarrelSpawner();          
         barrelSix.createBarrelSpawner();
+        barrelBottomOne.createBarrelSpawner();
+        barrelBottomTwo.createBarrelSpawner();
+        barrelBottomThree.createBarrelSpawner();
+        barrelBottomFour.createBarrelSpawner();
+        barrelBottomFive.createBarrelSpawner();
+        barrelBottomSix.createBarrelSpawner();
         
         const doubleJump = this.add.zone(82, 90).setSize(100, 100);
         this.physics.world.enable(doubleJump);
