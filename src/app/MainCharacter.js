@@ -34,11 +34,13 @@ class MainCharacter extends Phaser.GameObjects.Sprite {
         }
     }
 
-    jump() {
+    jump() {        
         let bodyRule = this.body.onFloor() || this.body.touching.down;
         
         let jump = this.getData('jump');
         let isDoubleJumping = this.getData('isDoubleJumping');     
+        
+
         
         if (bodyRule) {
             this.body.setVelocityY(-280);    
@@ -57,7 +59,10 @@ class MainCharacter extends Phaser.GameObjects.Sprite {
 
             if (itens.doubleJump && !isDoubleJumping) {
                 this.body.setVelocityY(-300);
-                this.setData('isDoubleJumping', true);
+                if(!itens.armor) {
+                    this.setData('isDoubleJumping', true);                    
+                }
+
                 this.setData('jump', false);
             }
         }
@@ -88,8 +93,8 @@ class MainCharacter extends Phaser.GameObjects.Sprite {
             currentLifePoints: 1000,
             shield: 0,
             itens: {
-                doubleJump: true,
-                spear: true,
+                doubleJump: false,
+                spear: false,
                 armor: false
             }
         });

@@ -60,6 +60,7 @@ class Odin extends MainCharacter {
                 x: direction,
                     y: 0
                 },
+                odin: this,
                 bounce: 0,
                 x: xOrigin,
                 y: this.y,

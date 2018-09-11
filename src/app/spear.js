@@ -12,18 +12,23 @@ class SpearSpawner extends Phaser.Physics.Arcade.Group {
     }
 
     createNewSpear(config) {
-        const crow = this.spearGroup.create(config.x, config.y, 'tridente');
+        const spear = this.spearGroup.create(config.x, config.y, 'tridente');
+        const itens = config.odin.getData('itens');
+
         if (config.speedDirection.x < 0) {
-            crow.flipX = true;  
+            spear.flipX = true;  
         } else {
-            crow.flipX = false;
+            spear.flipX = false;
         }
-        crow.setVelocity(config.speedDirection.x, config.speedDirection.y);
-        crow.body.setAllowGravity(false);
-        crow.setOrigin(0.5);
-        crow.body.setSize(crow.body.sourceWidth * 0.5, crow.body.sourceHeight * 0.5, crow.body.sourceWidth * 0.5, crow.body.sourceHeight * 0.5)
-        crow.anims.play('lancando');
-        this.queueBarrel(this.kill, crow, config.scene);
+        spear.setVelocity(config.speedDirection.x, config.speedDirection.y);
+        spear.body.setAllowGravity(false);
+        spear.setOrigin(0.5);
+        spear.body.setSize(spear.body.sourceWidth * 0.5, spear.body.sourceHeight * 0.5, spear.body.sourceWidth * 0.5, spear.body.sourceHeight * 0.5)
+        spear.anims.play('lancando');
+
+        if(!itens.armor) {
+            this.queueBarrel(this.kill, spear, config.scene);
+        }
 
         config.scene.physics.add.collider(this.spearGroup, [...config.colliderList], function (spearCollider, collider) {
 
