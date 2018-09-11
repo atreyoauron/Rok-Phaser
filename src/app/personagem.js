@@ -83,6 +83,10 @@ class Odin extends MainCharacter {
         return scene[0];
     }
 
+    resetSpearGroup() {
+        this.getActivatedScene(this.scene.scene.manager.scenes);
+    }
+
     update() {
 
     }

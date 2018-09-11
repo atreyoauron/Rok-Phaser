@@ -115,6 +115,7 @@ class MainMenu extends Phaser.Scene {
 
     update() {
         if(this.cameras.main.fadeEffect.isComplete) {
+            this.scene.launch('userInterface');
             this.scene.start('faseum');
         }
 

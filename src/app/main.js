@@ -11,7 +11,8 @@ import {
     FaseOito,
     FaseNove,
     Creditos,
-    Preloading
+    Preloading,
+    UserInterface,
 } from './index.js'
 
 
@@ -32,7 +33,8 @@ const config = {
         FaseSete,
         FaseOito,
         FaseNove,
-        Creditos
+        Creditos,
+        UserInterface
     ]
 }
 

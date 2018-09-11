@@ -31,6 +31,7 @@ class FaseUm extends Phaser.Scene {
         this.common = this.scene.get('preloading');
         this.odin = this.common.odin;
         this.physics.world.enable(this.odin);
+        this.odin.resetSpearGroup();
 
         if (config.odinx) {
             this.odin.x = config.odinx;

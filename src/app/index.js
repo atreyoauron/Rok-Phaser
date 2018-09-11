@@ -11,6 +11,7 @@ import SplashScreen from './splashScreen.js';
 import Creditos from './creditos.js';
 import MainMenu from './menu.js';
 import Preloading from './preloading.js';
+import UserInterface from './user-interface.js';
 
 export {
     FaseUm,
@@ -25,5 +26,6 @@ export {
     SplashScreen,
     Creditos,
     MainMenu,
-    Preloading
+    Preloading,
+    UserInterface,
 }

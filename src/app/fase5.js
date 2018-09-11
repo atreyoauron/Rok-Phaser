@@ -20,6 +20,8 @@ class FaseQuatro extends Phaser.Scene {
     init(config) {
         this.common = this.scene.get('preloading');
         this.odin = this.common.odin;
+        this.odin.resetSpearGroup();
+
         this.scene.stop('fasequatro');
         
         if (config) {

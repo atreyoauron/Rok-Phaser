@@ -4,6 +4,8 @@ class BarrelSpawner extends Phaser.GameObjects.Group {
     constructor(config) {
         super(config.scene, config.groupConfig, config.groupMultipleConfig, config.customConfig);
         this.config = config;
+        this.userInterface = this.scene.scene.get('userInterface');
+
     }
 
     createBarrelSpawner() {
@@ -51,6 +53,7 @@ class BarrelSpawner extends Phaser.GameObjects.Group {
                 if (barrel.anims.currentAnim.key !== 'explosion') {
                     if (barrel.body.touching.left || barrel.body.touching.right || barrel.body.touching.up) {
                         this.killBarrel(barrel, config.barrelGroup);
+                        this.userInterface.events.emit('damageTaken', 50);
                         return;
                     }
                 }

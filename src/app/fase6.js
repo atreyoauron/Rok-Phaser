@@ -22,7 +22,8 @@ class FaseSeis extends Phaser.Scene {
         this.common = this.scene.get('preloading');
         this.odin = this.common.odin;
         this.scene.stop('fasecinco');
-        
+        this.odin.resetSpearGroup();
+
         if (config) {
             this.odin.x = config.odinx;
             this.odin.y = config.odiny;

@@ -84,7 +84,8 @@ class MainCharacter extends Phaser.GameObjects.Sprite {
         this.setData({
             isDoubleJumping: false,
             jump: false,
-            lifePoints: 100,
+            totalLifePoints: 1000,
+            currentLifePoints: 1000,
             shield: 0,
             itens: {
                 doubleJump: true,
