@@ -10,6 +10,7 @@ import {
     FaseSete,
     FaseOito,
     FaseNove,
+    FaseDez,
     Creditos,
     Preloading,
     UserInterface,
@@ -33,6 +34,7 @@ const config = {
         FaseSete,
         FaseOito,
         FaseNove,
+        FaseDez,
         Creditos,
         UserInterface
     ]

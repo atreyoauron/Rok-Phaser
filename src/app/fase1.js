@@ -24,11 +24,14 @@ class FaseUm extends Phaser.Scene {
         this.hasConfig = false;
         this.firstTime = true;
         this.common;
+        this.ui;
     }
 
     init(config) {
         this.scene.resume('preloading');        
         this.common = this.scene.get('preloading');
+        this.ui = this.scene.get('userInterface');
+        
         this.odin = this.common.odin;
         this.physics.world.enable(this.odin);
         this.odin.resetSpearGroup();
@@ -63,6 +66,17 @@ class FaseUm extends Phaser.Scene {
         this.physics.add.collider(this.odin, [this.ground], function() {
             this.odin.resetJump();
         }, null, this);
+
+        const boost = this.physics.add.sprite(505, 0, 'hidromel');
+        boost.body.setGravityY(-670);
+
+        this.physics.add.collider(boost, [this.ground]);
+
+        this.physics.add.overlap(this.odin, boost, function(odin, collider) {
+            this.ui.getPowerBoost(100);
+        }, null, this);
+
+
         this.odin = this.add.existing(this.odin);
     }
 

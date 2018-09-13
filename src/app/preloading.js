@@ -71,9 +71,18 @@ class Preloading extends Phaser.Scene {
         }, this);
 
         this.load.image('light', 'src/assets/img/light.png');
-        this.load.spritesheet('odin', 'src/assets/img/Odin_Idle_Sheet.png', {
+        this.load.image('hidromel', 'src/assets/img/boost.png');
+        this.load.spritesheet('odin', 'src/assets/img/odin.png', {
             frameWidth: 28,
             frameHeight: 42
+        });
+        this.load.spritesheet('odin_gold_idle', 'src/assets/img/Golden_Odin_Idle_Sheet.png', {
+            frameWidth: 28,
+            frameHeight: 42
+        });
+        this.load.spritesheet('odin_run', 'src/assets/img/Odin_Run_Sheet.png', {
+            frameWidth: 25,
+            frameHeight: 38
         });
         this.load.spritesheet('barril', 'src/assets/img/barril.png', {
             frameWidth: 32,
@@ -90,7 +99,8 @@ class Preloading extends Phaser.Scene {
         this.load.spritesheet('lanca', 'src/assets/img/lanca.png', {
             frameWidth: 37,
             frameHeight: 9
-        });        
+        });
+
         this.load.tilemapTiledJSON('fase_1', 'src/assets/json/fase_1.json');
         this.load.tilemapTiledJSON('fase_2', 'src/assets/json/fase_2.json');
         this.load.tilemapTiledJSON('fase_3', 'src/assets/json/fase_3.json');
@@ -121,13 +131,39 @@ class Preloading extends Phaser.Scene {
             frames: this.anims.generateFrameNumbers('crow', { start: 1, end: 3 }),
             frameRate: 6,
             repeat: -1
-        });        
+        });
 
         this.anims.create({
             key: 'standing',
             frames: this.anims.generateFrameNumbers('odin', { start: 0, end: 7 }),
             frameRate: 7,
             repeat: -1
+        });
+
+
+        this.anims.create({
+            key: 'jumping',
+            frames: this.anims.generateFrameNumbers('odin', { start: 8, end: 10 }),
+            frameRate: 3,
+        });        
+
+        this.anims.create({
+            key: 'inAir',
+            frames: this.anims.generateFrameNumbers('odin', { start: 11, end: 12 }),
+            frameRate: 2,
+            repeat: -1,
+        });
+        
+        this.anims.create({
+            key: 'landing',
+            frames: this.anims.generateFrameNumbers('odin', { start: 12, end: 14 }),
+            frameRate: 6,
+        });        
+
+        this.anims.create({
+            key: 'walking',
+            frames: this.anims.generateFrameNumbers('odin_run', { start: 0, end: 7 }),
+            frameRate: 7,
         });        
 
         this.anims.create({

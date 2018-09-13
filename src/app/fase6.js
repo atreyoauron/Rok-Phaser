@@ -8,7 +8,7 @@ class FaseSeis extends Phaser.Scene {
             physics: {
                 arcade: {
                     gravity: { y: 700 },
-                    debug: true,
+                    debug: false,
                     // tileBias: 120,
                 }
             }
@@ -53,7 +53,7 @@ class FaseSeis extends Phaser.Scene {
         this.crows = new CrowSpawner({
             scene: this,
             groupConfig: {
-                defaultKey: 'barril',
+                defaultKey: 'crow',
                 maxSize: 15,    
             },
             groupMultipleConfig: {},
@@ -78,16 +78,16 @@ class FaseSeis extends Phaser.Scene {
         this.crows.createCrow({x: 614, y: 325},{ x: 0, y: -50});        
 
         this.crows.createCrow({x: 258, y: 325},{ x: 0, y: -50});        
-        // this.crows.createCrow({x: 190, y: 325},{ x: 0, y: -50});        
-        // this.crows.createCrow({x: 128, y: 325},{ x: 0, y: -50});        
-        // this.crows.createCrow({x: 71, y: 325},{ x: 0, y: -50});        
+        this.crows.createCrow({x: 198, y: 325},{ x: 0, y: -50});        
+        this.crows.createCrow({x: 135, y: 325},{ x: 0, y: -50});        
+        this.crows.createCrow({x: 75, y: 325},{ x: 0, y: -50});        
 
-        // this.crows.createCrow({x: 150, y: 35},{ x: 0, y: -50});        
-        // this.crows.createCrow({x: 200, y: 70},{ x: 0, y: -50});        
-        // this.crows.createCrow({x: 250, y: 105},{ x: 0, y: -50});        
-        // this.crows.createCrow({x: 315, y: 135},{ x: 0, y: -50});        
+        this.crows.createCrow({x: 150, y: 35},{ x: 0, y: -50});        
+        this.crows.createCrow({x: 200, y: 70},{ x: 0, y: -50});        
+        this.crows.createCrow({x: 250, y: 105},{ x: 0, y: -50});        
+        this.crows.createCrow({x: 315, y: 135},{ x: 0, y: -50});        
 
-        // this.crows.createCrow({x: 533, y: 35},{ x: 0, y: -50});
+        this.crows.createCrow({x: 533, y: 35},{ x: 0, y: -50});
     }
 
     update() {

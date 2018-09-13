@@ -27,17 +27,41 @@ class UserInterface extends Phaser.Scene {
     create() {
         this.cameras.main.flash(500, 0, 0, 0);
 
-        const progressBox = this.add.graphics();
+        const lifeBarBox = this.add.graphics();
+        const powerBoostBox = this.add.graphics();
         this.lifeBar = this.add.graphics();
+        this.powerBoost = this.add.graphics();
 
-        progressBox.fillStyle(0x000000, 1);
-        progressBox.fillRect(10, 10, 100, 10);
+        lifeBarBox.fillStyle(0x000000, 1);
+        lifeBarBox.fillRect(10, 10, 100, 10);
         this.updateCharacterLifeBar(0);
-        progressBox.setDepth(1);
+        lifeBarBox.setDepth(1);
+
+        powerBoostBox.fillStyle(0x000000, 1);
+        powerBoostBox.fillRect(10, 30, 100, 10);
+        this.updateCharacterLifeBar(0);
+        powerBoostBox.setDepth(1);
 
         this.events.addListener('damageTaken', function(damage) {
             this.updateCharacterLifeBar(damage);
         }, this);
+    }
+
+    getPowerBoost(boost) {
+        let updateBoost = this.odin.setData('powerBoost');
+        this.powerBoost.clear();
+        this.powerBoost.fillStyle(0xffff00, 1);
+        this.powerBoost.setDepth(2)
+        this.powerBoost.fillRect(10, 30, boost, 10);
+    }
+
+    userPowerBost() {
+        let powerBoost = this.odin.setData('powerBoost');
+        let boostTime = this.odin.setData('boostTime');
+        this.config.scene.time.addEvent({
+            delay: boostTime,
+            repeat: -1,
+        });
     }
 
     updateCharacterLifeBar(damage) {

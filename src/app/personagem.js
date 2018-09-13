@@ -6,7 +6,7 @@ import SpearSpawner from './spear.js';
 class Odin extends MainCharacter {
     constructor(config) {
         super(config);
-        this.anims.play('standing');
+        this.anims.play('standing', true);
         this.setName('mainCharacter');
         this.config = config;
         this.spearGroupCreatedOnThisScene = {};
@@ -19,7 +19,7 @@ class Odin extends MainCharacter {
             scene: this,
             groupConfig: {
                 defaultKey: 'tridente',
-                maxSize: 1,    
+                maxSize: 1,
             },
             groupMultipleConfig: {},
             customConfig: {
@@ -32,32 +32,32 @@ class Odin extends MainCharacter {
                 speedDirection: {
                     x: 0,
                     y: -400
-                }                 
-            }            
+                }
+            }
         });
 
         this.scene.input.keyboard.addKey('C');
-        this.scene.input.keyboard.on('keydown_C', function() {
+        this.scene.input.keyboard.on('keydown_C', function () {
             const itens = this.getData('itens');
 
-            if(!itens.spear) return;
+            if (!itens.spear) return;
 
             const scene = this.getActivatedScene(this.scene.scene.manager.scenes);
-            if(!this.spearGroupCreatedOnThisScene[scene.scene.key]) {
+            if (!this.spearGroupCreatedOnThisScene[scene.scene.key]) {
                 if (!this.spearGroupCreatedOnThisScene[scene.scene.key]) {
                     this.spear.createSpearGroup(scene);
                     this.spearGroupCreatedOnThisScene[scene.scene.key] = scene.scene.key;
                 }
-            }   
+            }
 
             const direction = (this.flipX) ? -400 : 400;
             const xOrigin = (this.flipX) ? this.x - 30 : this.x + 30;
 
             const colliders = (scene.crows) ? [scene.ground, scene.crows.crowGroup] : [scene.ground];
             const config = {
-                scene: scene,              
+                scene: scene,
                 speedDirection: {
-                x: direction,
+                    x: direction,
                     y: 0
                 },
                 odin: this,
@@ -70,10 +70,30 @@ class Odin extends MainCharacter {
         }, this);
     }
 
+    inAir() {
+        this.anims.play('inAir', true);        
+    }
+
+    jumping() {
+        this.anims.play('jumping', true);
+    }       
+
+    walking() {
+        this.anims.play('walking', true);
+    }    
+
+    idle() {
+        this.anims.play('standing', true);
+    }
+
+    superHeroLanding() {
+        this.anims.play('landing', true);
+    }
+
     getActivatedScene(scenes) {
         const scene = scenes.filter(scene => {
             if (scene.scene.key !== 'preloading') {
-                if(scene.scene.settings.active) {
+                if (scene.scene.settings.active) {
                     return scene;
                 } else {
                     this.spearGroupCreatedOnThisScene[scene.scene.key] = false;
@@ -89,7 +109,12 @@ class Odin extends MainCharacter {
     }
 
     update() {
-
+        let jump = this.getData('jump');
+        let double = this.getData('isDoubleJumping');
+        
+        if (jump || double) {
+            this.inAir();
+        }
     }
 
     shootSpear() {

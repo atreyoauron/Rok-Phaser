@@ -1,4 +1,6 @@
 /// <reference path="../../phaser.d.ts" />
+import BarrelSpawner from './barrel-spawner.js';
+import CrowSpawner from './crow-spawner.js';
 
 class FaseOito extends Phaser.Scene {
     constructor() {
@@ -7,7 +9,7 @@ class FaseOito extends Phaser.Scene {
             physics: {
                 arcade: {
                     gravity: { y: 700 },
-                    debug: true,
+                    debug: false,
                     // tileBias: 120,
                 }
             }

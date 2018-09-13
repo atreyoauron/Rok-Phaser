@@ -7,6 +7,7 @@ import FaseSeis from './fase6.js';
 import FaseSete from './fase7.js';
 import FaseOito from './fase8.js';
 import FaseNove from './fase9.js';
+import FaseDez from './fase10.js';
 import SplashScreen from './splashScreen.js';
 import Creditos from './creditos.js';
 import MainMenu from './menu.js';
@@ -23,6 +24,7 @@ export {
     FaseSete,
     FaseOito,
     FaseNove,
+    FaseDez,
     SplashScreen,
     Creditos,
     MainMenu,
