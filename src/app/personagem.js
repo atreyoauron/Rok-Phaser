@@ -37,6 +37,8 @@ class Odin extends MainCharacter {
         });
 
         this.scene.input.keyboard.addKey('C');
+        this.up = this.scene.input.keyboard.addKey('UP');
+        this.space = this.scene.input.keyboard.addKey('SPACE');
         this.scene.input.keyboard.on('keydown_C', function () {
             const itens = this.getData('itens');
 
@@ -75,11 +77,16 @@ class Odin extends MainCharacter {
     }
 
     jumping() {
-        this.anims.play('jumping', true);
+        this.anims.play('jumping');
     }       
 
     walking() {
-        this.anims.play('walking', true);
+        let jump = this.getData('jump');
+        let double = this.getData('isDoubleJumping');
+        
+        if (!jump || !double) {
+            this.anims.play('walking', true);
+        }
     }    
 
     idle() {
@@ -113,7 +120,10 @@ class Odin extends MainCharacter {
         let double = this.getData('isDoubleJumping');
         
         if (jump || double) {
-            this.inAir();
+            if(this.anims.currentAnim.key !== 'jumping') {
+                console.log('play in air');
+                this.inAir();
+            }
         }
     }
 
