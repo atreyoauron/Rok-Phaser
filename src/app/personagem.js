@@ -37,8 +37,26 @@ class Odin extends MainCharacter {
         });
 
         this.scene.input.keyboard.addKey('C');
+        this.scene.input.keyboard.addKey('X');
+
         this.up = this.scene.input.keyboard.addKey('UP');
         this.space = this.scene.input.keyboard.addKey('SPACE');
+        
+        this.scene.input.keyboard.on('keydown_X', function () {
+            const userInterface = this.scene.scene.get('userInterface');
+            const itens = this.getData('powerBoost');
+
+            if (itens < 100) {
+                return;
+            }
+
+            if (userInterface) {
+                this.setData('powerBostActive', true);
+                this.startPowerUp();
+                userInterface.userPowerBost(true);
+            }
+        }, this);
+        
         this.scene.input.keyboard.on('keydown_C', function () {
             const itens = this.getData('itens');
 

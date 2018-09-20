@@ -42,26 +42,62 @@ class UserInterface extends Phaser.Scene {
         this.updateCharacterLifeBar(0);
         powerBoostBox.setDepth(1);
 
-        this.events.addListener('damageTaken', function(damage) {
+        this.events.addListener('damageTaken', function (damage) {
             this.updateCharacterLifeBar(damage);
         }, this);
     }
 
     getPowerBoost(boost) {
-        let updateBoost = this.odin.setData('powerBoost');
+        this.odin.setData('powerBoost');
+        
+        if (this.odin.getData('powerBostActive')) {
+            this.odin.setData('currentTime', 3000);
+        }
+
         this.powerBoost.clear();
         this.powerBoost.fillStyle(0xffff00, 1);
         this.powerBoost.setDepth(2)
         this.powerBoost.fillRect(10, 30, boost, 10);
     }
 
-    userPowerBost() {
-        let powerBoost = this.odin.setData('powerBoost');
-        let boostTime = this.odin.setData('boostTime');
-        this.config.scene.time.addEvent({
-            delay: boostTime,
+    userPowerBost(firstTime) {        
+        if (firstTime) {
+            this.odin.setData('currentTime', this.odin.getData('boostTime'));
+        }
+
+        this.time.addEvent({
+            delay: 100,
             repeat: -1,
+            callback: this.reducePowerBar.bind(this)
         });
+    }
+
+    reducePowerBar() {
+        let currentTime = this.odin.getData('currentTime');
+        let boostTime = this.odin.getData('boostTime');
+        let powerBostActive = this.odin.getData('powerBostActive');
+        
+        let segundosRestantes = currentTime * 100 / boostTime;
+
+        this.odin.setData('powerBoost', segundosRestantes);
+
+        this.powerBoost.clear();
+        this.powerBoost.fillStyle(0xffff00, 1);
+        this.powerBoost.setDepth(2)
+        this.powerBoost.fillRect(10, 30, segundosRestantes, 10);
+
+        this.odin.setData('currentTime', currentTime - 100);
+
+        if (this.odin.getData('currentTime') <= 0 && powerBostActive) {
+            this.time.removeAllEvents();
+            this.time.clearPendingEvents();
+            this.odin.setData('powerBostActive', false);
+            this.odin.finishPowerUp();
+            this.powerBoost.clear();
+            this.powerBoost.fillStyle(0xffff00, 1);
+            this.powerBoost.setDepth(2)
+            this.powerBoost.fillRect(10, 30, 0, 10);            
+        }
     }
 
     updateCharacterLifeBar(damage) {
@@ -69,7 +105,7 @@ class UserInterface extends Phaser.Scene {
         let porcentagem;
         this.odin.setData('currentLifePoints', updatedLifePoints);
         porcentagem = (this.odin.getData('currentLifePoints') * 100) / this.odin.getData('totalLifePoints');
-        
+
         if (porcentagem <= 0) {
             console.log('killed!');
             this.lifeBar.clear();

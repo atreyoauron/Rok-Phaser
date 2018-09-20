@@ -108,13 +108,27 @@ class MainCharacter extends Phaser.GameObjects.Sprite {
             totalLifePoints: 1000,
             currentLifePoints: 1000,
             powerBoost: 0,
+            powerBostActive: false,
             boostTime: 3000,
+            currentTime: 0,
             itens: {
                 doubleJump: true,
                 spear: true,
                 armor: false
             }
         });
+    }
+
+    finishPowerUp() {
+        const itens = {...this.getData('itens')};
+        itens.armor = false;
+        this.setData('itens', itens);        
+    }
+
+    startPowerUp() {
+        const itens = {...this.getData('itens')};
+        itens.armor = true;
+        this.setData('itens', itens);
     }
 
     getDoubleJumpItem() {
