@@ -108,7 +108,13 @@ class Odin extends MainCharacter {
     }    
 
     idle() {
-        this.anims.play('standing', true);
+        const powerBostActive = this.getData('powerBostActive');
+
+        if (powerBostActive) {
+            this.anims.play('gold_standing', true);
+        } else {
+            this.anims.play('standing', true);
+        }
     }
 
     superHeroLanding() {

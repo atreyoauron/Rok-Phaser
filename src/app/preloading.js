@@ -140,6 +140,14 @@ class Preloading extends Phaser.Scene {
             repeat: -1
         });
 
+        this.anims.create({
+            key: 'gold_standing',
+            frames: this.anims.generateFrameNumbers('odin_gold_idle', { start: 0, end: 7 }),
+            frameRate: 7,
+            repeat: -1
+        });
+
+
 
         this.anims.create({
             key: 'jumping',
