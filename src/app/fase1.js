@@ -1,5 +1,7 @@
 /// <reference path="../../phaser.d.ts" />
 
+import HidromelSpawner from './hidromel-spawner.js';
+
 class FaseUm extends Phaser.Scene {
     constructor() {
         super({
@@ -66,16 +68,6 @@ class FaseUm extends Phaser.Scene {
         this.physics.add.collider(this.odin, [this.ground], function() {
             this.odin.resetJump();
         }, null, this);
-
-        const boost = this.physics.add.sprite(505, 0, 'hidromel');
-        boost.body.setGravityY(-670);
-
-        this.physics.add.collider(boost, [this.ground]);
-
-        this.physics.add.overlap(this.odin, boost, function(odin, collider) {
-            this.ui.getPowerBoost(100);
-        }, null, this);
-
 
         this.odin = this.add.existing(this.odin);
     }

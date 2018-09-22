@@ -9,7 +9,7 @@ class FaseDois extends Phaser.Scene {
             physics: {
                 arcade: {
                     gravity: { y: 700 },
-                    debug: false,
+                    debug: true,
                     // tileBias: 120,                
                 }
             }
@@ -58,7 +58,7 @@ class FaseDois extends Phaser.Scene {
             customConfig: {
                 x: 645,
                 y: 71,
-                speedDirection: -400,
+                speedDirection: -120,
                 colliders: [this.ground],
                 overlaps: [this.odin],
             }

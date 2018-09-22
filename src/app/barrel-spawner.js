@@ -35,13 +35,22 @@ class BarrelSpawner extends Phaser.GameObjects.Group {
     }
 
     createNewBarrel(config) {
-        const barril = this.barrelGroup.getFirstDead(true, config.barrelX, config.barrelY, 'barril');
+        const barril = this.barrelGroup.getFirstDead(true, this.config.customConfig.x, this.config.customConfig.y, this.config.groupConfig.key);
+
         if (barril === null) return;
 
-        barril.active = true;
-        barril.visible = true;
+        if (!barril.getData('configured')) {
+            barril.body.setSize(barril.body.sourceWidth * 0.5, barril.body.height / 2, barril.body.sourceWidth * 0.5, barril.body.height / 2)
+        }
+
 
         if (barril) {
+            barril.setDataEnabled();
+            barril.setData('configured', true);
+    
+            barril.active = true;
+            barril.visible = true;
+            
             barril.anims.play('rolling');
             barril.setVelocityX(config.speedDirection);
 
@@ -53,6 +62,7 @@ class BarrelSpawner extends Phaser.GameObjects.Group {
                 if (barrel.anims.currentAnim.key !== 'explosion') {
                     if (barrel.body.touching.left || barrel.body.touching.right || barrel.body.touching.up) {
                         this.killBarrel(barrel, config.barrelGroup);
+                        console.log('testing');
                         this.userInterface.events.emit('damageTaken', 50);
                         return;
                     }

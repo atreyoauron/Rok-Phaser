@@ -145,14 +145,12 @@ class Odin extends MainCharacter {
         
         if (jump || double) {
             if(this.anims.currentAnim.key !== 'jumping') {
-                console.log('play in air');
                 this.inAir();
             }
         }
     }
 
     shootSpear() {
-        console.log('shoot spear');
     }
 }
 

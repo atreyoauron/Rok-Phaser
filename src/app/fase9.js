@@ -1,4 +1,5 @@
 /// <reference path="../../phaser.d.ts" />
+import HidromelSpawner from './hidromel-spawner.js';
 import BarrelSpawner from './barrel-spawner.js';
 import CrowSpawner from './crow-spawner.js';
 
@@ -9,8 +10,7 @@ class FaseNove extends Phaser.Scene {
             physics: {
                 arcade: {
                     gravity: { y: 700 },
-                    debug: false,
-                    // tileBias: 120,
+                    debug: true
                 }
             }
         })
@@ -28,7 +28,6 @@ class FaseNove extends Phaser.Scene {
         if (config) {
             this.odin.x = config.odinx;
             this.odin.y = config.odiny;
-            this.odin.body.setVelocityX(0);
             this.physics.world.enable(this.odin);
         }
     }
@@ -52,7 +51,7 @@ class FaseNove extends Phaser.Scene {
         }, null, this);
         this.odin = this.add.existing(this.odin);
 
-        const barrelSpawner = new BarrelSpawner({
+        const barrelOne = new BarrelSpawner({
             scene: this,
             groupConfig: {
                 defaultKey: 'barril',
@@ -62,10 +61,9 @@ class FaseNove extends Phaser.Scene {
             customConfig: {
                 x: 0,
                 y: 330,
-                timing: 100,
                 speedDirection: 120,
                 colliders: [this.ground],
-                overlaps: [this.odin],               
+                overlaps: [this.odin],
             }
         });
 
@@ -98,7 +96,23 @@ class FaseNove extends Phaser.Scene {
 
         this.crows.createCrow({x: 309, y: 142},{ x: -50, y: 0});
         
-        
+        const hidromel = new HidromelSpawner({
+            scene: this,
+            groupConfig: {
+                defaultKey: 'hidromel',
+                maxSize: 1,
+            },
+            groupMultipleConfig: {},
+            customConfig: {
+                x: 600,
+                y: 97,
+                colliders: [this.ground],
+                overlaps: [this.odin],
+            }
+        });
+        hidromel.createSpawner();        
+
+        barrelOne.createBarrelSpawner();    
     }
 
     update() {

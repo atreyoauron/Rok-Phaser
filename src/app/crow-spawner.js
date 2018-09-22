@@ -9,7 +9,6 @@ class CrowSpawner extends Phaser.Physics.Arcade.Group {
 
     createCrow(position, direction, bounce) {
         if(!this.crowGroup) {
-            console.log('criando novo grupo');
             this.crowGroup = this.config.scene.physics.add.group();
         }
 
@@ -46,7 +45,6 @@ class CrowSpawner extends Phaser.Physics.Arcade.Group {
             }
 
             if (crow.anims.currentAnim.key !== 'explosion') {
-                console.log(crow.getData('hit'));
                 if (crow.body.onWall() && crow.getData('hit')) {
                     // crow.setVelocityX(0);
                     crow.setGravityY(-400);
