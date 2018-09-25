@@ -67,6 +67,22 @@ class FaseNove extends Phaser.Scene {
             }
         });
 
+        const barrelTwo = new BarrelSpawner({
+            scene: this,
+            groupConfig: {
+                defaultKey: 'barril',
+                maxSize: 2,    
+            },
+            groupMultipleConfig: {},
+            customConfig: {
+                x: 20,
+                y: 330,
+                speedDirection: 120,
+                colliders: [this.ground],
+                overlaps: [this.odin],
+            }
+        });        
+
         this.crows = new CrowSpawner({
             scene: this,
             groupConfig: {
@@ -110,9 +126,26 @@ class FaseNove extends Phaser.Scene {
                 overlaps: [this.odin],
             }
         });
-        hidromel.createSpawner();        
+        hidromel.createSpawner();  
+        
+        const hidromel2 = new HidromelSpawner({
+            scene: this,
+            groupConfig: {
+                defaultKey: 'hidromel',
+                maxSize: 1,
+            },
+            groupMultipleConfig: {},
+            customConfig: {
+                x: 250,
+                y: 19,
+                colliders: [this.ground],
+                overlaps: [this.odin],
+            }
+        });
+        hidromel2.createSpawner();          
 
         barrelOne.createBarrelSpawner();    
+        barrelTwo.createBarrelSpawner();
     }
 
     update() {

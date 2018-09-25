@@ -18,7 +18,7 @@ class BarrelSpawner extends Phaser.GameObjects.Group {
             callback: () => {
                 this.barrelGroup.getChildren().forEach(data => {
                     if (data.body.x > 640 || data.body.y > 360) {
-                        this.killBarrel(data, this.barrelGroup);
+                        this.barrelGroup.kill(data);
                     }
                 });                
             }

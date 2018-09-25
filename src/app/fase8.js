@@ -56,8 +56,11 @@ class FaseOito extends Phaser.Scene {
     update() {
         this.odin.checkCursorMoviment(this.common);
 
-        if (this.odin.x >= 10 && this.odin.x <= 120 && this.odin.y > 360) {
-            this.scene.start('fasenove', {
+        if (
+            this.odin.x >= 10 && this.odin.x <= 120 && this.odin.y > 360
+            || this.odin.x >= 136 && this.odin.x <= 237 && this.odin.y > 360 
+            || this.odin.x >= 136 && this.odin.x <= 629 && this.odin.y > 360) {
+                this.scene.start('fasenove', {
                 odinx: this.odin.x,
                 odiny: 0,
             });
