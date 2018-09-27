@@ -73,7 +73,10 @@ class Odin extends MainCharacter {
             const direction = (this.flipX) ? -400 : 400;
             const xOrigin = (this.flipX) ? this.x - 30 : this.x + 30;
 
-            const colliders = (scene.crows) ? [scene.ground, scene.crows.crowGroup] : [scene.ground];
+            const crows = (scene.crows) ? scene.crows.crowGroup : {};
+            const barrelSwitch = (scene.barrelSwitch) ? scene.barrelSwitch : {};
+
+            const colliders = [scene.ground, crows, barrelSwitch];
             const config = {
                 scene: scene,
                 speedDirection: {

@@ -151,12 +151,21 @@ class FaseNove extends Phaser.Scene {
     update() {
         this.odin.checkCursorMoviment(this.common);
 
-        if (this.odin.x >= 137 && this.odin.x <= 244 && this.odin.y < 0) {
+        if (this.odin.x >= 137 && this.odin.x <= 244 && this.odin.y < 0
+            || this.odin.x >= 568 && this.odin.x <= 628 && this.odin.y < 0) {
             this.scene.start('faseoito', {
                 odinx: this.odin.x,
                 odiny: 360
             });
         }
+
+
+        if(this.odin.x > 630) {
+            this.scene.start('fasedez', {
+                odinx: 0,
+                odiny: this.odin.y,
+            });
+        }        
     }
 }
 

@@ -26,11 +26,20 @@ class SpearSpawner extends Phaser.Physics.Arcade.Group {
         spear.body.setSize(spear.body.sourceWidth * 0.5, spear.body.sourceHeight * 0.5, spear.body.sourceWidth * 0.5, spear.body.sourceHeight * 0.5)
         spear.anims.play('lancando');
 
-        if(!itens.armor) {
+        if(itens.armor) {
+            this.queueBarrel(this.kill, spear, config.scene, 3000);
+        } else {
             this.queueBarrel(this.kill, spear, config.scene);
         }
 
         config.scene.physics.add.collider(this.spearGroup, [...config.colliderList], function (spearCollider, collider) {
+            if (spearCollider.name === "switchBarrelOff") {
+                const barrels = spearCollider.getData('barrels');
+                barrels.forEach(barrel => {
+                    barrel.destroySpawner();
+                })
+                return
+            }
 
             if (spearCollider.body.onWall()) {
                 this.kill(spearCollider);
@@ -48,9 +57,9 @@ class SpearSpawner extends Phaser.Physics.Arcade.Group {
         crow.destroy();
     }
 
-    queueBarrel(callback, crow, scene) {
+    queueBarrel(callback, crow, scene, timing = 400) {
         scene.time.addEvent({
-            delay: 400,
+            delay: timing,
             callback: callback.bind(this, crow)
         })
     }

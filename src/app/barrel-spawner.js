@@ -8,21 +8,14 @@ class BarrelSpawner extends Phaser.GameObjects.Group {
 
     }
 
-    createBarrelSpawner() {
-        this.barrelGroup = this.config.scene.physics.add.group();
-        this.barrelGroup.maxSize = this.config.groupConfig.maxSize;
+    destroySpawner() {
+        this.barrelGroup.clear(true, true);
+        this.barrelTimer.remove();
+    }
 
-        this.config.scene.time.addEvent({
-            delay: 1,
-            repeat: -1,
-            callback: () => {
-                this.barrelGroup.getChildren().forEach(data => {
-                    if (data.body.x > 640 || data.body.y > 360) {
-                        this.barrelGroup.kill(data);
-                    }
-                });                
-            }
-        })        
+    createBarrelSpawner() {
+        this.barrelGroup = this.scene.physics.add.group();
+        this.barrelGroup.maxSize = this.config.groupConfig.maxSize;   
 
         this.queueBarrel(this.config.customConfig.timing, this.createNewBarrel, {
             speedDirection: this.config.customConfig.speedDirection,
@@ -35,6 +28,20 @@ class BarrelSpawner extends Phaser.GameObjects.Group {
     }
 
     createNewBarrel(config) {
+        if(!this.barrelGroup && !this.barrelGroup.children) {
+            return;
+        }
+        
+        this.barrelGroup.getChildren().forEach(data => {
+            if (data.body.x > 640 || data.body.y > 360) {
+                this.barrelGroup.kill(data);
+            }
+        });
+
+        if(!this.barrelGroup && !this.barrelGroup.children) {
+            return;
+        }        
+
         const barril = this.barrelGroup.getFirstDead(true, this.config.customConfig.x, this.config.customConfig.y, this.config.groupConfig.key);
 
         if (barril === null) return;
@@ -91,11 +98,11 @@ class BarrelSpawner extends Phaser.GameObjects.Group {
     }
 
     queueBarrel(timing = 2000, callback, ...args) {
-        this.config.scene.time.addEvent({
+        this.barrelTimer = this.scene.time.addEvent({
             delay: timing,
             repeat: -1,
             callback: callback.bind(this, ...args)
-        })
+        });
     }
 }
 

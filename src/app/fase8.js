@@ -1,6 +1,7 @@
 /// <reference path="../../phaser.d.ts" />
 import BarrelSpawner from './barrel-spawner.js';
 import CrowSpawner from './crow-spawner.js';
+import HidromelSpawner from './hidromel-spawner.js';
 
 class FaseOito extends Phaser.Scene {
     constructor() {
@@ -45,12 +46,162 @@ class FaseOito extends Phaser.Scene {
         var map = this.add.tilemap('fase_8');
 
         var tileset = map.addTilesetImage('plataformas');
-        this.ground = map.createStaticLayer('plataformas', tileset);
+        this.ground = map.createDynamicLayer('plataformas', tileset);
         this.ground.setCollisionByProperty({ collider: true });
         this.physics.add.collider(this.odin, [this.ground], function() {
             this.odin.resetJump();
         }, null, this);
         this.odin = this.add.existing(this.odin);
+
+        const hidromel = new HidromelSpawner({
+            scene: this,
+            groupConfig: {
+                defaultKey: 'hidromel',
+                maxSize: 1,
+            },
+            groupMultipleConfig: {},
+            customConfig: {
+                x: 145,
+                y: 28,
+                colliders: [this.ground],
+                overlaps: [this.odin],
+            }
+        });
+        hidromel.createSpawner();
+
+        const one = new BarrelSpawner({
+            scene: this,
+            groupConfig: {
+                defaultKey: 'barril',
+                maxSize: 2,    
+            },
+            groupMultipleConfig: {},
+            customConfig: {
+                x: 460,
+                y: 90,
+                speedDirection: -120,
+                colliders: [this.ground],
+                overlaps: [this.odin],
+            }
+        }); 
+        
+        const two = new BarrelSpawner({
+            scene: this,
+            groupConfig: {
+                defaultKey: 'barril',
+                maxSize: 2,    
+            },
+            groupMultipleConfig: {},
+            customConfig: {
+                x: 515,
+                y: 114,
+                speedDirection: -120,
+                colliders: [this.ground],
+                overlaps: [this.odin],
+            }
+        });   
+        
+        const three = new BarrelSpawner({
+            scene: this,
+            groupConfig: {
+                defaultKey: 'barril',
+                maxSize: 2,    
+            },
+            groupMultipleConfig: {},
+            customConfig: {
+                x: 496,
+                y: 114,
+                speedDirection: -120,
+                colliders: [this.ground],
+                overlaps: [this.odin],
+            }
+        });     
+                
+        const four = new BarrelSpawner({
+            scene: this,
+            groupConfig: {
+                defaultKey: 'barril',
+                maxSize: 2,    
+            },
+            groupMultipleConfig: {},
+            customConfig: {
+                x: 447,
+                y: 71,
+                speedDirection: -120,
+                colliders: [this.ground],
+                overlaps: [this.odin],
+            }
+        });
+        
+        const five = new BarrelSpawner({
+            scene: this,
+            groupConfig: {
+                defaultKey: 'barril',
+                maxSize: 2,    
+            },
+            groupMultipleConfig: {},
+            customConfig: {
+                x: 417,
+                y: 50,
+                speedDirection: -120,
+                colliders: [this.ground],
+                overlaps: [this.odin],
+            }
+        });       
+        
+        const six = new BarrelSpawner({
+            scene: this,
+            groupConfig: {
+                defaultKey: 'barril',
+                maxSize: 2,    
+            },
+            groupMultipleConfig: {},
+            customConfig: {
+                x: 341,
+                y: 29,
+                speedDirection: -120,
+                colliders: [this.ground],
+                overlaps: [this.odin],
+            }
+        });        
+
+        this.crows = new CrowSpawner({
+            scene: this,
+            groupConfig: {
+                defaultKey: 'crow',
+                maxSize: 1,    
+            },
+            groupMultipleConfig: {},
+            customConfig: {
+                x: 489,
+                y: 300,
+                bounce: {
+                    x: 0,
+                    y: 1
+                },
+                speedDirection: {
+                    x: 0,
+                    y: -30
+                },
+                colliders: [this.ground]                 
+            }
+        });     
+        
+        this.crows.createCrow({x: 273, y: 21},{ x: 0, y: 50});
+        
+
+        one.createBarrelSpawner();
+        two.createBarrelSpawner();
+        three.createBarrelSpawner();
+        four.createBarrelSpawner();
+        five.createBarrelSpawner();
+        six.createBarrelSpawner();
+
+        this.barrelSwitch = this.physics.add.staticImage(602, 33, 'hidromel');
+        this.barrelSwitch.setDataEnabled();
+        this.barrelSwitch.setName('switchBarrelOff');
+
+        this.barrelSwitch.setData('barrels', [one, two, three, four, five, six]);        
     }
 
     update() {

@@ -8,18 +8,31 @@ class CrowSpawner extends Phaser.Physics.Arcade.Group {
     }
 
     createCrow(position, direction, bounce) {
-        if(!this.crowGroup) {
+        if (!this.crowGroup) {
             this.crowGroup = this.config.scene.physics.add.group();
         }
 
         this.createNewCrow({
-            speedDirection: direction, 
+            speedDirection: direction,
             bounce: this.config.customConfig.bounce,
-            x: position.x, 
-            y: position.y, 
+            x: position.x,
+            y: position.y,
             crowGroup: this.crowGroup,
             colliderList: this.config.customConfig.colliders
         });
+    }
+
+    getTheFirstPixel(tileGroup, tile) {
+        const hasTileAt = tileGroup.hasTileAt(tile.x, tile.y - 1);
+        const newTile = tileGroup.getTileAt(tile.x, tile.y - 1);
+
+
+        if (!hasTileAt || !newTile.properties || !newTile.properties.breakable) {
+            console.log(tile);
+            return tile;
+        }
+
+        return this.getTheFirstPixel(tileGroup, newTile);
     }
 
     createNewCrow(config) {
@@ -34,10 +47,15 @@ class CrowSpawner extends Phaser.Physics.Arcade.Group {
 
         this.config.scene.physics.add.collider(config.crowGroup, [...config.colliderList, config.crowGroup], function (crow, collider) {
             if (collider && collider.visible) {
-                if(collider.properties && collider.properties.breakable) {
-                    const tiles = config.colliderList[0].getTilesWithin(collider.x, collider.y, 100, 100);
-                    tiles.forEach(data => {
-                        if(data.properties && data.properties.breakable) {
+                if (collider.properties && collider.properties.breakable) {
+                    const tile = this.getTheFirstPixel(config.colliderList[0], collider);
+
+                    const tiles = config.colliderList[0].getTilesWithinWorldXY(tile.pixelX, tile.pixelY, 15, 135, {
+                        isNotEmpty: true
+                    });
+
+                    tiles.forEach((data, index) => {
+                        if (data.properties && data.properties.breakable) {
                             config.colliderList[0].removeTileAt(data.x, data.y);
                         }
                     })
@@ -51,42 +69,42 @@ class CrowSpawner extends Phaser.Physics.Arcade.Group {
                     this.kill(crow);
                     return;
                 }
-            }            
-        }, function(obj1, obj2) {
-            if(obj1.name === obj2.name) {
-                if(obj1.data || obj2.data) {                    
-                    if(obj1.anims.currentAnim.key === 'explosion') {
+            }
+        }, function (obj1, obj2) {
+            if (obj1.name === obj2.name) {
+                if (obj1.data || obj2.data) {
+                    if (obj1.anims.currentAnim.key === 'explosion') {
                         this.kill(obj2);
                         return false;
                     }
 
-                    if(obj1.getData('hit')) {
+                    if (obj1.getData('hit')) {
+                        obj2.body.setBounce(0);
+
                         obj2.setDataEnabled();
-                        obj2.setData({hit: true});    
+                        obj2.setData({ hit: true });
                     }
                     return false;
                 } else {
                     return false;
                 }
             }
-            if (obj2.body && obj2.body.speed > obj1.body.speed)
-            {
+            if (obj2.body && obj2.body.speed > obj1.body.speed) {
                 return false;
             }
-            else
-            {
+            else {
                 return true;
             }
         }, this);
     }
 
     kill(crow) {
-        crow.anims.play('explosion');      
+        crow.anims.play('explosion');
         crow.on('animationcomplete', function (animation, frame) {
             if (animation.key == 'explosion') {
                 crow.destroy();
             };
-        });    
+        });
     }
 
     queueBarrel(callback, ...args) {
@@ -95,7 +113,7 @@ class CrowSpawner extends Phaser.Physics.Arcade.Group {
             repeat: -1,
             callback: callback.bind(this, ...args)
         })
-    }  
+    }
 }
 
 export default CrowSpawner;
