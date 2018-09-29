@@ -12,7 +12,7 @@ import {
     FaseNove,
     FaseDez,
     Creditos,
-    Preloading,
+    Boot,
     UserInterface,
 } from './index.js'
 
@@ -23,7 +23,7 @@ const config = {
     height: 360,
     scene: [ 
         SplashScreen, 
-        Preloading, 
+        Boot, 
         MainMenu, 
         FaseUm, 
         FaseDois, 

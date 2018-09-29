@@ -1,18 +1,18 @@
-import FaseUm from './fase1.js';
-import FaseDois from './fase2.js';
-import FaseTres from './fase3.js';
-import FaseQuatro from './fase4.js';
-import FaseCinco from './fase5.js';
-import FaseSeis from './fase6.js';
-import FaseSete from './fase7.js';
-import FaseOito from './fase8.js';
-import FaseNove from './fase9.js';
-import FaseDez from './fase10.js';
-import SplashScreen from './splashScreen.js';
-import Creditos from './creditos.js';
-import MainMenu from './menu.js';
-import Preloading from './preloading.js';
-import UserInterface from './user-interface.js';
+import FaseUm from './fases/fase1.js';
+import FaseDois from './fases/fase2.js';
+import FaseTres from './fases/fase3.js';
+import FaseQuatro from './fases/fase4.js';
+import FaseCinco from './fases/fase5.js';
+import FaseSeis from './fases/fase6.js';
+import FaseSete from './fases/fase7.js';
+import FaseOito from './fases/fase8.js';
+import FaseNove from './fases/fase9.js';
+import FaseDez from './fases/fase10.js';
+import SplashScreen from './boot/splashScreen.js';
+import Creditos from './boot/creditos.js';
+import MainMenu from './boot/menu.js';
+import Boot from './boot/boot.js';
+import UserInterface from './boot/user-interface.js';
 
 export {
     FaseUm,
@@ -28,6 +28,6 @@ export {
     SplashScreen,
     Creditos,
     MainMenu,
-    Preloading,
+    Boot,
     UserInterface,
 }
