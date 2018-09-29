@@ -28,7 +28,6 @@ class CrowSpawner extends Phaser.Physics.Arcade.Group {
 
 
         if (!hasTileAt || !newTile.properties || !newTile.properties.breakable) {
-            console.log(tile);
             return tile;
         }
 

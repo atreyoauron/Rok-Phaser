@@ -30,7 +30,7 @@ class FaseUm extends Phaser.Scene {
     }
 
     init(config) {
-        this.scene.resume('preloading');        
+        this.scene.resume('boot');        
         this.common = this.scene.get('boot');
         this.ui = this.scene.get('userInterface');
         

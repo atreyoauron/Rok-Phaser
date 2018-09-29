@@ -23,7 +23,7 @@ class MainMenu extends Phaser.Scene {
     }
 
     create() {
-        this.scene.pause('preloading');
+        this.scene.pause('boot');
 
         const splash = this.add.image(0, 0, 'fundo-splash');
         splash.setOrigin(0);

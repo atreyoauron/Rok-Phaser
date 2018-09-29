@@ -18,7 +18,7 @@ class Odin extends MainCharacter {
         this.spear = new SpearSpawner({
             scene: this,
             groupConfig: {
-                defaultKey: 'tridente',
+                defaultKey: 'lanca',
                 maxSize: 1,
             },
             groupMultipleConfig: {},
@@ -60,9 +60,11 @@ class Odin extends MainCharacter {
         this.scene.input.keyboard.on('keydown_C', function () {
             const itens = this.getData('itens');
 
+
             if (!itens.spear) return;
 
             const scene = this.getActivatedScene(this.scene.scene.manager.scenes);
+
             if (!this.spearGroupCreatedOnThisScene[scene.scene.key]) {
                 if (!this.spearGroupCreatedOnThisScene[scene.scene.key]) {
                     this.spear.createSpearGroup(scene);
@@ -126,7 +128,7 @@ class Odin extends MainCharacter {
 
     getActivatedScene(scenes) {
         const scene = scenes.filter(scene => {
-            if (scene.scene.key !== 'preloading') {
+            if (scene.scene.key !== 'boot') {
                 if (scene.scene.settings.active) {
                     return scene;
                 } else {

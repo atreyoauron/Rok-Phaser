@@ -86,11 +86,11 @@ class MainCharacter extends Phaser.GameObjects.Sprite {
         if (context.cursors.right.isDown) {
             this.flipX = false;
             this.walking();
-            this.body.setVelocityX(100);
+            this.body.setVelocityX(75);
         } else if (context.cursors.left.isDown) {
             this.walking();
             this.flipX = true;
-            this.body.setVelocityX(-100);
+            this.body.setVelocityX(-75);
         } else {            
             if(this.getData('jump') === false && this.getData('isDoubleJumping') === false) {
                 this.idle();

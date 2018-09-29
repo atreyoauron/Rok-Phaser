@@ -69,7 +69,6 @@ class BarrelSpawner extends Phaser.GameObjects.Group {
                 if (barrel.anims.currentAnim.key !== 'explosion') {
                     if (barrel.body.touching.left || barrel.body.touching.right || barrel.body.touching.up) {
                         this.killBarrel(barrel, config.barrelGroup);
-                        console.log('testing');
                         this.userInterface.events.emit('damageTaken', 50);
                         return;
                     }

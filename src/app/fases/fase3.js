@@ -61,6 +61,7 @@ class FaseTres extends Phaser.Scene {
             customConfig: {
                 x: 0,
                 y: 71,
+                timing: 0,
                 speedDirection: 120,
                 colliders: [this.ground],
                 overlaps: [this.odin],
@@ -76,6 +77,7 @@ class FaseTres extends Phaser.Scene {
             customConfig: {
                 x: 130,
                 y: 0,
+                timing: 0,
                 speedDirection: 120,
                 colliders: [this.ground],
                 overlaps: [this.odin],
