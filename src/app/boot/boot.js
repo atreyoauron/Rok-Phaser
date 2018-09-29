@@ -95,6 +95,10 @@ class Boot extends Phaser.Scene {
             frameWidth: 24,
             frameHeight: 24
         });
+        this.load.spritesheet('big-explosion', 'src/assets/img/big-explosion.png', {
+            frameWidth: 128,
+            frameHeight: 128
+        });        
         this.load.spritesheet('lanca', 'src/assets/img/lanca.png', {
             frameWidth: 37,
             frameHeight: 9
@@ -186,6 +190,13 @@ class Boot extends Phaser.Scene {
             frameRate: 15,
             repeat: 0
         });
+
+        this.anims.create({
+            key: 'big-explosion',
+            frames: this.anims.generateFrameNumbers('big-explosion', { start: 0, end: 16 }),
+            frameRate: 16,
+            repeat: 0
+        });        
 
         this.odin = new Odin({
             scene: this,

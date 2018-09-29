@@ -44,7 +44,35 @@ class CrowSpawner extends Phaser.Physics.Arcade.Group {
         crow.setName('crow');
         crow.setMaxVelocity(400, 400);
 
-        this.config.scene.physics.add.collider(config.crowGroup, [...config.colliderList, config.crowGroup], function (crow, collider) {
+        this.config.scene.physics.add.overlap(config.crowGroup, [config.crowGroup], function (crow, crowOverlap) {
+            if (crow.anims.currentAnim.key === 'big-explosion') {
+                this.kill(crowOverlap);
+            }
+
+            if (crow.anims.currentAnim.key !== 'big-explosion') {                
+                if (crow.getData('hit')) {
+                    if (!crowOverlap.getData('hit')) {
+                        crowOverlap.setData('hit', true);
+
+                        if (crow.body.touching.left) {
+                            crowOverlap.body.setVelocityX(-120);
+                        }
+                        if (crow.body.touching.right) {
+                            crowOverlap.body.setVelocityX(120);
+                        }
+                    }
+
+                }
+            }
+        }, null, this);
+
+        this.config.scene.physics.add.collider(config.crowGroup, [...config.colliderList], function (crow, collider) {
+            if (crow.body.onWall() && crow.getData('hit')) {
+                crow.body.setVelocity(0);
+                this.kill(crow);
+            } 
+
+
             if (collider && collider.visible) {
                 if (collider.properties && collider.properties.breakable) {
                     const tile = this.getTheFirstPixel(config.colliderList[0], collider);
@@ -60,47 +88,15 @@ class CrowSpawner extends Phaser.Physics.Arcade.Group {
                     })
                 }
             }
-
-            if (crow.anims.currentAnim.key !== 'explosion') {
-                if (crow.body.onWall() && crow.getData('hit')) {
-                    // crow.setVelocityX(0);
-                    crow.setGravityY(-400);
-                    this.kill(crow);
-                    return;
-                }
-            }
-        }, function (obj1, obj2) {
-            if (obj1.name === obj2.name) {
-                if (obj1.data || obj2.data) {
-                    if (obj1.anims.currentAnim.key === 'explosion') {
-                        this.kill(obj2);
-                        return false;
-                    }
-
-                    if (obj1.getData('hit')) {
-                        obj2.body.setBounce(0);
-
-                        obj2.setDataEnabled();
-                        obj2.setData({ hit: true });
-                    }
-                    return false;
-                } else {
-                    return false;
-                }
-            }
-            if (obj2.body && obj2.body.speed > obj1.body.speed) {
-                return false;
-            }
-            else {
-                return true;
-            }
-        }, this);
+        }, null, this);
     }
 
     kill(crow) {
-        crow.anims.play('explosion');
+        crow.body.setSize(128, 128, 128, 128);
+        crow.anims.play('big-explosion', true);
+
         crow.on('animationcomplete', function (animation, frame) {
-            if (animation.key == 'explosion') {
+            if (animation.key == 'big-explosion') {
                 crow.destroy();
             };
         });

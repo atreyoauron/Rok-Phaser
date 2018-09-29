@@ -10,7 +10,7 @@ class MainCharacter extends Phaser.GameObjects.Sprite {
         this.common;      
         this.body.wasTouching.none = false
         this.body.touching.none = false;
-        this.body.setMaxVelocity(120, 330)
+        this.body.setMaxVelocity(120, 330);
     }
 
     createJump(character){
@@ -112,9 +112,9 @@ class MainCharacter extends Phaser.GameObjects.Sprite {
             boostTime: 3000,
             currentTime: 0,
             itens: {
-                doubleJump: false,
-                spear: false,
-                armor: false
+                doubleJump: true,
+                spear: true,
+                armor: true
             }
         });
     }
