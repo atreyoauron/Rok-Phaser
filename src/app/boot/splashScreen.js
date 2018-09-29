@@ -11,7 +11,6 @@ class SplashScreen extends Phaser.Scene {
     preload() {
         this.load.image('fundo-splash', 'src/assets/img/splash-screen.jpg');
         this.load.image('logo', 'src/assets/img/pp.png');
-        this.load.image('loadingBar', 'src/assets/img/loading-bar.jpg');
     }
 
     create() {

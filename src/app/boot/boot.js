@@ -70,7 +70,6 @@ class Boot extends Phaser.Scene {
             });
         }, this);
 
-        this.load.image('light', 'src/assets/img/light.png');
         this.load.image('hidromel', 'src/assets/img/boost.png');
         this.load.spritesheet('odin', 'src/assets/img/odin.png', {
             frameWidth: 28,

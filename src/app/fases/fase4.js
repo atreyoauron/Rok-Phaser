@@ -60,7 +60,7 @@ class FaseQuatro extends Phaser.Scene {
             customConfig: {
                 x: 640,
                 y: 23,
-                speedDirection: -70,
+                speedDirection: -68,
                 colliders: [this.ground],
                 overlaps: [this.odin],
             }
@@ -74,9 +74,9 @@ class FaseQuatro extends Phaser.Scene {
             },
             groupMultipleConfig: {},
             customConfig: {
-                x: 640,
+                x: 635,
                 y: 70,
-                speedDirection: -80,
+                speedDirection: -70,
                 colliders: [this.ground],
                 overlaps: [this.odin],                
             }
@@ -90,9 +90,9 @@ class FaseQuatro extends Phaser.Scene {
             },
             groupMultipleConfig: {},
             customConfig: {
-                x: 640,
+                x: 630,
                 y: 117,
-                speedDirection: -90,
+                speedDirection: -72,
                 colliders: [this.ground],
                 overlaps: [this.odin],               
             }
@@ -106,9 +106,9 @@ class FaseQuatro extends Phaser.Scene {
             },
             groupMultipleConfig: {},
             customConfig: {
-                x: 640,
+                x: 625,
                 y: 158,
-                speedDirection: -100,
+                speedDirection: -74,
                 colliders: [this.ground],
                 overlaps: [this.odin],                
             }
@@ -150,7 +150,7 @@ class FaseQuatro extends Phaser.Scene {
             scene: this,
             groupConfig: {
                 defaultKey: 'barril',
-                maxSize: 2,    
+                maxSize: 1,    
             },
             groupMultipleConfig: {},
             customConfig: {
@@ -166,13 +166,13 @@ class FaseQuatro extends Phaser.Scene {
             scene: this,
             groupConfig: {
                 defaultKey: 'barril',
-                maxSize: 2,    
+                maxSize: 1,    
             },
             groupMultipleConfig: {},
             customConfig: {
                 x: 345,
                 y: 236,
-                speedDirection: -120,
+                speedDirection: -100,
                 colliders: [this.ground],
                 overlaps: [this.odin],               
             }
@@ -188,7 +188,7 @@ class FaseQuatro extends Phaser.Scene {
             customConfig: {
                 x: 145,
                 y: 256,
-                timing: 2000,
+                timing: 1500,
                 speedDirection: 120,
                 colliders: [this.ground],
                 overlaps: [this.odin],               
@@ -205,8 +205,8 @@ class FaseQuatro extends Phaser.Scene {
             customConfig: {
                 x: 174,
                 y: 256,
-                timing: 2000,
-                speedDirection: 120,
+                timing: 1500,
+                speedDirection: 118,
                 colliders: [this.ground],
                 overlaps: [this.odin],               
             }
@@ -223,7 +223,7 @@ class FaseQuatro extends Phaser.Scene {
             customConfig: {
                 x: 388,
                 y: 256,
-                timing: 500,
+                timing: 1500,
                 speedDirection: 120,
                 colliders: [this.ground],
                 overlaps: [this.odin],               
@@ -240,8 +240,8 @@ class FaseQuatro extends Phaser.Scene {
             customConfig: {
                 x: 417,
                 y: 256,
-                timing: 500,
-                speedDirection: 120,
+                timing: 1500,
+                speedDirection: 118,
                 colliders: [this.ground],
                 overlaps: [this.odin],               
             }
