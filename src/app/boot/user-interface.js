@@ -107,7 +107,6 @@ class UserInterface extends Phaser.Scene {
         porcentagem = (this.odin.getData('currentLifePoints') * 100) / this.odin.getData('totalLifePoints');
 
         if (porcentagem <= 0) {
-            console.log('killed!');
             this.lifeBar.clear();
             this.lifeBar.fillStyle(0xff0000, 1);
             this.lifeBar.setDepth(2)

@@ -13,6 +13,8 @@ class Odin extends MainCharacter {
     }
 
     create() {
+        this.setName('odin');
+        
         this.createJump();
 
         this.spear = new SpearSpawner({

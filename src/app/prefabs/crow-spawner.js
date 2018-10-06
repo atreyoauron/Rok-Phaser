@@ -5,6 +5,7 @@ class CrowSpawner extends Phaser.Physics.Arcade.Group {
         super(config.scene, config.groupConfig, config.groupMultipleConfig, config.customConfig);
         this.config = config;
         this.crowGroup;
+        this.userInterface = config.scene.scene.get('userInterface');
     }
 
     createCrow(position, direction, bounce) {
@@ -18,7 +19,8 @@ class CrowSpawner extends Phaser.Physics.Arcade.Group {
             x: position.x,
             y: position.y,
             crowGroup: this.crowGroup,
-            colliderList: this.config.customConfig.colliders
+            colliderList: this.config.customConfig.colliders,
+            overlapList: this.config.customConfig.overlap
         });
     }
 
@@ -44,34 +46,29 @@ class CrowSpawner extends Phaser.Physics.Arcade.Group {
         crow.setName('crow');
         crow.setMaxVelocity(400, 400);
 
-        this.config.scene.physics.add.overlap(config.crowGroup, [config.crowGroup], function (crow, crowOverlap) {
-            if (crow.anims.currentAnim.key === 'big-explosion') {
-                this.kill(crowOverlap);
-            }
+        if(config.overlapList) {
+            this.config.scene.physics.add.overlap(config.crowGroup, [...config.overlapList], function (firstOverlap, overlap) {
+                if (firstOverlap.name === 'odin') {
+                    const odinTakingDamage = firstOverlap.getData('takingDamage');
 
-            if (crow.anims.currentAnim.key !== 'big-explosion') {                
-                if (crow.getData('hit')) {
-                    if (!crowOverlap.getData('hit')) {
-                        crowOverlap.setData('hit', true);
-
-                        if (crow.body.touching.left) {
-                            crowOverlap.body.setVelocityX(-120);
-                        }
-                        if (crow.body.touching.right) {
-                            crowOverlap.body.setVelocityX(120);
-                        }
+                    if (!odinTakingDamage) {
+                        this.userInterface.events.emit('damageTaken', 250);
+                        firstOverlap.setData('takingDamage', true);
+                        this.config.scene.time.addEvent({
+                            delay: 500,
+                            repeat: 0,
+                            callback: this.clearTakeDamage.bind(this, firstOverlap)
+                        });
                     }
-
                 }
-            }
-        }, null, this);
+            }, null, this);
+        }
 
         this.config.scene.physics.add.collider(config.crowGroup, [...config.colliderList], function (crow, collider) {
             if (crow.body.onWall() && crow.getData('hit')) {
                 crow.body.setVelocity(0);
                 this.kill(crow);
-            } 
-
+            }
 
             if (collider && collider.visible) {
                 if (collider.properties && collider.properties.breakable) {
@@ -100,6 +97,10 @@ class CrowSpawner extends Phaser.Physics.Arcade.Group {
                 crow.destroy();
             };
         });
+    }
+
+    clearTakeDamage(odin) {
+        odin.setData('takingDamage', false);
     }
 
     queueBarrel(callback, ...args) {

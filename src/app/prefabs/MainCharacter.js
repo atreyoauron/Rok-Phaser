@@ -108,6 +108,7 @@ class MainCharacter extends Phaser.GameObjects.Sprite {
             totalLifePoints: 1000,
             currentLifePoints: 1000,
             powerBoost: 0,
+            takingDamage: false,
             powerBostActive: false,
             boostTime: 3000,
             currentTime: 0,

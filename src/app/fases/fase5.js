@@ -70,7 +70,8 @@ class FaseQuatro extends Phaser.Scene {
                     x: 0,
                     y: -120
                 },
-                colliders: [this.ground]                 
+                colliders: [this.ground],
+                overlap: [this.odin],               
             }            
         });     
         this.crows.createCrow({x: 440, y: 180},{ x: 0, y: 50});

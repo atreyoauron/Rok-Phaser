@@ -55,7 +55,8 @@ class FaseSete extends Phaser.Scene {
         spearItem.setOrigin(0.5);
         this.physics.world.enable(spearItem);
         spearItem.body.setAllowGravity(false);
-        spearItem.body.moves = false;             
+        spearItem.body.moves = false;
+                
         this.physics.add.overlap(this.odin, spearItem, function() {
             this.odin.getSpear();
         }, null, this);
