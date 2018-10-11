@@ -45,6 +45,10 @@ class UserInterface extends Phaser.Scene {
         this.events.addListener('damageTaken', function (damage) {
             this.updateCharacterLifeBar(damage);
         }, this);
+
+        this.events.addListener('characterDied', function (damage) {
+            this.scene.start('fase1');
+        }, this);
     }
 
     getPowerBoost(boost) {
@@ -107,6 +111,7 @@ class UserInterface extends Phaser.Scene {
         porcentagem = (this.odin.getData('currentLifePoints') * 100) / this.odin.getData('totalLifePoints');
 
         if (porcentagem <= 0) {
+            this.events.emit('characterDied');
             this.lifeBar.clear();
             this.lifeBar.fillStyle(0xff0000, 1);
             this.lifeBar.setDepth(2)
