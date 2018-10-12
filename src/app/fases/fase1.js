@@ -33,7 +33,8 @@ class FaseUm extends Phaser.Scene {
         this.scene.resume('boot');        
         this.common = this.scene.get('boot');
         this.ui = this.scene.get('userInterface');
-        
+        this.ui.events.emit('damageTaken', 0);
+
         this.odin = this.common.odin;
         this.physics.world.enable(this.odin);
         this.odin.resetSpearGroup();

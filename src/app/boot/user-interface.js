@@ -32,11 +32,13 @@ class UserInterface extends Phaser.Scene {
         this.lifeBar = this.add.graphics();
         this.powerBoost = this.add.graphics();
 
+        lifeBarBox.clear();
         lifeBarBox.fillStyle(0x000000, 1);
         lifeBarBox.fillRect(10, 10, 100, 10);
         this.updateCharacterLifeBar(0);
         lifeBarBox.setDepth(1);
 
+        powerBoostBox.clear();
         powerBoostBox.fillStyle(0x000000, 1);
         powerBoostBox.fillRect(10, 30, 100, 10);
         this.updateCharacterLifeBar(0);
@@ -47,8 +49,33 @@ class UserInterface extends Phaser.Scene {
         }, this);
 
         this.events.addListener('characterDied', function (damage) {
-            this.scene.start('fase1');
+            const activatedScene = this.getActivatedScene(this.scene.manager.scenes);
+            activatedScene.scene.stop();
+            this.resetGame(activatedScene);
         }, this);
+    }
+
+    resetGame(activatedScene) {
+        this.odin.setData('currentLifePoints', 1000);
+        this.odin.setData('takingDamage', false);
+
+        activatedScene.scene.start('faseum', {
+            odinX: 321,
+            odinY: 169
+        });
+    }
+
+    getActivatedScene(scenes) {
+        console.log(scenes);
+        const scene = scenes.filter(scene => {
+            if (scene.scene.key !== 'boot' && scene.scene.key !== 'userInterface') {
+                if (scene.scene.settings.active) {
+                    return scene;
+                }
+            }
+        });
+
+        return scene[0];
     }
 
     getPowerBoost(boost) {
@@ -105,6 +132,10 @@ class UserInterface extends Phaser.Scene {
     }
 
     updateCharacterLifeBar(damage) {
+        if (this.odin.getData('currentLifePoints') < 1) {
+            return;
+        }
+
         let updatedLifePoints = this.odin.getData('currentLifePoints') - damage;
         let porcentagem;
         this.odin.setData('currentLifePoints', updatedLifePoints);
@@ -118,7 +149,7 @@ class UserInterface extends Phaser.Scene {
             this.lifeBar.fillRect(10, 10, 0, 10);
             return;
         }
-
+        
         this.lifeBar.clear();
         this.lifeBar.fillStyle(0xff0000, 1);
         this.lifeBar.setDepth(2)
