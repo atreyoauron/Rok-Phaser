@@ -51,14 +51,11 @@ class FaseSete extends Phaser.Scene {
         }, null, this);
         this.odin = this.add.existing(this.odin);
 
-        const spearItem = this.add.zone(565, 213).setSize(30, 30);
-        spearItem.setOrigin(0.5);
-        this.physics.world.enable(spearItem);
-        spearItem.body.setAllowGravity(false);
-        spearItem.body.moves = false;
-                
-        this.physics.add.overlap(this.odin, spearItem, function() {
+        const spearItem = this.physics.add.staticImage(565, 213, 'spear-item');
+
+        this.physics.add.overlap(this.odin, spearItem, function(odin, spear) {
             this.odin.getSpear();
+            spear.destroy();
         }, null, this);
 
         this.crows = new CrowSpawner({

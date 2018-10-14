@@ -2,7 +2,7 @@
 
 class BarrelSpawner extends Phaser.GameObjects.Group {
     constructor(config) {
-        super(config.scene, config.groupConfig, config.groupMultipleConfig, config.customConfig);
+        super(config.scene, config.groupConfig, config.customConfig);
         this.config = config;
         this.userInterface = this.scene.scene.get('userInterface');
 
@@ -11,6 +11,20 @@ class BarrelSpawner extends Phaser.GameObjects.Group {
     destroySpawner() {
         this.barrelGroup.clear(true, true);
         this.barrelTimer.remove();
+    }
+
+    createMultipleSpawner(barrels) {
+        this.barrelGroup = this.scene.physics.add.group();
+        this.barrelGroup.maxSize = barrels.groupConfig.maxSize;   
+
+        this.queueBarrel(this.config.customConfig.timing, this.createMultipleBarrels, {
+            barrelGroup: this.barrelGroup,
+            barrelList: barrels.barrelList,
+            minToSpawn: barrels.minToSpawn,
+            colliderList: barrels.colliders,
+            overlapList: barrels.overlaps,
+            groupConfig: barrels.groupConfig
+        });        
     }
 
     createBarrelSpawner() {
@@ -25,6 +39,82 @@ class BarrelSpawner extends Phaser.GameObjects.Group {
             colliderList: this.config.customConfig.colliders,
             overlapList: this.config.customConfig.overlaps
         });
+    }
+
+    createMultipleBarrels(config) {
+        const used = this.barrelGroup.getTotalUsed();
+
+        if(used !== 0 && used !== config.minToSpawn) {
+            return;
+        }
+                
+        config.barrelList.forEach((barrel) => {
+            const newConfig = {
+                ...barrel,
+                ...config,
+            }
+
+            this.barrelForMultiple(newConfig);
+        });
+    }
+
+    barrelForMultiple(config) {
+        if(!this.barrelGroup && !this.barrelGroup.children) {
+            return;
+        }
+        
+        this.barrelGroup.getChildren().forEach(data => {
+            if (data.body.x > 640 || data.body.y > 360) {
+                this.barrelGroup.kill(data);
+            }
+        });
+
+        if(!this.barrelGroup && !this.barrelGroup.children) {
+            return;
+        }        
+
+        const barril = this.barrelGroup.getFirstDead(true, config.customConfig.x, config.customConfig.y, config.groupConfig.key);
+
+        if (barril === null) return;
+
+        if (!barril.getData('configured')) {
+            barril.body.setSize(barril.body.sourceWidth * 0.5, barril.body.height / 2, barril.body.sourceWidth * 0.5, barril.body.height / 2)
+        }
+
+
+        if (barril) {
+            barril.setDataEnabled();
+            barril.setData('configured', true);
+    
+            barril.active = true;
+            barril.visible = true;
+            
+            barril.anims.play('rolling');
+            barril.setVelocityX(config.customConfig.speedDirection);
+
+            if (config.customConfig.speedDirection > 0) {
+                barril.flipX = true;
+            }
+
+            this.config.scene.physics.add.overlap(config.barrelGroup, [...config.overlapList], function (collider, barrel) {
+                if (barrel.anims.currentAnim.key !== 'explosion') {
+                    if (barrel.body.touching.left || barrel.body.touching.right || barrel.body.touching.up) {
+                        this.killBarrel(barrel, config.barrelGroup);
+                        this.userInterface.events.emit('damageTaken', 250);
+                        return;
+                    }
+                }
+            }, null, this);
+
+            this.config.scene.physics.add.collider(config.barrelGroup, [...config.colliderList], function (barrel, collider) {
+                if (barrel.anims.currentAnim.key !== 'explosion') {
+                    if (barrel.body.onWall()) {
+                        this.killBarrel(barrel, config.barrelGroup);
+                        return;
+                    }
+                }
+            }, null, this);
+        }
     }
 
     createNewBarrel(config) {

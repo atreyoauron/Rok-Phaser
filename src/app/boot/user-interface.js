@@ -66,7 +66,6 @@ class UserInterface extends Phaser.Scene {
     }
 
     getActivatedScene(scenes) {
-        console.log(scenes);
         const scene = scenes.filter(scene => {
             if (scene.scene.key !== 'boot' && scene.scene.key !== 'userInterface') {
                 if (scene.scene.settings.active) {

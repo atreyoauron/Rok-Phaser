@@ -119,6 +119,7 @@ class Boot extends Phaser.Scene {
         this.load.audio('bgMusic', 'src/assets/audio/sound.mp3');
         this.load.image('rok_logo', 'src/assets/img/rok-logo.png');
         this.load.image('plataformas', 'src/assets/img/plataforma_fase_1.png');
+        this.load.image('spear-item', 'src/assets/img/spear-item.png');
     }
 
     create() {
