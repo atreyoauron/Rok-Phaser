@@ -116,8 +116,26 @@ class FaseQuatro extends Phaser.Scene {
                 overlaps: [this.odin],                
             }
         });
-       
+
+        const secondWave = new BarrelSpawner({
+            scene: this,
+            groupConfig: {
+                defaultKey: 'barril',
+                maxSize: 3,    
+            },
+            groupMultipleConfig: {},
+            customConfig: {
+                x: 354,
+                y: 0,
+                timing: 2000,
+                speedDirection: -120,
+                colliders: [this.ground],
+                overlaps: [this.odin],                
+            }
+        });        
+
         firstWave.createMultipleSpawner(barrels);
+        secondWave.createMultipleSpawner(barrels);
 
         const barrelFive = new BarrelSpawner({
             scene: this,
@@ -252,7 +270,6 @@ class FaseQuatro extends Phaser.Scene {
             }
         });        
 
-       
         barrelFive.createBarrelSpawner();          
         barrelSix.createBarrelSpawner();
         barrelBottomOne.createBarrelSpawner();
