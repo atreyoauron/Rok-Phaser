@@ -47,8 +47,10 @@ class MainMenu extends Phaser.Scene {
 
         newGame.setInteractive();
 
-        newGame.on('pointerdown', function() {
-        });
+        newGame.on('pointerdown', function(e, a) {
+            this.cameras.main.fadeOut(1000, 0, 0, 0, function() {
+            }, this);
+        }, this);
 
         const continuar = this.make.text({
             x: this.sys.game.config.width / 2 - 40,
