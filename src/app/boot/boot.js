@@ -98,7 +98,7 @@ class Boot extends Phaser.Scene {
         this.load.spritesheet('big-explosion', 'src/assets/img/big-explosion.png', {
             frameWidth: 128,
             frameHeight: 128
-        });        
+        });
         this.load.spritesheet('lanca', 'src/assets/img/lanca.png', {
             frameWidth: 37,
             frameHeight: 9
@@ -120,6 +120,9 @@ class Boot extends Phaser.Scene {
         this.load.image('rok_logo', 'src/assets/img/rok-logo.png');
         this.load.image('plataformas', 'src/assets/img/plataforma_fase_1.png');
         this.load.image('spear-item', 'src/assets/img/spear-item.png');
+        this.load.image('arrow', 'src/assets/img/arrow.png');
+        this.load.image('attack', 'src/assets/img/attack.png');
+        this.load.image('jump', 'src/assets/img/jump.png');
     }
 
     create() {
@@ -157,7 +160,7 @@ class Boot extends Phaser.Scene {
             key: 'jumping',
             frames: this.anims.generateFrameNumbers('odin', { start: 8, end: 10 }),
             frameRate: 3,
-        });        
+        });
 
         this.anims.create({
             key: 'inAir',
@@ -165,18 +168,18 @@ class Boot extends Phaser.Scene {
             frameRate: 2,
             repeat: -1,
         });
-        
+
         this.anims.create({
             key: 'landing',
             frames: this.anims.generateFrameNumbers('odin', { start: 12, end: 14 }),
             frameRate: 6,
-        });        
+        });
 
         this.anims.create({
             key: 'walking',
             frames: this.anims.generateFrameNumbers('odin_run', { start: 0, end: 7 }),
             frameRate: 7,
-        });        
+        });
 
         this.anims.create({
             key: 'rolling',
@@ -197,7 +200,7 @@ class Boot extends Phaser.Scene {
             frames: this.anims.generateFrameNumbers('big-explosion', { start: 0, end: 16 }),
             frameRate: 16,
             repeat: 0
-        });        
+        });
 
         this.odin = new Odin({
             scene: this,
@@ -218,8 +221,8 @@ class Boot extends Phaser.Scene {
         this.odin.update();
 
         if (this.input.activePointer.isDown) {
-            console.log(this.input.activePointer.x);
-            console.log(this.input.activePointer.y);
+            // console.log(this.input.activePointer.x);
+            // console.log(this.input.activePointer.y);
         }
     }
 

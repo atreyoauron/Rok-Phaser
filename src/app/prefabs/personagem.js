@@ -10,11 +10,13 @@ class Odin extends MainCharacter {
         this.setName('mainCharacter');
         this.config = config;
         this.spearGroupCreatedOnThisScene = {};
+        this.scene = config.scene;
+        console.log(config);
     }
 
     create() {
         this.setName('odin');
-        
+
         this.createJump();
 
         this.spear = new SpearSpawner({
@@ -43,7 +45,7 @@ class Odin extends MainCharacter {
 
         this.up = this.scene.input.keyboard.addKey('UP');
         this.space = this.scene.input.keyboard.addKey('SPACE');
-        
+
         this.scene.input.keyboard.on('keydown_X', function () {
             const userInterface = this.scene.scene.get('userInterface');
             const itens = this.getData('powerBoost');
@@ -58,7 +60,7 @@ class Odin extends MainCharacter {
                 userInterface.userPowerBost(true);
             }
         }, this);
-        
+
         this.scene.input.keyboard.on('keydown_C', function () {
             const itens = this.getData('itens');
 
@@ -98,21 +100,21 @@ class Odin extends MainCharacter {
     }
 
     inAir() {
-        this.anims.play('inAir', true);        
+        this.anims.play('inAir', true);
     }
 
     jumping() {
         this.anims.play('jumping');
-    }       
+    }
 
     walking() {
         let jump = this.getData('jump');
         let double = this.getData('isDoubleJumping');
-        
+
         if (!jump || !double) {
             this.anims.play('walking', true);
         }
-    }    
+    }
 
     idle() {
         const powerBostActive = this.getData('powerBostActive');
@@ -143,13 +145,13 @@ class Odin extends MainCharacter {
     }
 
     resetSpearGroup() {
-        this.getActivatedScene(this.scene.scene.manager.scenes);
+      this.getActivatedScene(this.scene.scene.manager.scenes);
     }
 
     update() {
         let jump = this.getData('jump');
         let double = this.getData('isDoubleJumping');
-        
+
         if (jump || double) {
             if(this.anims.currentAnim.key !== 'jumping') {
                 this.inAir();

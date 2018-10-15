@@ -7,29 +7,34 @@ class MainCharacter extends Phaser.GameObjects.Sprite {
         config.scene.add.existing(this);
         this.setOrigin(0.5);
         this.body.setSize(this.body.sourceWidth * 0.5, this.body.height, this.body.sourceWidth * 0.5, this.height)
-        this.common;      
+        this.common;
         this.body.wasTouching.none = false
         this.body.touching.none = false;
         this.body.setMaxVelocity(120, 330);
+        this.ui = config.scene.scene.get('userInterface');
     }
 
     createJump(character){
-        this.scene.input.keyboard.addKey('SPACE');        
+        this.scene.events.addListener('jump', function () {
+          this.jump(character);
+        }, this);
+
+        this.scene.input.keyboard.addKey('SPACE');
         this.scene.input.keyboard.on('keydown_SPACE', function() {
             this.jump(character);
-        }, this);    
-        
-        this.scene.input.keyboard.addKey('UP');        
+        }, this);
+
+        this.scene.input.keyboard.addKey('UP');
         this.scene.input.keyboard.on('keydown_UP', function() {
             this.jump(character);
-        }, this);            
+        }, this);
     }
 
     resetJump() {
         const bodyRule = this.body.onFloor() || this.body.touching.down;
 
         let jump = this.getData('jump');
-        let isDoubleJumping = this.getData('isDoubleJumping');     
+        let isDoubleJumping = this.getData('isDoubleJumping');
 
 
         if (bodyRule) {
@@ -37,7 +42,7 @@ class MainCharacter extends Phaser.GameObjects.Sprite {
                 this.superHeroLanding();
             }
             this.setData('isDoubleJumping', false);
-            this.setData('jump', false);    
+            this.setData('jump', false);
         }
     }
 
@@ -45,18 +50,18 @@ class MainCharacter extends Phaser.GameObjects.Sprite {
         let bodyRule = this.body.onFloor() || this.body.touching.down;
 
         let jump = this.getData('jump');
-        let isDoubleJumping = this.getData('isDoubleJumping');     
+        let isDoubleJumping = this.getData('isDoubleJumping');
 
         if (bodyRule) {
             this.jumping();
-            this.body.setVelocityY(-280);    
+            this.body.setVelocityY(-280);
             this.setData('jump', true);
             return;
         }
 
         if (!jump && !isDoubleJumping) {
             this.jumping();
-            this.body.setVelocityY(-280);    
+            this.body.setVelocityY(-280);
             this.setData('jump', true);
             return;
         }
@@ -68,7 +73,7 @@ class MainCharacter extends Phaser.GameObjects.Sprite {
                 this.body.setVelocityY(-300);
                 if(!itens.armor) {
                     this.setData('isDoubleJumping', true);
-                    this.setData('jump', false);                    
+                    this.setData('jump', false);
                 }
             }
         }
@@ -80,18 +85,18 @@ class MainCharacter extends Phaser.GameObjects.Sprite {
 
     checkCursorMoviment(context) {
         if(context.cursors.right.isDown && context.cursors.left.isDown) {
-            this.body.setVelocityX(0);  
+            this.body.setVelocityX(0);
         }
-        
-        if (context.cursors.right.isDown) {
+
+        if (context.cursors.right.isDown || this.ui.rightButtonPressed) {
             this.flipX = false;
             this.walking();
             this.body.setVelocityX(75);
-        } else if (context.cursors.left.isDown) {
+        } else if (context.cursors.left.isDown || this.ui.leftButtonPressed) {
             this.walking();
             this.flipX = true;
             this.body.setVelocityX(-75);
-        } else {            
+        } else {
             if(this.getData('jump') === false && this.getData('isDoubleJumping') === false) {
                 this.idle();
             }
@@ -123,7 +128,7 @@ class MainCharacter extends Phaser.GameObjects.Sprite {
     finishPowerUp() {
         const itens = {...this.getData('itens')};
         itens.armor = false;
-        this.setData('itens', itens);        
+        this.setData('itens', itens);
     }
 
     startPowerUp() {
@@ -142,7 +147,7 @@ class MainCharacter extends Phaser.GameObjects.Sprite {
         const itens = {...this.getData('itens')};
         itens.spear = true;
         this.setData('itens', itens);
-    }    
+    }
 }
 
 export default MainCharacter;

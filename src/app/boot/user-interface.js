@@ -13,11 +13,15 @@ class UserInterface extends Phaser.Scene {
         })
 
         this.data;
+        this.leftButtonPressed = false;
+        this.rightButtonPressed = false;
+        this.attackButtonPressed = false;
+        this.jumpButtonPressed = false;
     }
 
     init() {
-        this.common = this.scene.get('boot');
-        this.odin = this.common.odin;
+        this.boot = this.scene.get('boot');
+        this.odin = this.boot.odin;
     }
 
     preload() {
@@ -43,6 +47,49 @@ class UserInterface extends Phaser.Scene {
         powerBoostBox.fillRect(10, 30, 100, 10);
         this.updateCharacterLifeBar(0);
         powerBoostBox.setDepth(1);
+
+        const leftButton = this.add.image(27,334, 'arrow');
+        const rightButton = this.add.image(97,334, 'arrow');
+        const attack = this.add.image(608,334, 'attack');
+        const jump = this.add.image(550,334, 'jump');
+
+        leftButton.flipX = true;
+        leftButton.setInteractive();
+        rightButton.setInteractive();
+        attack.setInteractive();
+        jump.setInteractive();
+
+        leftButton.on('pointerdown', function() {
+          this.rightButtonPressed = false;
+          this.leftButtonPressed = true;
+        }, this);
+
+        rightButton.on('pointerdown', function() {
+          this.leftButtonPressed = false;
+          this.rightButtonPressed = true;
+        }, this);
+
+        leftButton.on('pointerup', function() {
+          this.leftButtonPressed = false;
+          this.rightButtonPressed = false;
+        }, this);
+
+        rightButton.on('pointerup', function() {
+          this.leftButtonPressed = false;
+          this.rightButtonPressed = false;
+        }, this);
+
+        attack.on('pointerdown', function() {
+          this.attackButtonPressed = true;
+        }, this);
+        attack.on('pointerup', function() {
+          this.attackButtonPressed = false;
+        }, this);
+
+        jump.on('pointerdown', function() {
+          const activatedScene = this.getActivatedScene(this.scene.manager.scenes);
+          this.boot.events.emit('jump');
+        }, this);
 
         this.events.addListener('damageTaken', function (damage) {
             this.updateCharacterLifeBar(damage);
@@ -79,7 +126,7 @@ class UserInterface extends Phaser.Scene {
 
     getPowerBoost(boost) {
         this.odin.setData('powerBoost');
-        
+
         if (this.odin.getData('powerBostActive')) {
             this.odin.setData('currentTime', 3000);
         }
@@ -90,7 +137,7 @@ class UserInterface extends Phaser.Scene {
         this.powerBoost.fillRect(10, 30, boost, 10);
     }
 
-    userPowerBost(firstTime) {        
+    userPowerBost(firstTime) {
         if (firstTime) {
             this.odin.setData('currentTime', this.odin.getData('boostTime'));
         }
@@ -106,7 +153,7 @@ class UserInterface extends Phaser.Scene {
         let currentTime = this.odin.getData('currentTime');
         let boostTime = this.odin.getData('boostTime');
         let powerBostActive = this.odin.getData('powerBostActive');
-        
+
         let segundosRestantes = currentTime * 100 / boostTime;
 
         this.odin.setData('powerBoost', segundosRestantes);
@@ -126,7 +173,7 @@ class UserInterface extends Phaser.Scene {
             this.powerBoost.clear();
             this.powerBoost.fillStyle(0xffff00, 1);
             this.powerBoost.setDepth(2)
-            this.powerBoost.fillRect(10, 30, 0, 10);            
+            this.powerBoost.fillRect(10, 30, 0, 10);
         }
     }
 
@@ -148,7 +195,7 @@ class UserInterface extends Phaser.Scene {
             this.lifeBar.fillRect(10, 10, 0, 10);
             return;
         }
-        
+
         this.lifeBar.clear();
         this.lifeBar.fillStyle(0xff0000, 1);
         this.lifeBar.setDepth(2)
