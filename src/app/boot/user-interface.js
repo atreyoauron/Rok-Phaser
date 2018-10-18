@@ -30,7 +30,7 @@ class UserInterface extends Phaser.Scene {
 
     create() {
         this.cameras.main.flash(500, 0, 0, 0);
-
+        this.input.addPointer(3);
         const lifeBarBox = this.add.graphics();
         const powerBoostBox = this.add.graphics();
         this.lifeBar = this.add.graphics();
@@ -80,7 +80,7 @@ class UserInterface extends Phaser.Scene {
         }, this);
 
         attack.on('pointerdown', function() {
-          this.attackButtonPressed = true;
+          this.boot.events.emit('fireSpear');
         }, this);
         attack.on('pointerup', function() {
           this.attackButtonPressed = false;
