@@ -103,6 +103,10 @@ class Boot extends Phaser.Scene {
             frameWidth: 37,
             frameHeight: 9
         });
+        this.load.spritesheet('hel-bg', 'src/assets/img/hel-sprite.png', {
+          frameWidth: 640,
+          frameHeight: 360,
+        });
 
         this.load.tilemapTiledJSON('fase_1', 'src/assets/json/fase_1.json');
         this.load.tilemapTiledJSON('fase_2', 'src/assets/json/fase_2.json');
@@ -132,6 +136,13 @@ class Boot extends Phaser.Scene {
             frameRate: 8,
             repeat: -1
         });
+
+        this.anims.create({
+          key: 'hel',
+          frames: this.anims.generateFrameNumbers('hel-bg', {start: 0, end: 9}),
+          frameRate: 9,
+          repeat: -1
+        })
 
         this.anims.create({
             key: 'crow-flying',

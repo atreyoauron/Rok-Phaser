@@ -18,7 +18,7 @@ class FaseOito extends Phaser.Scene {
         })
 
         this.odin;
-        this.common;        
+        this.common;
     }
 
     init(config) {
@@ -43,15 +43,17 @@ class FaseOito extends Phaser.Scene {
         const screenWidth = this.sys.game.config.width;
         const screenHeight = this.sys.game.config.height;
         this.cameras.main.setBackgroundColor('rgba(10, 230, 255, 1)');
-
         var map = this.add.tilemap('fase_8');
-
         var tileset = map.addTilesetImage('plataformas');
         this.ground = map.createDynamicLayer('plataformas', tileset);
         this.ground.setCollisionByProperty({ collider: true });
         this.physics.add.collider(this.odin, [this.ground], function() {
             this.odin.resetJump();
         }, null, this);
+        const helbg = this.add.sprite(0,0,'hel-bg', 0);
+        helbg.anims.play('hel');
+        helbg.setOrigin(0,0);
+
         this.odin = this.add.existing(this.odin);
 
         const hidromel = new HidromelSpawner({
@@ -74,7 +76,7 @@ class FaseOito extends Phaser.Scene {
             scene: this,
             groupConfig: {
                 defaultKey: 'barril',
-                maxSize: 2,    
+                maxSize: 2,
             },
             groupMultipleConfig: {},
             customConfig: {
@@ -84,13 +86,13 @@ class FaseOito extends Phaser.Scene {
                 colliders: [this.ground],
                 overlaps: [this.odin],
             }
-        }); 
-        
+        });
+
         const two = new BarrelSpawner({
             scene: this,
             groupConfig: {
                 defaultKey: 'barril',
-                maxSize: 2,    
+                maxSize: 2,
             },
             groupMultipleConfig: {},
             customConfig: {
@@ -100,13 +102,13 @@ class FaseOito extends Phaser.Scene {
                 colliders: [this.ground],
                 overlaps: [this.odin],
             }
-        });   
-        
+        });
+
         const three = new BarrelSpawner({
             scene: this,
             groupConfig: {
                 defaultKey: 'barril',
-                maxSize: 2,    
+                maxSize: 2,
             },
             groupMultipleConfig: {},
             customConfig: {
@@ -116,13 +118,13 @@ class FaseOito extends Phaser.Scene {
                 colliders: [this.ground],
                 overlaps: [this.odin],
             }
-        });     
-                
+        });
+
         const four = new BarrelSpawner({
             scene: this,
             groupConfig: {
                 defaultKey: 'barril',
-                maxSize: 2,    
+                maxSize: 2,
             },
             groupMultipleConfig: {},
             customConfig: {
@@ -133,12 +135,12 @@ class FaseOito extends Phaser.Scene {
                 overlaps: [this.odin],
             }
         });
-        
+
         const five = new BarrelSpawner({
             scene: this,
             groupConfig: {
                 defaultKey: 'barril',
-                maxSize: 2,    
+                maxSize: 2,
             },
             groupMultipleConfig: {},
             customConfig: {
@@ -148,13 +150,13 @@ class FaseOito extends Phaser.Scene {
                 colliders: [this.ground],
                 overlaps: [this.odin],
             }
-        });       
-        
+        });
+
         const six = new BarrelSpawner({
             scene: this,
             groupConfig: {
                 defaultKey: 'barril',
-                maxSize: 2,    
+                maxSize: 2,
             },
             groupMultipleConfig: {},
             customConfig: {
@@ -164,13 +166,13 @@ class FaseOito extends Phaser.Scene {
                 colliders: [this.ground],
                 overlaps: [this.odin],
             }
-        });        
+        });
 
         this.crows = new CrowSpawner({
             scene: this,
             groupConfig: {
                 defaultKey: 'crow',
-                maxSize: 1,    
+                maxSize: 1,
             },
             groupMultipleConfig: {},
             customConfig: {
@@ -184,12 +186,12 @@ class FaseOito extends Phaser.Scene {
                     x: 0,
                     y: -30
                 },
-                colliders: [this.ground]                 
+                colliders: [this.ground]
             }
-        });     
-        
+        });
+
         this.crows.createCrow({x: 273, y: 21},{ x: 0, y: 50});
-        
+
 
         one.createBarrelSpawner();
         two.createBarrelSpawner();
@@ -202,7 +204,7 @@ class FaseOito extends Phaser.Scene {
         this.barrelSwitch.setDataEnabled();
         this.barrelSwitch.setName('switchBarrelOff');
 
-        this.barrelSwitch.setData('barrels', [one, two, three, four, five, six]);        
+        this.barrelSwitch.setData('barrels', [one, two, three, four, five, six]);
     }
 
     update() {
@@ -210,7 +212,7 @@ class FaseOito extends Phaser.Scene {
 
         if (
             this.odin.x >= 10 && this.odin.x <= 120 && this.odin.y > 360
-            || this.odin.x >= 136 && this.odin.x <= 237 && this.odin.y > 360 
+            || this.odin.x >= 136 && this.odin.x <= 237 && this.odin.y > 360
             || this.odin.x >= 136 && this.odin.x <= 629 && this.odin.y > 360) {
                 this.scene.start('fasenove', {
                 odinx: this.odin.x,
