@@ -48,25 +48,34 @@ class UserInterface extends Phaser.Scene {
         this.updateCharacterLifeBar(0);
         powerBoostBox.setDepth(1);
 
-        const leftButton = this.add.image(27,334, 'arrow');
-        const rightButton = this.add.image(97,334, 'arrow');
-        const attack = this.add.image(608,334, 'attack');
-        const jump = this.add.image(550,334, 'jump');
+        const leftButton = this.add.sprite(27,330, 'button-sprite', 0);
+        const rightButton = this.add.sprite(97,330, 'button-sprite', 1);
+        const attack = this.add.sprite(550,330, 'button-sprite', 3);
+        const jump = this.add.sprite(608,330, 'button-sprite', 2);
 
-        leftButton.flipX = true;
         leftButton.setInteractive();
         rightButton.setInteractive();
         attack.setInteractive();
         jump.setInteractive();
 
-        leftButton.on('pointerdown', function() {
+        leftButton.on('pointermove', function() {
           this.rightButtonPressed = false;
           this.leftButtonPressed = true;
         }, this);
 
-        rightButton.on('pointerdown', function() {
+        rightButton.on('pointermove', function() {
           this.leftButtonPressed = false;
           this.rightButtonPressed = true;
+        }, this);
+
+        leftButton.on('pointerout', function() {
+          this.leftButtonPressed = false;
+          this.rightButtonPressed = false;
+        }, this);
+
+        rightButton.on('pointerout', function() {
+          this.leftButtonPressed = false;
+          this.rightButtonPressed = false;
         }, this);
 
         leftButton.on('pointerup', function() {
@@ -78,6 +87,7 @@ class UserInterface extends Phaser.Scene {
           this.leftButtonPressed = false;
           this.rightButtonPressed = false;
         }, this);
+
 
         attack.on('pointerdown', function() {
           this.boot.events.emit('fireSpear');

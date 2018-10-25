@@ -108,6 +108,11 @@ class Boot extends Phaser.Scene {
           frameHeight: 360,
         });
 
+        this.load.spritesheet('button-sprite', 'src/assets/img/buttons.png', {
+          frameWidth: 36,
+          frameHeight: 36,
+        });
+
         this.load.tilemapTiledJSON('fase_1', 'src/assets/json/fase_1.json');
         this.load.tilemapTiledJSON('fase_2', 'src/assets/json/fase_2.json');
         this.load.tilemapTiledJSON('fase_3', 'src/assets/json/fase_3.json');
