@@ -15,7 +15,7 @@ class BarrelSpawner extends Phaser.GameObjects.Group {
 
     createMultipleSpawner(barrels) {
         this.barrelGroup = this.scene.physics.add.group();
-        this.barrelGroup.maxSize = barrels.groupConfig.maxSize;   
+        this.barrelGroup.maxSize = barrels.groupConfig.maxSize;
 
         this.queueBarrel(this.config.customConfig.timing, this.createMultipleBarrels, {
             barrelGroup: this.barrelGroup,
@@ -24,12 +24,12 @@ class BarrelSpawner extends Phaser.GameObjects.Group {
             colliderList: barrels.colliders,
             overlapList: barrels.overlaps,
             groupConfig: barrels.groupConfig
-        });        
+        });
     }
 
     createBarrelSpawner() {
         this.barrelGroup = this.scene.physics.add.group();
-        this.barrelGroup.maxSize = this.config.groupConfig.maxSize;   
+        this.barrelGroup.maxSize = this.config.groupConfig.maxSize;
 
         this.queueBarrel(this.config.customConfig.timing, this.createNewBarrel, {
             speedDirection: this.config.customConfig.speedDirection,
@@ -47,7 +47,7 @@ class BarrelSpawner extends Phaser.GameObjects.Group {
         if(used !== 0 && used !== config.minToSpawn) {
             return;
         }
-                
+
         config.barrelList.forEach((barrel) => {
             const newConfig = {
                 ...barrel,
@@ -62,7 +62,7 @@ class BarrelSpawner extends Phaser.GameObjects.Group {
         if(!this.barrelGroup && !this.barrelGroup.children) {
             return;
         }
-        
+
         this.barrelGroup.getChildren().forEach(data => {
             if (data.body.x > 640 || data.body.y > 360) {
                 this.barrelGroup.kill(data);
@@ -71,7 +71,7 @@ class BarrelSpawner extends Phaser.GameObjects.Group {
 
         if(!this.barrelGroup && !this.barrelGroup.children) {
             return;
-        }        
+        }
 
         const barril = this.barrelGroup.getFirstDead(true, config.customConfig.x, config.customConfig.y, config.groupConfig.key);
 
@@ -85,10 +85,10 @@ class BarrelSpawner extends Phaser.GameObjects.Group {
         if (barril) {
             barril.setDataEnabled();
             barril.setData('configured', true);
-    
+
             barril.active = true;
             barril.visible = true;
-            
+
             barril.anims.play('rolling');
             barril.setVelocityX(config.customConfig.speedDirection);
 
@@ -121,7 +121,7 @@ class BarrelSpawner extends Phaser.GameObjects.Group {
         if(!this.barrelGroup && !this.barrelGroup.children) {
             return;
         }
-        
+
         this.barrelGroup.getChildren().forEach(data => {
             if (data.body.x > 640 || data.body.y > 360) {
                 this.barrelGroup.kill(data);
@@ -130,7 +130,7 @@ class BarrelSpawner extends Phaser.GameObjects.Group {
 
         if(!this.barrelGroup && !this.barrelGroup.children) {
             return;
-        }        
+        }
 
         const barril = this.barrelGroup.getFirstDead(true, this.config.customConfig.x, this.config.customConfig.y, this.config.groupConfig.key);
 
@@ -144,10 +144,10 @@ class BarrelSpawner extends Phaser.GameObjects.Group {
         if (barril) {
             barril.setDataEnabled();
             barril.setData('configured', true);
-    
+
             barril.active = true;
             barril.visible = true;
-            
+
             barril.anims.play('rolling');
             barril.setVelocityX(config.speedDirection);
 

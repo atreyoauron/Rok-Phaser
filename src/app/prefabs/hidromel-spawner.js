@@ -10,7 +10,7 @@ class HidromelSpawner extends Phaser.Physics.Arcade.Group {
     }
 
     createSpawner() {
-        
+
         this.hidroGroup = this.config.scene.physics.add.group();
         this.hidroGroup.maxSize = this.config.groupConfig.maxSize;
 
@@ -20,12 +20,16 @@ class HidromelSpawner extends Phaser.Physics.Arcade.Group {
             callback: this.createHidromel.bind(this)
         });
 
-        this.config.scene.physics.add.collider(this.hidroGroup, [...this.config.customConfig.colliders]);     
+        const spawner = this.config.scene.add.sprite(this.config.customConfig.x, this.config.customConfig.y, 'hidromel_spawner');
+        spawner.anims.play('spawner-animation');
+        this.config.scene.physics.add.collider(this.hidroGroup, [...this.config.customConfig.colliders]);
     }
 
     createHidromel(config) {
         const hidro = this.hidroGroup.getFirstDead(true, this.config.customConfig.x, this.config.customConfig.y, 'hidromel');
         if (hidro === null) return;
+
+        hidro.anims.play('hidromel-blob');
         hidro.active = true;
         hidro.visible = true;
 
@@ -33,7 +37,7 @@ class HidromelSpawner extends Phaser.Physics.Arcade.Group {
         this.config.scene.physics.add.overlap(hidro, [...this.config.customConfig.overlaps], function (group, collider) {
             this.ui.getPowerBoost(100);
             this.hidroGroup.killAndHide(group);
-        }, null, this);           
+        }, null, this);
 
     }
 }

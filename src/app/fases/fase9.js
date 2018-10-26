@@ -17,7 +17,7 @@ class FaseNove extends Phaser.Scene {
         })
 
         this.odin;
-        this.common;        
+        this.common;
     }
 
     init(config) {
@@ -56,7 +56,7 @@ class FaseNove extends Phaser.Scene {
             scene: this,
             groupConfig: {
                 defaultKey: 'barril',
-                maxSize: 2,    
+                maxSize: 2,
             },
             groupMultipleConfig: {},
             customConfig: {
@@ -72,7 +72,7 @@ class FaseNove extends Phaser.Scene {
             scene: this,
             groupConfig: {
                 defaultKey: 'barril',
-                maxSize: 2,    
+                maxSize: 2,
             },
             groupMultipleConfig: {},
             customConfig: {
@@ -82,13 +82,13 @@ class FaseNove extends Phaser.Scene {
                 colliders: [this.ground],
                 overlaps: [this.odin],
             }
-        });        
+        });
 
         this.crows = new CrowSpawner({
             scene: this,
             groupConfig: {
                 defaultKey: 'crow',
-                maxSize: 15,    
+                maxSize: 15,
             },
             groupMultipleConfig: {},
             customConfig: {
@@ -102,17 +102,17 @@ class FaseNove extends Phaser.Scene {
                     x: 0,
                     y: -120
                 },
-                colliders: [this.ground]                 
+                colliders: [this.ground]
             }
         });
-        
+
         this.crows.createCrow({x: 255, y: 30},{ x: 0, y: 50});
-        this.crows.createCrow({x: 255, y: 60},{ x: 0, y: 50});       
-        this.crows.createCrow({x: 255, y: 90},{ x: 0, y: 50});       
+        this.crows.createCrow({x: 255, y: 60},{ x: 0, y: 50});
+        this.crows.createCrow({x: 255, y: 90},{ x: 0, y: 50});
         this.crows.createCrow({x: 255, y: 115},{ x: 0, y: 50});
 
         this.crows.createCrow({x: 309, y: 142},{ x: -50, y: 0});
-        
+
         const hidromel = new HidromelSpawner({
             scene: this,
             groupConfig: {
@@ -127,8 +127,8 @@ class FaseNove extends Phaser.Scene {
                 overlaps: [this.odin],
             }
         });
-        hidromel.createSpawner();  
-        
+        hidromel.createSpawner();
+
         const hidromel2 = new HidromelSpawner({
             scene: this,
             groupConfig: {
@@ -138,14 +138,14 @@ class FaseNove extends Phaser.Scene {
             groupMultipleConfig: {},
             customConfig: {
                 x: 250,
-                y: 19,
+                y: 23,
                 colliders: [this.ground],
                 overlaps: [this.odin],
             }
         });
-        hidromel2.createSpawner();          
+        hidromel2.createSpawner();
 
-        barrelOne.createBarrelSpawner();    
+        barrelOne.createBarrelSpawner();
         barrelTwo.createBarrelSpawner();
     }
 
@@ -166,7 +166,7 @@ class FaseNove extends Phaser.Scene {
                 odinx: 0,
                 odiny: this.odin.y,
             });
-        }        
+        }
     }
 }
 

@@ -16,7 +16,7 @@ class SpearSpawner extends Phaser.Physics.Arcade.Group {
         const itens = config.odin.getData('itens');
 
         if (config.speedDirection.x < 0) {
-            spear.flipX = true;  
+            spear.flipX = true;
         } else {
             spear.flipX = false;
         }
@@ -32,24 +32,28 @@ class SpearSpawner extends Phaser.Physics.Arcade.Group {
             this.queueBarrel(this.kill, spear, config.scene);
         }
 
-        config.scene.physics.add.collider(this.spearGroup, [...config.colliderList], function (spearCollider, collider) {
-            if (spearCollider.name === "switchBarrelOff") {
-                const barrels = spearCollider.getData('barrels');
+        config.scene.physics.add.collider(this.spearGroup, [...config.colliderList], function (firstCollider, collider) {
+            if (firstCollider.name === "switchBarrelOff") {
+                const barrels = firstCollider.getData('barrels');
                 barrels.forEach(barrel => {
                     barrel.destroySpawner();
-                })
+                });
+
+                firstCollider.setTint(0x00ff00);
+                firstCollider.setScale(0.9);
+                collider.destroy();
                 return
             }
 
-            if (spearCollider.body.onWall()) {
-                this.kill(spearCollider);
+            if (firstCollider.body.onWall()) {
+                this.kill(firstCollider);
                 return;
             }
 
-            if(spearCollider.body.touching.left || spearCollider.body.touching.right) {
+            if(firstCollider.body.touching.left || firstCollider.body.touching.right) {
                 collider.setDataEnabled();
                 collider.setData({hit: true});
-                spearCollider.destroy();
+                firstCollider.destroy();
             }
         }, null, this);
     }

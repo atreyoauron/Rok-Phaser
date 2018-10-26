@@ -64,109 +64,88 @@ class FaseOito extends Phaser.Scene {
             },
             groupMultipleConfig: {},
             customConfig: {
-                x: 145,
-                y: 28,
+                x: 155,
+                y: 20,
                 colliders: [this.ground],
                 overlaps: [this.odin],
             }
         });
         hidromel.createSpawner();
 
-        const one = new BarrelSpawner({
-            scene: this,
-            groupConfig: {
-                defaultKey: 'barril',
-                maxSize: 2,
+        const barrels = {
+          barrelList: [
+            {
+              groupMultipleConfig: {},
+              customConfig: {
+                  x: 333,
+                  y: 95,
+                  speedDirection: -68,
+              }
             },
-            groupMultipleConfig: {},
-            customConfig: {
-                x: 460,
-                y: 90,
-                speedDirection: -120,
-                colliders: [this.ground],
-                overlaps: [this.odin],
-            }
+            {
+              groupMultipleConfig: {},
+              customConfig: {
+                  x: 370,
+                  y: 109,
+                  speedDirection: -68,
+              }
+            },
+            {
+              groupMultipleConfig: {},
+              customConfig: {
+                  x: 400,
+                  y: 120,
+                  speedDirection: -68,
+              }
+            },
+            {
+              groupMultipleConfig: {},
+              customConfig: {
+                  x: 440,
+                  y: 132,
+                  speedDirection: -68,
+              }
+            },
+            {
+              groupMultipleConfig: {},
+              customConfig: {
+                  x: 480,
+                  y: 145,
+                  speedDirection: -68,
+              }
+            },
+          ],
+          groupConfig: {
+            defaultKey: 'barril',
+            maxSize: 5,
+          },
+          groupMultipleConfig: {},
+          customConfig: {
+          },
+          scene: this,
+          colliders: [this.ground],
+          overlaps: [this.odin],
+          minToSpawn: 5,
+        };
+
+        const firstWave = new BarrelSpawner({
+          scene: this,
+          groupConfig: {
+              defaultKey: 'barril',
+              maxSize: 3,
+          },
+          groupMultipleConfig: {},
+          customConfig: {
+              x: 354,
+              y: 0,
+              timing: 0,
+              speedDirection: -120,
+              colliders: [this.ground],
+              overlaps: [this.odin],
+          }
         });
 
-        const two = new BarrelSpawner({
-            scene: this,
-            groupConfig: {
-                defaultKey: 'barril',
-                maxSize: 2,
-            },
-            groupMultipleConfig: {},
-            customConfig: {
-                x: 515,
-                y: 114,
-                speedDirection: -120,
-                colliders: [this.ground],
-                overlaps: [this.odin],
-            }
-        });
-
-        const three = new BarrelSpawner({
-            scene: this,
-            groupConfig: {
-                defaultKey: 'barril',
-                maxSize: 2,
-            },
-            groupMultipleConfig: {},
-            customConfig: {
-                x: 496,
-                y: 114,
-                speedDirection: -120,
-                colliders: [this.ground],
-                overlaps: [this.odin],
-            }
-        });
-
-        const four = new BarrelSpawner({
-            scene: this,
-            groupConfig: {
-                defaultKey: 'barril',
-                maxSize: 2,
-            },
-            groupMultipleConfig: {},
-            customConfig: {
-                x: 447,
-                y: 71,
-                speedDirection: -120,
-                colliders: [this.ground],
-                overlaps: [this.odin],
-            }
-        });
-
-        const five = new BarrelSpawner({
-            scene: this,
-            groupConfig: {
-                defaultKey: 'barril',
-                maxSize: 2,
-            },
-            groupMultipleConfig: {},
-            customConfig: {
-                x: 417,
-                y: 50,
-                speedDirection: -120,
-                colliders: [this.ground],
-                overlaps: [this.odin],
-            }
-        });
-
-        const six = new BarrelSpawner({
-            scene: this,
-            groupConfig: {
-                defaultKey: 'barril',
-                maxSize: 2,
-            },
-            groupMultipleConfig: {},
-            customConfig: {
-                x: 341,
-                y: 29,
-                speedDirection: -120,
-                colliders: [this.ground],
-                overlaps: [this.odin],
-            }
-        });
+        firstWave.createMultipleSpawner(barrels);
 
         this.crows = new CrowSpawner({
             scene: this,
@@ -193,18 +172,11 @@ class FaseOito extends Phaser.Scene {
         this.crows.createCrow({x: 273, y: 21},{ x: 0, y: 50});
 
 
-        one.createBarrelSpawner();
-        two.createBarrelSpawner();
-        three.createBarrelSpawner();
-        four.createBarrelSpawner();
-        five.createBarrelSpawner();
-        six.createBarrelSpawner();
-
-        this.barrelSwitch = this.physics.add.staticImage(602, 33, 'hidromel');
+        this.barrelSwitch = this.physics.add.staticImage(602, 33, 'switch-block');
         this.barrelSwitch.setDataEnabled();
         this.barrelSwitch.setName('switchBarrelOff');
 
-        this.barrelSwitch.setData('barrels', [one, two, three, four, five, six]);
+        this.barrelSwitch.setData('barrels', [firstWave]);
     }
 
     update() {
