@@ -243,7 +243,7 @@ class Boot extends Phaser.Scene {
       repeat: 0
     });
 
-    const previousData = JSON.parse(localStorage.getItem('currentGameState'));
+    const previousData = JSON.parse(localStorage.getItem('currentGameState')) || {};
 
     this.odin = new Odin({
       scene: this,

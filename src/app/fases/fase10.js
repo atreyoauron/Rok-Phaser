@@ -68,7 +68,8 @@ class FaseDez extends Phaser.Scene {
                     x: 0,
                     y: -120
                 },
-                colliders: [this.ground]
+                colliders: [this.ground],
+                overlap: this.odin,
             }
         });
 

@@ -1,5 +1,6 @@
 /// <reference path="../../../phaser.d.ts" />
 import CrowSpawner from '../prefabs/crow-spawner.js';
+import CheckPoint from '../prefabs/checkpoint.js';
 
 class FaseSete extends Phaser.Scene {
     constructor() {
@@ -21,6 +22,9 @@ class FaseSete extends Phaser.Scene {
 
     init(config) {
         this.common = this.scene.get('boot');
+        this.ui = this.scene.get('userInterface');
+        this.ui.events.emit('damageTaken', 0);
+
         this.odin = this.common.odin;
         this.scene.stop('faseseis');
         this.odin.resetSpearGroup();
@@ -72,9 +76,10 @@ class FaseSete extends Phaser.Scene {
                 },
                 speedDirection: {
                     x: 0,
-                    y: -120
+                    y: 0
                 },
-                colliders: [this.ground]
+                colliders: [this.ground],
+                overlap: this.odin,
             }
         });
 
@@ -91,11 +96,27 @@ class FaseSete extends Phaser.Scene {
         this.crows.createCrow({x: 120, y: 67},{ x: -50, y: 0});
         this.crows.createCrow({x: 160, y: 100},{ x: 50, y: 0});
 
+        this.crows.createCrow({x: 280, y: 60},{ x: -50, y: 0});
+        this.crows.createCrow({x: 410, y: 60},{ x: 50, y: 0});
 
-        this.crows.createCrow({x: 270, y: 74},{ x: -50, y: 0});
-        this.crows.createCrow({x: 420, y: 74},{ x: 50, y: 0});
-        this.crows.createCrow({x: 270, y: 90},{ x: -50, y: 0});
-        this.crows.createCrow({x: 420, y: 90},{ x: 50, y: 0});
+        this.crows.createCrow({x: 280, y: 90},{ x: -50, y: 0});
+        this.crows.createCrow({x: 410, y: 90},{ x: 50, y: 0});
+
+
+        const checkpoint = new CheckPoint({
+          scene: this,
+          x: 494,
+          y: 142,
+          key: 'switch-block'
+        });
+
+        this.physics.add.overlap(this.odin, checkpoint, (over1, over2) => {
+          this.ui.getCheckpoint(
+            511,
+            144,
+            'faseseis');
+          this.ui.events.emit('damageTaken', 0);
+        }, null, this);
     }
 
     update() {

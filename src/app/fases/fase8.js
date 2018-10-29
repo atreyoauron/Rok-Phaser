@@ -163,7 +163,8 @@ class FaseOito extends Phaser.Scene {
                     x: 0,
                     y: -30
                 },
-                colliders: [this.ground]
+                colliders: [this.ground],
+                overlap: this.odin,
             }
         });
 

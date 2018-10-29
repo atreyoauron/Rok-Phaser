@@ -21,6 +21,7 @@ class FaseSeis extends Phaser.Scene {
 
     init(config) {
         this.common = this.scene.get('boot');
+
         this.odin = this.common.odin;
         this.scene.stop('fasecinco');
         this.odin.resetSpearGroup();
@@ -67,7 +68,8 @@ class FaseSeis extends Phaser.Scene {
                     x: 0,
                     y: -120
                 },
-                colliders: [this.ground]
+                colliders: [this.ground],
+                overlap: this.odin,
             }
         });
 
