@@ -20,11 +20,7 @@ class SpearSpawner extends Phaser.Physics.Arcade.Group {
         } else {
             spear.flipX = false;
         }
-        spear.setVelocity(config.speedDirection.x, config.speedDirection.y);
-        spear.body.setAllowGravity(false);
-        spear.setOrigin(0.5);
-        spear.body.setSize(spear.body.sourceWidth * 0.5, spear.body.sourceHeight * 0.5, spear.body.sourceWidth * 0.5, spear.body.sourceHeight * 0.5)
-        spear.anims.play('lancando');
+        this.configureSpear(spear, config);
 
         if(itens.armor) {
             this.queueBarrel(this.kill, spear, config.scene, 3000);
@@ -32,31 +28,44 @@ class SpearSpawner extends Phaser.Physics.Arcade.Group {
             this.queueBarrel(this.kill, spear, config.scene);
         }
 
-        config.scene.physics.add.collider(this.spearGroup, [...config.colliderList], function (firstCollider, collider) {
-            if (firstCollider.name === "switchBarrelOff") {
-                const barrels = firstCollider.getData('barrels');
-                barrels.forEach(barrel => {
-                    barrel.destroySpawner();
-                });
-
-                firstCollider.setTint(0x00ff00);
-                firstCollider.setScale(0.9);
-                collider.destroy();
-                return
-            }
-
-            if (firstCollider.body.onWall()) {
-                this.kill(firstCollider);
-                return;
-            }
-
-            if(firstCollider.body.touching.left || firstCollider.body.touching.right) {
-                collider.setDataEnabled();
-                collider.setData({hit: true});
-                firstCollider.destroy();
-            }
-        }, null, this);
+        this.addSpearCollider(config);
     }
+
+  addSpearCollider(config) {
+    config.scene.physics.add.collider(this.spearGroup, [...config.colliderList], function (firstCollider, collider) {
+      if (firstCollider.name === "switchBarrelOff") {
+        this.shutDownBarrelSpawner(firstCollider, collider);
+        return;
+      }
+      if (firstCollider.body.onWall()) {
+        this.kill(firstCollider);
+        return;
+      }
+      if (firstCollider.body.touching.left || firstCollider.body.touching.right) {
+        collider.setDataEnabled();
+        collider.setData({ hit: true });
+        firstCollider.destroy();
+      }
+    }, null, this);
+  }
+
+  configureSpear(spear, config) {
+    spear.setVelocity(config.speedDirection.x, config.speedDirection.y);
+    spear.body.setAllowGravity(false);
+    spear.setOrigin(0.5);
+    spear.body.setSize(spear.body.sourceWidth * 0.5, spear.body.sourceHeight * 0.5, spear.body.sourceWidth * 0.5, spear.body.sourceHeight * 0.5);
+    spear.anims.play('lancando');
+  }
+
+  shutDownBarrelSpawner(firstCollider, collider) {
+    const barrels = firstCollider.getData('barrels');
+    barrels.forEach(barrel => {
+      barrel.destroySpawner();
+    });
+    firstCollider.setTint(0x00ff00);
+    firstCollider.setScale(0.9);
+    collider.destroy();
+  }
 
     kill(crow) {
         crow.destroy();

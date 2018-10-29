@@ -10,7 +10,7 @@ class FaseDois extends Phaser.Scene {
                 arcade: {
                     gravity: { y: 700 },
                     debug: false,
-                    // tileBias: 120,                
+                    // tileBias: 120,
                 }
             }
         })
@@ -36,15 +36,13 @@ class FaseDois extends Phaser.Scene {
     preload() { }
 
     create() {
-        const screenWidth = this.sys.game.config.width;
-        const screenHeight = this.sys.game.config.height;
         this.cameras.main.setBackgroundColor('rgba(10, 230, 255, 1)');
 
         var map = this.add.tilemap('fase_2');
         var tileset = map.addTilesetImage('plataformas');
         this.ground = map.createStaticLayer('plataformas', tileset);
         this.ground.setCollisionByProperty({ collider: true });
-        
+
         this.physics.add.collider(this.odin, [this.ground], function() {
             this.odin.resetJump();
         }, null, this);
@@ -54,7 +52,7 @@ class FaseDois extends Phaser.Scene {
             scene: this,
             groupConfig: {
                 defaultKey: 'barril',
-                maxSize: 2,    
+                maxSize: 2,
             },
             groupMultipleConfig: {},
             customConfig: {
@@ -83,7 +81,7 @@ class FaseDois extends Phaser.Scene {
                 odiny: this.odin.y
             });
         }
-    }            
+    }
 }
 
 export default FaseDois;

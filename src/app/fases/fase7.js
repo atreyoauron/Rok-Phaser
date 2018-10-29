@@ -16,7 +16,7 @@ class FaseSete extends Phaser.Scene {
         })
 
         this.odin;
-        this.common;        
+        this.common;
     }
 
     init(config) {
@@ -37,8 +37,6 @@ class FaseSete extends Phaser.Scene {
     }
 
     create() {
-        const screenWidth = this.sys.game.config.width;
-        const screenHeight = this.sys.game.config.height;
         this.cameras.main.setBackgroundColor('rgba(10, 230, 255, 1)');
 
         var map = this.add.tilemap('fase_7');
@@ -62,7 +60,7 @@ class FaseSete extends Phaser.Scene {
             scene: this,
             groupConfig: {
                 defaultKey: 'barril',
-                maxSize: 15,    
+                maxSize: 15,
             },
             groupMultipleConfig: {},
             customConfig: {
@@ -76,28 +74,28 @@ class FaseSete extends Phaser.Scene {
                     x: 0,
                     y: -120
                 },
-                colliders: [this.ground]                 
-            }            
-        });     
-        
-        this.crows.createCrow({x: 530, y: 214},{ x: 0, y: 50});    
-        
-        this.crows.createCrow({x: 300, y: 320},{ x: 0, y: 50});        
-        this.crows.createCrow({x: 330, y: 300},{ x: 0, y: 50});        
-        this.crows.createCrow({x: 360, y: 280},{ x: 0, y: 50});        
-        this.crows.createCrow({x: 400, y: 260},{ x: 0, y: 50});           
- 
-        this.crows.createCrow({x: 25, y: 280},{ x: -50, y: 0});           
-        this.crows.createCrow({x: 120, y: 300},{ x: 50, y: 0});           
+                colliders: [this.ground]
+            }
+        });
 
-        this.crows.createCrow({x: 120, y: 67},{ x: -50, y: 0});           
-        this.crows.createCrow({x: 160, y: 100},{ x: 50, y: 0});           
+        this.crows.createCrow({x: 530, y: 214},{ x: 0, y: 50});
+
+        this.crows.createCrow({x: 300, y: 320},{ x: 0, y: 50});
+        this.crows.createCrow({x: 330, y: 300},{ x: 0, y: 50});
+        this.crows.createCrow({x: 360, y: 280},{ x: 0, y: 50});
+        this.crows.createCrow({x: 400, y: 260},{ x: 0, y: 50});
+
+        this.crows.createCrow({x: 25, y: 280},{ x: -50, y: 0});
+        this.crows.createCrow({x: 120, y: 300},{ x: 50, y: 0});
+
+        this.crows.createCrow({x: 120, y: 67},{ x: -50, y: 0});
+        this.crows.createCrow({x: 160, y: 100},{ x: 50, y: 0});
 
 
-        this.crows.createCrow({x: 270, y: 74},{ x: -50, y: 0});           
-        this.crows.createCrow({x: 420, y: 74},{ x: 50, y: 0});           
-        this.crows.createCrow({x: 270, y: 90},{ x: -50, y: 0});           
-        this.crows.createCrow({x: 420, y: 90},{ x: 50, y: 0});           
+        this.crows.createCrow({x: 270, y: 74},{ x: -50, y: 0});
+        this.crows.createCrow({x: 420, y: 74},{ x: 50, y: 0});
+        this.crows.createCrow({x: 270, y: 90},{ x: -50, y: 0});
+        this.crows.createCrow({x: 420, y: 90},{ x: 50, y: 0});
     }
 
     update() {

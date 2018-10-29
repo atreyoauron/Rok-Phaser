@@ -40,8 +40,6 @@ class FaseOito extends Phaser.Scene {
     }
 
     create() {
-        const screenWidth = this.sys.game.config.width;
-        const screenHeight = this.sys.game.config.height;
         this.cameras.main.setBackgroundColor('rgba(10, 230, 255, 1)');
         var map = this.add.tilemap('fase_8');
         var tileset = map.addTilesetImage('plataformas');

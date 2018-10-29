@@ -16,7 +16,7 @@ class FaseQuatro extends Phaser.Scene {
         })
 
         this.odin;
-        this.common;        
+        this.common;
     }
 
     init(config) {
@@ -25,7 +25,7 @@ class FaseQuatro extends Phaser.Scene {
         this.odin.resetSpearGroup();
 
         this.scene.stop('fasequatro');
-        
+
         if (config) {
             this.odin.x = config.odinx;
             this.odin.y = config.odiny;
@@ -38,8 +38,6 @@ class FaseQuatro extends Phaser.Scene {
     }
 
     create() {
-        const screenWidth = this.sys.game.config.width;
-        const screenHeight = this.sys.game.config.height;
         this.cameras.main.setBackgroundColor('rgba(10, 230, 255, 1)');
 
         var map = this.add.tilemap('fase_5');
@@ -56,7 +54,7 @@ class FaseQuatro extends Phaser.Scene {
             scene: this,
             groupConfig: {
                 defaultKey: 'barril',
-                maxSize: 15,    
+                maxSize: 15,
             },
             groupMultipleConfig: {},
             customConfig: {
@@ -71,11 +69,11 @@ class FaseQuatro extends Phaser.Scene {
                     y: -120
                 },
                 colliders: [this.ground],
-                overlap: this.odin,               
-            }            
-        });     
+                overlap: this.odin,
+            }
+        });
         this.crows.createCrow({x: 440, y: 180},{ x: 0, y: 50});
-        this.crows.createCrow({x: 440, y: 240},{ x: 0, y: -50});        
+        this.crows.createCrow({x: 440, y: 240},{ x: 0, y: -50});
         this.crows.createCrow({x: 400, y: 180},{ x: 0, y: 50});
         this.crows.createCrow({x: 400, y: 240},{ x: 0, y: -50});
         this.crows.createCrow({x: 360, y: 180},{ x: 0, y: 50});
@@ -109,7 +107,7 @@ class FaseQuatro extends Phaser.Scene {
                 odiny: 310 - this.odin.y * 2
             });
         }
-        
+
         if (this.odin.x > 636) {
             this.scene.start('faseum', {
                 odinx: this.odin.width,

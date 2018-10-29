@@ -37,8 +37,6 @@ class FaseTres extends Phaser.Scene {
     }
 
     create() {
-        const screenWidth = this.sys.game.config.width;
-        const screenHeight = this.sys.game.config.height;
         this.cameras.main.setBackgroundColor('rgba(10, 230, 255, 1)');
 
         var map = this.add.tilemap('fase_3');
@@ -55,7 +53,7 @@ class FaseTres extends Phaser.Scene {
             scene: this,
             groupConfig: {
                 defaultKey: 'barril',
-                maxSize: 1,    
+                maxSize: 1,
             },
             groupMultipleConfig: {},
             customConfig: {
@@ -71,7 +69,7 @@ class FaseTres extends Phaser.Scene {
             scene: this,
             groupConfig: {
                 defaultKey: 'barril',
-                maxSize: 1,    
+                maxSize: 1,
             },
             groupMultipleConfig: {},
             customConfig: {
@@ -84,8 +82,8 @@ class FaseTres extends Phaser.Scene {
             }
         });
 
-        barrelOne.createBarrelSpawner();        
-        barrelTwo.createBarrelSpawner();        
+        barrelOne.createBarrelSpawner();
+        barrelTwo.createBarrelSpawner();
     }
 
     update() {

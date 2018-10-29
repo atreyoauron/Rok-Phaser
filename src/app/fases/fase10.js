@@ -1,5 +1,4 @@
 /// <reference path="../../../phaser.d.ts" />
-import BarrelSpawner from '../prefabs/barrel-spawner.js';
 import CrowSpawner from '../prefabs/crow-spawner.js';
 
 class FaseDez extends Phaser.Scene {
@@ -17,7 +16,7 @@ class FaseDez extends Phaser.Scene {
         })
 
         this.odin;
-        this.common;        
+        this.common;
     }
 
     init(config) {
@@ -39,8 +38,6 @@ class FaseDez extends Phaser.Scene {
     }
 
     create() {
-        const screenWidth = this.sys.game.config.width;
-        const screenHeight = this.sys.game.config.height;
         this.cameras.main.setBackgroundColor('rgba(10, 230, 255, 1)');
 
         var map = this.add.tilemap('fase_10');
@@ -53,28 +50,11 @@ class FaseDez extends Phaser.Scene {
         }, null, this);
         this.odin = this.add.existing(this.odin);
 
-        const barrelSpawner = new BarrelSpawner({
-            scene: this,
-            groupConfig: {
-                defaultKey: 'barril',
-                maxSize: 2,    
-            },
-            groupMultipleConfig: {},
-            customConfig: {
-                x: 0,
-                y: 330,
-                timing: 100,
-                speedDirection: 120,
-                colliders: [this.ground],
-                overlaps: [this.odin],               
-            }
-        });
-
         this.crows = new CrowSpawner({
             scene: this,
             groupConfig: {
                 defaultKey: 'crow',
-                maxSize: 15,    
+                maxSize: 15,
             },
             groupMultipleConfig: {},
             customConfig: {
@@ -88,18 +68,18 @@ class FaseDez extends Phaser.Scene {
                     x: 0,
                     y: -120
                 },
-                colliders: [this.ground]                 
+                colliders: [this.ground]
             }
         });
-        
+
         this.crows.createCrow({x: 255, y: 30},{ x: 0, y: 50});
-        this.crows.createCrow({x: 255, y: 60},{ x: 0, y: 50});       
-        this.crows.createCrow({x: 255, y: 90},{ x: 0, y: 50});       
+        this.crows.createCrow({x: 255, y: 60},{ x: 0, y: 50});
+        this.crows.createCrow({x: 255, y: 90},{ x: 0, y: 50});
         this.crows.createCrow({x: 255, y: 115},{ x: 0, y: 50});
 
         this.crows.createCrow({x: 309, y: 142},{ x: -50, y: 0});
-        
-        
+
+
     }
 
     update() {

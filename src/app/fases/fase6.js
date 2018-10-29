@@ -16,7 +16,7 @@ class FaseSeis extends Phaser.Scene {
         })
 
         this.odin;
-        this.common;        
+        this.common;
     }
 
     init(config) {
@@ -37,8 +37,6 @@ class FaseSeis extends Phaser.Scene {
     }
 
     create() {
-        const screenWidth = this.sys.game.config.width;
-        const screenHeight = this.sys.game.config.height;
         this.cameras.main.setBackgroundColor('rgba(10, 230, 255, 1)');
 
         var map = this.add.tilemap('fase_6');
@@ -55,7 +53,7 @@ class FaseSeis extends Phaser.Scene {
             scene: this,
             groupConfig: {
                 defaultKey: 'crow',
-                maxSize: 15,    
+                maxSize: 15,
             },
             groupMultipleConfig: {},
             customConfig: {
@@ -69,24 +67,24 @@ class FaseSeis extends Phaser.Scene {
                     x: 0,
                     y: -120
                 },
-                colliders: [this.ground]                 
+                colliders: [this.ground]
             }
         });
 
         //voando na parte de baixo
-        this.crows.createCrow({x: 26, y: 198},{ x: 50, y: 0});        
+        this.crows.createCrow({x: 26, y: 198},{ x: 50, y: 0});
 
-        this.crows.createCrow({x: 614, y: 325},{ x: 0, y: -50});        
+        this.crows.createCrow({x: 614, y: 325},{ x: 0, y: -50});
 
-        this.crows.createCrow({x: 258, y: 325},{ x: 0, y: -50});        
-        this.crows.createCrow({x: 198, y: 325},{ x: 0, y: -50});        
-        this.crows.createCrow({x: 135, y: 325},{ x: 0, y: -50});        
-        this.crows.createCrow({x: 75, y: 325},{ x: 0, y: -50});        
+        this.crows.createCrow({x: 258, y: 325},{ x: 0, y: -50});
+        this.crows.createCrow({x: 198, y: 325},{ x: 0, y: -50});
+        this.crows.createCrow({x: 135, y: 325},{ x: 0, y: -50});
+        this.crows.createCrow({x: 75, y: 325},{ x: 0, y: -50});
 
-        this.crows.createCrow({x: 150, y: 35},{ x: 0, y: -50});        
-        this.crows.createCrow({x: 200, y: 70},{ x: 0, y: -50});        
-        this.crows.createCrow({x: 250, y: 105},{ x: 0, y: -50});        
-        this.crows.createCrow({x: 315, y: 135},{ x: 0, y: -50});        
+        this.crows.createCrow({x: 150, y: 35},{ x: 0, y: -50});
+        this.crows.createCrow({x: 200, y: 70},{ x: 0, y: -50});
+        this.crows.createCrow({x: 250, y: 105},{ x: 0, y: -50});
+        this.crows.createCrow({x: 315, y: 135},{ x: 0, y: -50});
 
         this.crows.createCrow({x: 533, y: 35},{ x: 0, y: -50});
     }
