@@ -1,5 +1,6 @@
 /// <reference path="../../../phaser.d.ts" />
 import BarrelSpawner from '../prefabs/barrel-spawner.js';
+import CheckPoint from '../prefabs/checkpoint.js';
 
 class FaseQuatro extends Phaser.Scene {
     constructor() {
@@ -20,17 +21,26 @@ class FaseQuatro extends Phaser.Scene {
     }
 
     init(config) {
-        this.common = this.scene.get('boot');
-        this.odin = this.common.odin;
-        this.scene.stop('fasetres');
-        this.odin.resetSpearGroup();
+      // this.scene.resume('boot');
+      this.common = this.scene.get('boot');
+      this.ui = this.scene.get('userInterface');
+      this.ui.events.emit('damageTaken', 0);
 
-        if (config) {
-            this.odin.x = config.odinx;
-            this.odin.y = config.odiny;
-            this.physics.world.enable(this.odin);
-        }
-    }
+      this.odin = this.common.odin;
+      this.physics.world.enable(this.odin);
+      this.odin.resetSpearGroup();
+
+      console.log(config);
+
+      if (config.odinx) {
+          this.odin.x = config.odinx;
+          this.odin.y = config.odiny;
+      } else {
+          this.odin.x = this.sys.game.config.width / 2;
+          this.odin.y = this.sys.game.config.height / 2;
+      }
+
+  }
 
     preload() {
 
@@ -283,6 +293,17 @@ class FaseQuatro extends Phaser.Scene {
             doubleJump.destroy();
         }, null, this);
 
+        const checkpoint = new CheckPoint({
+          scene: this,
+          x: 30,
+          y: 83,
+          key: 'switch-block'
+        });
+
+        this.physics.add.overlap(this.odin, checkpoint, (over1, over2) => {
+          this.ui.getCheckpoint(30, 83, 'fasequatro');
+          this.ui.events.emit('damageTaken', 0);
+        }, null, this);
     }
 
     update() {

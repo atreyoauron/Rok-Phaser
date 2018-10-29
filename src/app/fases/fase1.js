@@ -1,7 +1,6 @@
 /// <reference path="../../../phaser.d.ts" />
 
-import HidromelSpawner from '../prefabs/hidromel-spawner.js';
-
+import CheckPoint from '../prefabs/checkpoint.js';
 class FaseUm extends Phaser.Scene {
     constructor() {
         super({
@@ -30,7 +29,7 @@ class FaseUm extends Phaser.Scene {
     }
 
     init(config) {
-        this.scene.resume('boot');        
+        this.scene.resume('boot');
         this.common = this.scene.get('boot');
         this.ui = this.scene.get('userInterface');
         this.ui.events.emit('damageTaken', 0);
@@ -44,7 +43,7 @@ class FaseUm extends Phaser.Scene {
             this.odin.y = config.odiny;
         } else {
             this.odin.x = this.sys.game.config.width / 2;
-            this.odin.y = this.sys.game.config.height / 2;            
+            this.odin.y = this.sys.game.config.height / 2;
         }
 
     }
@@ -56,21 +55,34 @@ class FaseUm extends Phaser.Scene {
     create() {
         const screenWidth = this.sys.game.config.width;
         const screenHeight = this.sys.game.config.height;
-        this.lights.addLight(screenWidth / 2, screenHeight / 2, 200);
 
         var map = this.add.tilemap('fase_1');
 
         const fundo = this.add.image(0,0, 'fundo_fase_1');
         fundo.setOrigin(0);
-        
+
         var tileset = map.addTilesetImage('fase_1_plataformas');
-        this.ground = map.createStaticLayer('plataforma_fase_1', tileset);        
+        this.ground = map.createStaticLayer('plataforma_fase_1', tileset);
         this.ground.setCollisionByProperty({collider: true})
         this.physics.add.collider(this.odin, [this.ground], function() {
             this.odin.resetJump();
         }, null, this);
 
         this.odin = this.add.existing(this.odin);
+        const checkpoint = new CheckPoint({
+          scene: this,
+          x: this.sys.game.config.width / 2,
+          y: this.sys.game.config.height / 2,
+          key: 'switch-block'
+        });
+
+        this.physics.add.overlap(this.odin, checkpoint, (over1, over2) => {
+          this.ui.getCheckpoint(
+            this.sys.game.config.width / 2,
+            this.sys.game.config.height / 2,
+            'faseum');
+          this.ui.events.emit('damageTaken', 0);
+        }, null, this);
     }
 
     update() {

@@ -115,11 +115,24 @@ class UserInterface extends Phaser.Scene {
     resetGame(activatedScene) {
         this.odin.setData('currentLifePoints', 1000);
         this.odin.setData('takingDamage', false);
+        const previousData = JSON.parse(localStorage.getItem('currentGameState'));
 
-        activatedScene.scene.start('faseum', {
-            odinX: 321,
-            odinY: 169
+        console.log(previousData);
+        activatedScene.scene.start(previousData.fase, {
+            odinx: previousData.x,
+            odiny: previousData.y
         });
+    }
+
+    getCheckpoint(x, y, fase) {
+      this.odin.setData('currentLifePoints', 1000);
+      this.odin.setData('takingDamage', false);
+      localStorage.setItem('currentGameState', JSON.stringify({
+        x: x,
+        y: y,
+        fase: fase,
+        odinData: this.odin.data.getAll()
+      }))
     }
 
     getActivatedScene(scenes) {

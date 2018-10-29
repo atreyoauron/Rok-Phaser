@@ -243,10 +243,12 @@ class Boot extends Phaser.Scene {
       repeat: 0
     });
 
+    const previousData = JSON.parse(localStorage.getItem('currentGameState'));
+
     this.odin = new Odin({
       scene: this,
-      x: this.sys.game.config.width / 2,
-      y: this.sys.game.config.height / 2,
+      x: previousData.x || this.sys.game.config.width / 2,
+      y: previousData.y || this.sys.game.config.height / 2,
       key: 'odin'
     });
 
