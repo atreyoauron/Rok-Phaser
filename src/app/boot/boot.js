@@ -96,9 +96,9 @@ class Boot extends Phaser.Scene {
       frameWidth: 32,
       frameHeight: 24
     });
-    this.load.spritesheet('crow', 'src/assets/img/bat.png', {
-      frameWidth: 24,
-      frameHeight: 24,
+    this.load.spritesheet('crow', 'src/assets/img/Illrauga_Sprite_Sheet.png', {
+      frameWidth: 32,
+      frameHeight: 32,
     })
     this.load.spritesheet('barril-explodir', 'src/assets/img/barril-explodir.png', {
       frameWidth: 24,
@@ -176,8 +176,8 @@ class Boot extends Phaser.Scene {
 
     this.anims.create({
       key: 'crow-flying',
-      frames: this.anims.generateFrameNumbers('crow', { start: 1, end: 3 }),
-      frameRate: 6,
+      frames: this.anims.generateFrameNumbers('crow', { start: 0, end: 5 }),
+      frameRate: 12,
       repeat: -1
     });
 
