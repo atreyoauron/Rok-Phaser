@@ -38,7 +38,7 @@ class CrowSpawner extends Phaser.Physics.Arcade.Group {
 
   createNewCrow(config) {
     const crow = config.crowGroup.create(config.x, config.y, 'crow');
-    crow.body.setSize(crow.body.sourceWidth * 0.5, crow.body.height, crow.body.sourceWidth * 0.5, crow.body.height)
+    crow.body.setSize(crow.body.sourceWidth * 0.5, crow.body.height - 10, crow.body.sourceWidth * 0.5, crow.body.height - 10)
     crow.anims.play('crow-flying');
     crow.setVelocity(config.speedDirection.x, config.speedDirection.y);
     crow.setBounce(config.bounce.x, config.bounce.y);
@@ -57,7 +57,7 @@ class CrowSpawner extends Phaser.Physics.Arcade.Group {
           this.userInterface.events.emit('damageTaken', 250);
           firstOverlap.setData('takingDamage', true);
           this.config.scene.time.addEvent({
-            delay: 500,
+            delay: 1000,
             repeat: 0,
             callback: this.clearTakeDamage.bind(this, firstOverlap)
           });

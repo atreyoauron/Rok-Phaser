@@ -9,7 +9,7 @@ class FaseQuatro extends Phaser.Scene {
             pixelArt: true,
             physics: {
                 arcade: {
-                    debug: true,
+                    debug: false,
                     gravity: { y: 700 },
                     // tileBias: 120,
                 }
