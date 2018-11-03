@@ -16,10 +16,10 @@ class Hel extends Phaser.GameObjects.Sprite {
       this.ui = config.scene.scene.get('userInterface');
 
       this.possibleSpawnerPoints = [
-        { x: 320, y: 93, flip: true },
-        { x: 563, y: 79, flip: true },
-        { x: 324, y: 269, flip: true },
-        { x: 184, y: 241, flip: false },
+        { x: 320, y: 93, flip: false },
+        { x: 563, y: 79, flip: false },
+        { x: 324, y: 269, flip: false },
+        { x: 184, y: 241, flip: true },
         { x: 511, y: 256, flip: false },
       ]
   }

@@ -2,6 +2,7 @@
 import HidromelSpawner from '../prefabs/hidromel-spawner.js';
 import BarrelSpawner from '../prefabs/barrel-spawner.js';
 import CrowSpawner from '../prefabs/crow-spawner.js';
+import CheckPoint from '../prefabs/checkpoint.js';
 
 class FaseNove extends Phaser.Scene {
     constructor() {
@@ -25,7 +26,7 @@ class FaseNove extends Phaser.Scene {
         this.odin = this.common.odin;
         this.scene.stop('fasesete');
         this.odin.resetSpearGroup();
-
+        this.ui = this.scene.get('userInterface');
         if (config) {
             this.odin.x = config.odinx;
             this.odin.y = config.odiny;
@@ -48,6 +49,21 @@ class FaseNove extends Phaser.Scene {
         this.physics.add.collider(this.odin, [this.ground], function() {
             this.odin.resetJump();
         }, null, this);
+        const checkpoint = new CheckPoint({
+          scene: this,
+          x: 621,
+          y: 52,
+          key: 'switch-block'
+        });
+
+        this.physics.add.overlap(this.odin, checkpoint, (over1, over2) => {
+          this.ui.getCheckpoint(
+            621,
+            52,
+            'fasenove');
+          this.ui.events.emit('damageTaken', 0);
+        }, null, this);
+
         this.odin = this.add.existing(this.odin);
 
         const barrelOne = new BarrelSpawner({
