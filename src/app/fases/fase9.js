@@ -46,6 +46,9 @@ class FaseNove extends Phaser.Scene {
         var tileset = map.addTilesetImage('plataformas');
         this.ground = map.createStaticLayer('plataformas', tileset);
         this.ground.setCollisionByProperty({ collider: true });
+        const bg = this.add.image(0,0,'fase-9');
+        bg.setOrigin(0);
+
         this.physics.add.collider(this.odin, [this.ground], function() {
             this.odin.resetJump();
         }, null, this);
@@ -136,8 +139,8 @@ class FaseNove extends Phaser.Scene {
             },
             groupMultipleConfig: {},
             customConfig: {
-                x: 600,
-                y: 97,
+                x: 585,
+                y: 146,
                 colliders: [this.ground],
                 overlaps: [this.odin],
             }
@@ -153,7 +156,7 @@ class FaseNove extends Phaser.Scene {
             groupMultipleConfig: {},
             customConfig: {
                 x: 250,
-                y: 23,
+                y: 48,
                 colliders: [this.ground],
                 overlaps: [this.odin],
             }
