@@ -99,11 +99,11 @@ class MainCharacter extends Phaser.GameObjects.Sprite {
             this.body.setVelocityX(0);
         }
 
-        if (context.cursors.right.isDown || this.ui.rightButtonPressed && pointer.isDown) {
+        if (context.cursors.right.isDown || this.ui.rightButtonPressed) {
             this.flipX = false;
             this.walking();
             this.body.setVelocityX(75);
-        } else if (context.cursors.left.isDown || this.ui.leftButtonPressed && pointer.isDown) {
+        } else if (context.cursors.left.isDown || this.ui.leftButtonPressed) {
             this.walking();
             this.flipX = true;
             this.body.setVelocityX(-75);

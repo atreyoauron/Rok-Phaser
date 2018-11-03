@@ -48,6 +48,8 @@ class FaseNove extends Phaser.Scene {
         this.physics.add.collider(this.odin, [this.ground], function() {
             this.odin.resetJump();
         }, null, this);
+        const bg = this.add.image(0,0,'fase-9');
+        bg.setOrigin(0);
         this.odin = this.add.existing(this.odin);
 
         const barrelOne = new BarrelSpawner({
