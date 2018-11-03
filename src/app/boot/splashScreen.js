@@ -31,7 +31,7 @@ class SplashScreen extends Phaser.Scene {
             scaleX: 0.3,
             scaleY: 0.3,
             ease: 'Power1',
-            duration: 2000,
+            duration: 100,
             repeat: 0,
             onComplete: function () {
                 this.cameras.main.fadeOut(1000, 0, 0, 0);
@@ -42,7 +42,7 @@ class SplashScreen extends Phaser.Scene {
     update() {
         if (this.cameras.main.fadeEffect.isComplete) {
             this.scene.start('boot');
-        }        
+        }
     }
 }
 

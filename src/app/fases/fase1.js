@@ -69,6 +69,7 @@ class FaseUm extends Phaser.Scene {
         }, null, this);
 
         this.odin = this.add.existing(this.odin);
+
         const checkpoint = new CheckPoint({
           scene: this,
           x: this.sys.game.config.width / 2,

@@ -122,6 +122,12 @@ class Boot extends Phaser.Scene {
       frameHeight: 36,
     });
 
+
+    this.load.spritesheet('hel', 'src/assets/img/hel.png', {
+      frameWidth: 135,
+      frameHeight: 145,
+    });
+
     this.load.tilemapTiledJSON('fase_1', 'src/assets/json/fase_1.json');
     this.load.tilemapTiledJSON('fase_2', 'src/assets/json/fase_2.json');
     this.load.tilemapTiledJSON('fase_3', 'src/assets/json/fase_3.json');
@@ -166,6 +172,29 @@ class Boot extends Phaser.Scene {
     this.anims.create({
       key: 'spawner-animation',
       frames: this.anims.generateFrameNumbers('hidromel_spawner', { start: 0, end: 24 }),
+      frameRate: 8,
+      repeat: -1
+    });
+
+
+    this.anims.create({
+      key: 'hel-spawn',
+      frames: this.anims.generateFrameNumbers('hel', { start: 15, end: 17 }),
+      frameRate: 8,
+      repeat: 0
+    });
+
+    this.anims.create({
+      key: 'hel-attack',
+      frames: this.anims.generateFrameNumbers('hel', { start: 18, end: 20 }),
+      frameRate: 8,
+      repeat: -1
+    });
+
+
+    this.anims.create({
+      key: 'hel-standing',
+      frames: this.anims.generateFrameNumbers('hel', { start: 26, end: 27 }),
       frameRate: 8,
       repeat: -1
     });
