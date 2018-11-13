@@ -88,18 +88,23 @@ class CrowSpawner extends Phaser.Physics.Arcade.Group {
         crow.body.setVelocity(0);
         this.kill(crow);
       }
-      if (collider && collider.visible) {
-        if (collider.properties && collider.properties.breakable) {
-          const tile = this.getTheFirstPixel(config.colliderList[0], collider);
-          const tiles = config.colliderList[0].getTilesWithinWorldXY(tile.pixelX, tile.pixelY, 15, 135, {
-            isNotEmpty: true
-          });
-          tiles.forEach((data, index) => {
-            if (data.properties && data.properties.breakable) {
-              config.colliderList[0].removeTileAt(data.x, data.y);
-            }
-          });
+      if(crow.getData('hit')) {
+        if(collider.texture && collider.texture.key === 'breakable-wall') {
+          collider.destroy();
         }
+      }
+      if (collider && collider.visible) {
+        // if (collider.properties && collider.properties.breakable) {
+        //   const tile = this.getTheFirstPixel(config.colliderList[0], collider);
+        //   const tiles = config.colliderList[0].getTilesWithinWorldXY(tile.pixelX, tile.pixelY, 15, 135, {
+        //     isNotEmpty: true
+        //   });
+        //   tiles.forEach((data, index) => {
+        //     if (data.properties && data.properties.breakable) {
+        //       config.colliderList[0].removeTileAt(data.x, data.y);
+        //     }
+        //   });
+        // }
       }
     }, null, this);
   }

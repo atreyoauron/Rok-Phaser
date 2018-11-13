@@ -35,7 +35,6 @@ class FaseSete extends Phaser.Scene {
       this.odin.x = config.odinx;
       this.odin.y = config.odiny;
       this.physics.world.enable(this.odin);
-      console.log('caindo aqui');
       this.odin.resetSpearGroup();
     }
   }
@@ -54,12 +53,19 @@ class FaseSete extends Phaser.Scene {
     this.ground.setCollisionByProperty({
       collider: true
     });
-    this.physics.add.collider(this.odin, [this.ground], function () {
-      this.odin.resetJump();
-    }, null, this);
+
     const bg = this.add.image(0,0,'fase-7');
     bg.setOrigin(0);
     this.odin = this.add.existing(this.odin);
+    this.breakableWall = this.physics.add.staticGroup([
+      this.physics.add.staticSprite(495, 195, 'breakable-wall'),
+      this.physics.add.staticSprite(495, 211, 'breakable-wall'),
+      this.physics.add.staticSprite(495, 227, 'breakable-wall')
+    ]);
+
+    this.physics.add.collider(this.odin, [this.ground, this.breakableWall], function () {
+      this.odin.resetJump();
+    }, null, this);
 
     const spearItem = this.physics.add.staticImage(565, 213, 'spear-item');
 
@@ -86,7 +92,7 @@ class FaseSete extends Phaser.Scene {
           x: 0,
           y: 0
         },
-        colliders: [this.ground],
+        colliders: [this.ground, this.breakableWall],
         overlap: this.odin,
       }
     });

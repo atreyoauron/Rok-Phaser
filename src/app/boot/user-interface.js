@@ -102,7 +102,10 @@ class UserInterface extends Phaser.Scene {
         }, this);
 
         this.events.addListener('damageTaken', function (damage) {
-            this.updateCharacterLifeBar(damage);
+            const takingDamage = this.odin.getData('takingDamage');
+            if(!takingDamage) {
+              this.updateCharacterLifeBar(damage);
+            }
         }, this);
 
         this.events.addListener('characterDied', function (damage) {

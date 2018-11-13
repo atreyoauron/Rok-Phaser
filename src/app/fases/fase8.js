@@ -45,14 +45,25 @@ class FaseOito extends Phaser.Scene {
         var tileset = map.addTilesetImage('plataformas');
         this.ground = map.createDynamicLayer('plataformas', tileset);
         this.ground.setCollisionByProperty({ collider: true });
-        this.physics.add.collider(this.odin, [this.ground], function() {
-            this.odin.resetJump();
-        }, null, this);
+
         const helbg = this.add.sprite(0,0,'hel-bg', 0);
         helbg.anims.play('hel');
         helbg.setOrigin(0,0);
 
         this.odin = this.add.existing(this.odin);
+        this.breakableWall = this.physics.add.staticGroup([
+          this.physics.add.staticSprite(556, 14, 'breakable-wall'),
+          this.physics.add.staticSprite(556, 30, 'breakable-wall'),
+          this.physics.add.staticSprite(556, 46, 'breakable-wall'),
+          this.physics.add.staticSprite(556, 62, 'breakable-wall'),
+          this.physics.add.staticSprite(556, 78, 'breakable-wall'),
+          this.physics.add.staticSprite(556, 94, 'breakable-wall'),
+          this.physics.add.staticSprite(556, 110, 'breakable-wall'),
+          this.physics.add.staticSprite(556, 126, 'breakable-wall')
+        ]);
+        this.physics.add.collider(this.odin, [this.ground], function() {
+            this.odin.resetJump();
+        }, null, this);
 
         const hidromel = new HidromelSpawner({
             scene: this,
@@ -163,7 +174,7 @@ class FaseOito extends Phaser.Scene {
                     x: 0,
                     y: -30
                 },
-                colliders: [this.ground],
+                colliders: [this.ground, this.breakableWall],
                 overlap: this.odin,
             }
         });

@@ -88,6 +88,10 @@ class Boot extends Phaser.Scene {
       frameWidth: 28,
       frameHeight: 42
     });
+    this.load.spritesheet('odin_fire_spear', 'src/assets/img/spearodin.png', {
+      frameWidth: 54,
+      frameHeight: 42
+    });
     this.load.spritesheet('odin_run', 'src/assets/img/Odin_Run_Sheet.png', {
       frameWidth: 25,
       frameHeight: 38
@@ -123,10 +127,6 @@ class Boot extends Phaser.Scene {
     });
 
 
-    this.load.spritesheet('hel', 'src/assets/img/hel.png', {
-      frameWidth: 135,
-      frameHeight: 145,
-    });
 
     this.load.tilemapTiledJSON('fase_1', 'src/assets/json/fase_1.json');
     this.load.tilemapTiledJSON('fase_2', 'src/assets/json/fase_2.json');
@@ -141,6 +141,7 @@ class Boot extends Phaser.Scene {
     this.load.image('fase_1_plataformas', 'src/assets/img/plataforma_fase_1.png');
     this.load.image('fundo_fase_1', ['src/assets/img/fase_1_bg.png', 'src/assets/img/fase_n_1_bg.png']);
     this.load.audio('bgMusic', 'src/assets/audio/sound.mp3');
+    this.load.image('hel', 'src/assets/img/hel.png');
     this.load.image('rok_logo', 'src/assets/img/rok-logo.png');
     this.load.image('plataformas', 'src/assets/img/plataforma_fase_1.png');
     this.load.image('spear-item', 'src/assets/img/spear-item.png');
@@ -151,6 +152,7 @@ class Boot extends Phaser.Scene {
     this.load.image('fase-6', 'src/assets/img/fase_6_bg.png');
     this.load.image('fase-7', 'src/assets/img/fase_7_bg.png');
     this.load.image('fase-9', 'src/assets/img/fase_9_bg.png');
+    this.load.image('fase-10', 'src/assets/img/fase_10_bg.png');
     this.load.image('breakable-wall', 'src/assets/img/bloco-destrutivel.png');
     this.load.image('switch-block', 'src/assets/img/bloco.png');
   }
@@ -177,29 +179,6 @@ class Boot extends Phaser.Scene {
       repeat: -1
     });
 
-
-    this.anims.create({
-      key: 'hel-spawn',
-      frames: this.anims.generateFrameNumbers('hel', { start: 15, end: 17 }),
-      frameRate: 8,
-      repeat: 0
-    });
-
-    this.anims.create({
-      key: 'hel-attack',
-      frames: this.anims.generateFrameNumbers('hel', { start: 18, end: 20 }),
-      frameRate: 8,
-      repeat: -1
-    });
-
-
-    this.anims.create({
-      key: 'hel-standing',
-      frames: this.anims.generateFrameNumbers('hel', { start: 26, end: 27 }),
-      frameRate: 8,
-      repeat: -1
-    });
-
     this.anims.create({
       key: 'hel',
       frames: this.anims.generateFrameNumbers('hel-bg', { start: 0, end: 9 }),
@@ -219,6 +198,13 @@ class Boot extends Phaser.Scene {
       frames: this.anims.generateFrameNumbers('odin', { start: 0, end: 7 }),
       frameRate: 7,
       repeat: -1
+    });
+
+    this.anims.create({
+      key: 'fire_spear',
+      frames: this.anims.generateFrameNumbers('odin_fire_spear', { start: 0, end: 6 }),
+      frameRate: 7,
+      repeat: 0
     });
 
     this.anims.create({
@@ -258,7 +244,7 @@ class Boot extends Phaser.Scene {
     this.anims.create({
       key: 'rolling',
       frames: this.anims.generateFrameNumbers('barril', { start: 0, end: 7 }),
-      frameRate: 7,
+      frameRate: 1,
       repeat: -1
     });
 

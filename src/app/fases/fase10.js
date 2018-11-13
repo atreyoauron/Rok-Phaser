@@ -50,6 +50,8 @@ class FaseDez extends Phaser.Scene {
     this.physics.add.collider(this.odin, [this.ground], function () {
       this.odin.resetJump();
     }, null, this);
+    const bg = this.add.image(0,0,'fase-10');
+    bg.setOrigin(0);
 
     const hidromel = new HidromelSpawner({
       scene: this,
@@ -103,11 +105,6 @@ class FaseDez extends Phaser.Scene {
     this.hel.configureHel();
 
     this.physics.add.collider(this.hel, [this.ground]);
-
-    this.hel.anims.play('hel-spawn');
-    this.hel.anims.play('hel-standing');
-
-
   }
 
   update() {

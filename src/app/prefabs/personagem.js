@@ -19,6 +19,7 @@ class Odin extends MainCharacter {
 
     this.scene.events.addListener('fireSpear', function () {
       this.fireSpear();
+      this.setData('attacking', true);
     }, this);
 
     this.createJump();
@@ -74,7 +75,7 @@ class Odin extends MainCharacter {
   fireSpear() {
     const itens = this.getData('itens');
 
-
+    this.attacking();
     if (!itens.spear) return;
 
     const scene = this.getActivatedScene(this.scene.scene.manager.scenes);
@@ -106,6 +107,7 @@ class Odin extends MainCharacter {
       colliderList: colliders,
     };
     this.spear.createNewSpear(config);
+    console.log(this.anims);
   }
 
   inAir() {
@@ -114,6 +116,10 @@ class Odin extends MainCharacter {
 
   jumping() {
     this.anims.play('jumping');
+  }
+
+  attacking() {
+    this.anims.play('fire_spear');
   }
 
   walking() {

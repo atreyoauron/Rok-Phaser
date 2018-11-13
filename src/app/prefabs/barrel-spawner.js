@@ -115,15 +115,31 @@ class BarrelSpawner extends Phaser.GameObjects.Group {
   }
 
   barrelOverlap(config) {
-    this.config.scene.physics.add.overlap(config.barrelGroup, [...config.overlapList], function (collider, barrel) {
+    this.config.scene.physics.add.overlap(config.barrelGroup, [...config.overlapList], function (firstOverlap, barrel) {
       if (barrel.anims.currentAnim.key !== 'explosion') {
         if (barrel.body.touching.left || barrel.body.touching.right || barrel.body.touching.up) {
           this.killBarrel(barrel, config.barrelGroup);
-          this.userInterface.events.emit('damageTaken', 250);
+
+          if (firstOverlap.name === 'odin') {
+            const odinTakingDamage = firstOverlap.getData('takingDamage');
+            if (!odinTakingDamage) {
+              this.userInterface.events.emit('damageTaken', 250);
+              firstOverlap.setData('takingDamage', true);
+              this.config.scene.time.addEvent({
+                delay: 1000,
+                repeat: 0,
+                callback: this.clearTakeDamage.bind(this, firstOverlap)
+              });
+            }
+          }
           return;
         }
       }
     }, null, this);
+  }
+
+  clearTakeDamage(odin) {
+    odin.setData('takingDamage', false);
   }
 
   createNewBarrel(config) {
@@ -172,11 +188,22 @@ class BarrelSpawner extends Phaser.GameObjects.Group {
   }
 
   singleBarrelOverlap(config) {
-    this.config.scene.physics.add.overlap(config.barrelGroup, [...config.overlapList], function (collider, barrel) {
+    this.config.scene.physics.add.overlap(config.barrelGroup, [...config.overlapList], function (firstOverlap, barrel) {
       if (barrel.anims.currentAnim.key !== 'explosion') {
         if (barrel.body.touching.left || barrel.body.touching.right || barrel.body.touching.up) {
           this.killBarrel(barrel, config.barrelGroup);
-          this.userInterface.events.emit('damageTaken', 250);
+          if (firstOverlap.name === 'odin') {
+            const odinTakingDamage = firstOverlap.getData('takingDamage');
+            if (!odinTakingDamage) {
+              this.userInterface.events.emit('damageTaken', 250);
+              firstOverlap.setData('takingDamage', true);
+              this.config.scene.time.addEvent({
+                delay: 1000,
+                repeat: 0,
+                callback: this.clearTakeDamage.bind(this, firstOverlap)
+              });
+            }
+          }
           return;
         }
       }

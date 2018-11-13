@@ -182,7 +182,7 @@ class FaseNove extends Phaser.Scene {
         if(this.odin.x > 630) {
             this.scene.start('fasedez', {
                 odinx: 0,
-                odiny: this.odin.y,
+                odiny: 36,
             });
         }
     }
