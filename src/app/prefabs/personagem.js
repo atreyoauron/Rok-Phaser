@@ -67,6 +67,10 @@ class Odin extends MainCharacter {
     }, this);
 
     this.scene.input.keyboard.on('keydown_C', function () {
+      const itens = this.getData('itens');
+
+      if (this.anims.currentAnim.key === 'fire_spear' && !itens.armor) { return; }
+
       this.scene.events.emit('fireSpear');
       // this.fireSpear();
     }, this);
@@ -125,6 +129,10 @@ class Odin extends MainCharacter {
   walking() {
     let jump = this.getData('jump');
     let double = this.getData('isDoubleJumping');
+
+    if (this.anims.currentAnim.key === 'fire_spear' && this.anims.isPlaying) {
+      return;
+    }
 
     if (!jump || !double) {
       this.anims.play('walking', true);
