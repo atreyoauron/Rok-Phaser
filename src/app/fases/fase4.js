@@ -30,7 +30,6 @@ class FaseQuatro extends Phaser.Scene {
       this.physics.world.enable(this.odin);
       this.odin.resetSpearGroup();
 
-      console.log(config);
 
       if (config.odinx) {
           this.odin.x = config.odinx;

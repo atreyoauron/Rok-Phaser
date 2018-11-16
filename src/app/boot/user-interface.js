@@ -120,7 +120,6 @@ class UserInterface extends Phaser.Scene {
         this.odin.setData('takingDamage', false);
         const previousData = JSON.parse(localStorage.getItem('currentGameState'));
 
-        console.log(previousData);
         activatedScene.scene.start(previousData.fase, {
             odinx: previousData.x,
             odiny: previousData.y

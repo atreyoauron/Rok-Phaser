@@ -11,7 +11,6 @@ class Odin extends MainCharacter {
     this.config = config;
     this.spearGroupCreatedOnThisScene = {};
     this.scene = config.scene;
-    console.log(config);
   }
 
   create() {
@@ -111,10 +110,12 @@ class Odin extends MainCharacter {
       colliderList: colliders,
     };
     this.spear.createNewSpear(config);
-    console.log(this.anims);
   }
 
   inAir() {
+    if (this.anims.currentAnim.key === 'fire_spear' && this.anims.isPlaying) {
+      return;
+    }
     this.anims.play('inAir', true);
   }
 

@@ -53,6 +53,12 @@ class FaseDez extends Phaser.Scene {
     const bg = this.add.image(0,0,'fase-10');
     bg.setOrigin(0);
 
+    this.barrelSwitch = this.physics.add.staticImage(602, 33, 'switch-block');
+    this.barrelSwitch.setDataEnabled();
+    this.barrelSwitch.setName('switchBarrelOff');
+
+    this.barrelSwitch.setData('barrels', [firstWave]);
+
     const hidromel = new HidromelSpawner({
       scene: this,
       groupConfig: {

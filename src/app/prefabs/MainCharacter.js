@@ -135,7 +135,7 @@ class MainCharacter extends Phaser.GameObjects.Sprite {
             currentTime: 0,
             itens: {
                 doubleJump: false,
-                spear: true,
+                spear: false,
                 armor: false
             }
         });

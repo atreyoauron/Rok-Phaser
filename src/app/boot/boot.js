@@ -244,7 +244,7 @@ class Boot extends Phaser.Scene {
     this.anims.create({
       key: 'rolling',
       frames: this.anims.generateFrameNumbers('barril', { start: 0, end: 7 }),
-      frameRate: 1,
+      frameRate: 7,
       repeat: -1
     });
 
