@@ -68,6 +68,7 @@ class Odin extends MainCharacter {
     this.scene.input.keyboard.on('keydown_C', function () {
       const itens = this.getData('itens');
 
+      if(!itens.spear) { return; }
       if (this.anims.currentAnim.key === 'fire_spear' && !itens.armor) { return; }
 
       this.scene.events.emit('fireSpear');
@@ -94,9 +95,10 @@ class Odin extends MainCharacter {
     const xOrigin = (this.flipX) ? this.x - 30 : this.x + 30;
 
     const crows = (scene.crows) ? scene.crows.crowGroup : {};
+    const helSwitch = (scene.helSwitch) ? scene.helSwitch : {};
     const barrelSwitch = (scene.barrelSwitch) ? scene.barrelSwitch : {};
 
-    const colliders = [scene.ground, crows, barrelSwitch];
+    const colliders = [scene.ground, crows, helSwitch, barrelSwitch];
     const config = {
       scene: scene,
       speedDirection: {

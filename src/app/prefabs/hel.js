@@ -28,6 +28,7 @@ class Hel extends Phaser.GameObjects.Sprite {
       this.body.allowGravity = false;
       this.setDataEnabled();
       this.setData({
+          dead: false,
           onTeletransport: false,
           firingEnemy: false,
           totalLifePoints: 1000,
@@ -56,7 +57,26 @@ class Hel extends Phaser.GameObjects.Sprite {
     });
   }
 
+  reduceHelLifePoints() {
+    let updatedLifePoints = this.getData('currentLifePoints') - 250;
+    let porcentagem;
+    this.setData('currentLifePoints', updatedLifePoints);
+    porcentagem = (this.getData('currentLifePoints') * 100) / this.getData('totalLifePoints');
+    if (porcentagem <= 0) {
+      this.killHel();
+    }
+  }
+
+  killHel() {
+    this.config.crowSpawner.destroyGroup();
+    this.setData('dead', true);
+  }
+
   spawn(x, y, flip) {
+    if(this.getData('dead')) {
+      return;
+    }
+
     this.setPosition(x, y);
     this.flipX = flip;
     this.setVisible(true);
@@ -70,6 +90,8 @@ class Hel extends Phaser.GameObjects.Sprite {
       }
     });
   }
+
+
 
   hide() {
     this.setVisible(false);

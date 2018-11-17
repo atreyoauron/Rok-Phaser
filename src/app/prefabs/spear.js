@@ -37,6 +37,14 @@ class SpearSpawner extends Phaser.Physics.Arcade.Group {
         this.shutDownBarrelSpawner(firstCollider, collider);
         return;
       }
+      if(firstCollider.name === 'hel-weak-points') {
+        const hel = collider.getData('hel');
+        hel.reduceHelLifePoints();
+      }
+      if(collider.name === 'hel-weak-points') {
+        const hel = collider.getData('hel');
+        hel.reduceHelLifePoints();
+      }
       if (firstCollider.body.onWall()) {
         this.kill(firstCollider);
         return;

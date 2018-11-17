@@ -36,6 +36,12 @@ class CrowSpawner extends Phaser.Physics.Arcade.Group {
     return this.getTheFirstPixel(tileGroup, newTile);
   }
 
+  destroyGroup() {
+    this.crowGroup.children.each(function(crow) {
+      this.kill(crow);
+    }, this);
+  }
+
   createNewCrow(config) {
     const crow = config.crowGroup.create(config.x, config.y, 'crow');
     crow.body.setSize(crow.body.sourceWidth * 0.5, crow.body.height - 10, crow.body.sourceWidth * 0.5, crow.body.height - 10)
