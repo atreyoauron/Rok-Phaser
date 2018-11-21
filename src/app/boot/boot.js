@@ -96,6 +96,10 @@ class Boot extends Phaser.Scene {
       frameWidth: 25,
       frameHeight: 38
     });
+    this.load.spritesheet('odin_gold_run', 'src/assets/img/Golden_Odin_Run.png', {
+      frameWidth: 25,
+      frameHeight: 38
+    });
     this.load.spritesheet('barril', 'src/assets/img/barril.png', {
       frameWidth: 32,
       frameHeight: 24
@@ -126,6 +130,15 @@ class Boot extends Phaser.Scene {
       frameHeight: 36,
     });
 
+    this.load.spritesheet('gold_jump', 'src/assets/img/gold_odin_jump.png', {
+      frameWidth: 54,
+      frameHeight: 42
+    });
+
+    this.load.spritesheet('air_attack', 'src/assets/img/spearAir.png', {
+      frameWidth: 54,
+      frameHeight: 42
+    });
 
 
     this.load.tilemapTiledJSON('fase_1', 'src/assets/json/fase_1.json');
@@ -153,6 +166,7 @@ class Boot extends Phaser.Scene {
     this.load.image('fase-7', 'src/assets/img/fase_7_bg.png');
     this.load.image('fase-9', 'src/assets/img/fase_9_bg.png');
     this.load.image('fase-10', 'src/assets/img/fase_10_bg.png');
+    this.load.image('alvo', 'src/assets/img/alvo.png');
     this.load.image('breakable-wall', 'src/assets/img/bloco-destrutivel.png');
     this.load.image('switch-block', 'src/assets/img/bloco.png');
   }
@@ -208,6 +222,13 @@ class Boot extends Phaser.Scene {
     });
 
     this.anims.create({
+      key: 'jump_fire_spear',
+      frames: this.anims.generateFrameNumbers('air_attack', { start: 0, end: 6 }),
+      frameRate: 7,
+      repeat: 0
+    })
+
+    this.anims.create({
       key: 'gold_standing',
       frames: this.anims.generateFrameNumbers('odin_gold_idle', { start: 0, end: 7 }),
       frameRate: 7,
@@ -221,6 +242,12 @@ class Boot extends Phaser.Scene {
       frames: this.anims.generateFrameNumbers('odin', { start: 8, end: 10 }),
       frameRate: 3,
     });
+
+    this.anims.create({
+      key: 'gold_jumping',
+      frames: this.anims.generateFrameNumbers('gold_jump', {start: 0, end: 6}),
+      frameRate: 7
+    })
 
     this.anims.create({
       key: 'inAir',
@@ -237,6 +264,11 @@ class Boot extends Phaser.Scene {
 
     this.anims.create({
       key: 'walking',
+      frames: this.anims.generateFrameNumbers('odin_gold_run', { start: 0, end: 7 }),
+      frameRate: 7,
+    });
+    this.anims.create({
+      key: 'gold_walking',
       frames: this.anims.generateFrameNumbers('odin_run', { start: 0, end: 7 }),
       frameRate: 7,
     });

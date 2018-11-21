@@ -108,7 +108,7 @@ class MainCharacter extends Phaser.GameObjects.Sprite {
             this.flipX = true;
             this.body.setVelocityX(-75);
         } else {
-            if (this.anims.currentAnim.key !== 'fire_spear') {
+            if (this.anims.currentAnim.key !== 'fire_spear' && this.anims.currentAnim.key !== 'jump_fire_spear') {
               this.anims.stop();
             }
 
@@ -127,9 +127,9 @@ class MainCharacter extends Phaser.GameObjects.Sprite {
             jump: false,
             totalLifePoints: 1000,
             currentLifePoints: 1000,
-            powerBoost: 0,
+            powerBoost: 100,
             takingDamage: false,
-            powerBostActive: false,
+            powerBostActive: true,
             attacking: false,
             boostTime: 3000,
             currentTime: 0,

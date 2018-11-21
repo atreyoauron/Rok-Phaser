@@ -62,6 +62,7 @@ class Odin extends MainCharacter {
         this.setData('powerBostActive', true);
         this.startPowerUp();
         userInterface.userPowerBost(true);
+        this.idle();
       }
     }, this);
 
@@ -69,7 +70,8 @@ class Odin extends MainCharacter {
       const itens = this.getData('itens');
 
       if(!itens.spear) { return; }
-      if (this.anims.currentAnim.key === 'fire_spear' && !itens.armor) { return; }
+      if (this.anims.currentAnim.key === 'fire_spear' && !itens.armor
+      || this.anims.currentAnim.key === 'jump_fire_spear' && !itens.armor ) { return; }
 
       this.scene.events.emit('fireSpear');
       // this.fireSpear();
@@ -96,9 +98,25 @@ class Odin extends MainCharacter {
 
     const crows = (scene.crows) ? scene.crows.crowGroup : {};
     const helSwitch = (scene.helSwitch) ? scene.helSwitch : {};
+    const breakableWall = (scene.breakableWall) ? scene.breakableWall : {};
+    const firstSwitchWall = (scene.firstSwitchWall) ? scene.firstSwitchWall : {};
+    const secondSwitchWall = (scene.secondSwitchWall) ? scene.secondSwitchWall : {};
+    const thirdSwitchWall = (scene.thirdSwitchWall) ? scene.thirdSwitchWall : {};
+    const fourthSwitchWall = (scene.fourthSwitchWall) ? scene.fourthSwitchWall : {};
     const barrelSwitch = (scene.barrelSwitch) ? scene.barrelSwitch : {};
 
-    const colliders = [scene.ground, crows, helSwitch, barrelSwitch];
+    const colliders = [
+      scene.ground,
+      crows,
+      helSwitch,
+      breakableWall,
+      firstSwitchWall,
+      secondSwitchWall,
+      thirdSwitchWall,
+      fourthSwitchWall,
+      barrelSwitch
+    ];
+
     const config = {
       scene: scene,
       speedDirection: {
@@ -115,30 +133,51 @@ class Odin extends MainCharacter {
   }
 
   inAir() {
-    if (this.anims.currentAnim.key === 'fire_spear' && this.anims.isPlaying) {
+    if (this.anims.currentAnim.key === 'fire_spear' && this.anims.isPlaying
+    || this.anims.currentAnim.key === 'jump_fire_spear' && this.anims.isPlaying ) {
+      console.log('não tocando o in air');
       return;
     }
+
+    console.log('tocando in air');
     this.anims.play('inAir', true);
   }
 
   jumping() {
-    this.anims.play('jumping');
+    const powerBostActive = this.getData('powerBostActive');
+
+    if (powerBostActive) {
+      console.log('goldJumping')
+      this.anims.play('gold_jumping');
+    } else {
+      this.anims.play('jumping');
+    }
   }
 
   attacking() {
-    this.anims.play('fire_spear');
+    let jump = this.getData('jump');
+    let double = this.getData('isDoubleJumping');
+
+    if (jump || double) {
+      this.anims.play('jump_fire_spear');
+    } else {
+      this.anims.play('fire_spear');
+    }
   }
 
   walking() {
     let jump = this.getData('jump');
     let double = this.getData('isDoubleJumping');
+    let powerBostActive = this.getData('powerBostActive');
+    let key = (powerBostActive) ? 'walking' : 'gold_walking';
 
-    if (this.anims.currentAnim.key === 'fire_spear' && this.anims.isPlaying) {
+    if (this.anims.currentAnim.key === 'fire_spear' && this.anims.isPlaying ||
+    this.anims.currentAnim.key === 'jump_fire_spear' && this.anims.isPlaying) {
       return;
     }
 
     if (!jump || !double) {
-      this.anims.play('walking', true);
+      this.anims.play(key, true);
     }
   }
 
@@ -179,7 +218,7 @@ class Odin extends MainCharacter {
     let double = this.getData('isDoubleJumping');
 
     if (jump || double) {
-      if (this.anims.currentAnim.key !== 'jumping') {
+      if (this.anims.currentAnim.key !== 'jumping' && this.anims.currentAnim.key !== 'gold_jumping') {
         this.inAir();
       }
     }

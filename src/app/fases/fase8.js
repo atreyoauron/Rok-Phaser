@@ -61,8 +61,9 @@ class FaseOito extends Phaser.Scene {
           this.physics.add.staticSprite(556, 110, 'breakable-wall'),
           this.physics.add.staticSprite(556, 126, 'breakable-wall')
         ]);
-        this.physics.add.collider(this.odin, [this.ground], function() {
-            this.odin.resetJump();
+
+        this.physics.add.collider(this.odin, [this.ground, this.breakableWall], function() {
+          this.odin.resetJump();
         }, null, this);
 
         const hidromel = new HidromelSpawner({
@@ -76,6 +77,7 @@ class FaseOito extends Phaser.Scene {
                 x: 155,
                 y: 20,
                 colliders: [this.ground],
+
                 overlaps: [this.odin],
             }
         });

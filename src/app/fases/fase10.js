@@ -71,6 +71,31 @@ class FaseDez extends Phaser.Scene {
 
     this.odin = this.add.existing(this.odin);
 
+
+    this.firstSwitchWall = this.physics.add.staticGroup([
+      this.physics.add.staticSprite(56, 224, 'breakable-wall'),
+      this.physics.add.staticSprite(56, 240, 'breakable-wall'),
+      this.physics.add.staticSprite(56, 256, 'breakable-wall'),
+    ]);
+
+    this.secondSwitchWall = this.physics.add.staticGroup([
+      this.physics.add.staticSprite(56, 116, 'breakable-wall'),
+      this.physics.add.staticSprite(56, 132, 'breakable-wall'),
+      this.physics.add.staticSprite(56, 148, 'breakable-wall'),
+    ]);
+
+    this.thirdSwitchWall = this.physics.add.staticGroup([
+      this.physics.add.staticSprite(570, 50, 'breakable-wall'),
+      this.physics.add.staticSprite(570, 66, 'breakable-wall'),
+      this.physics.add.staticSprite(570, 82, 'breakable-wall'),
+    ]);
+
+    this.fourthSwitchWall = this.physics.add.staticGroup([
+      this.physics.add.staticSprite(570, 224, 'breakable-wall'),
+      this.physics.add.staticSprite(570, 240, 'breakable-wall'),
+      this.physics.add.staticSprite(570, 256, 'breakable-wall'),
+    ]);
+
     this.crows = new CrowSpawner({
       scene: this,
       groupConfig: {
@@ -89,7 +114,7 @@ class FaseDez extends Phaser.Scene {
           x: 0,
           y: -120
         },
-        colliders: [this.ground],
+        colliders: [this.ground, this.firstSwitchWall, this.secondSwitchWall, this.thirdSwitchWall, this.fourthSwitchWall],
         overlap: this.odin,
       }
     });
@@ -105,10 +130,10 @@ class FaseDez extends Phaser.Scene {
     this.hel.configureHel();
 
     this.helSwitch = this.physics.add.staticGroup([
-      this.physics.add.staticImage(596, 114, 'switch-block'),
-      this.physics.add.staticImage(596, 240, 'switch-block'),
-      this.physics.add.staticImage(37, 240, 'switch-block'),
-      this.physics.add.staticImage(55, 132, 'switch-block'),
+      this.physics.add.staticImage(596, 66, 'alvo'),
+      this.physics.add.staticImage(596, 240, 'alvo'),
+      this.physics.add.staticImage(35, 132, 'alvo'),
+      this.physics.add.staticImage(35, 240, 'alvo'),
     ]);
 
     this.helSwitch.children.each(function(child) {
