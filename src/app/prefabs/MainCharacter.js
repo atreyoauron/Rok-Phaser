@@ -108,8 +108,10 @@ class MainCharacter extends Phaser.GameObjects.Sprite {
             this.flipX = true;
             this.body.setVelocityX(-75);
         } else {
-            if (this.anims.currentAnim.key !== 'fire_spear' && this.anims.currentAnim.key !== 'jump_fire_spear') {
-              this.anims.stop();
+            if (this.anims.currentAnim.key === 'fire_spear' && !this.anims.isPlaying ||
+                this.anims.currentAnim.key === 'jump_fire_spear' && !this.anims.isPlaying ||
+                this.anims.currentAnim.key === 'walking' || this.anims.currentAnim.key === 'gold_walking') {
+                  this.anims.stop();
             }
 
             if(this.getData('jump') === false && this.getData('isDoubleJumping') === false && this.anims.currentAnim.key !== 'standing' && !this.anims.isPlaying) {
@@ -129,7 +131,7 @@ class MainCharacter extends Phaser.GameObjects.Sprite {
             currentLifePoints: 1000,
             powerBoost: 100,
             takingDamage: false,
-            powerBostActive: true,
+            powerBostActive: false,
             attacking: false,
             boostTime: 3000,
             currentTime: 0,

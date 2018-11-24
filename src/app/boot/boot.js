@@ -167,6 +167,9 @@ class Boot extends Phaser.Scene {
     this.load.image('fase-9', 'src/assets/img/fase_9_bg.png');
     this.load.image('fase-10', 'src/assets/img/fase_10_bg.png');
     this.load.image('alvo', 'src/assets/img/alvo.png');
+    this.load.image('fundo_esquerda', 'src/assets/img/fundo_esquerda.png');
+    this.load.image('fundo_meio', 'src/assets/img/fundo_meio.png');
+    this.load.image('fundo_direita', 'src/assets/img/fundo_direita.png');
     this.load.image('breakable-wall', 'src/assets/img/bloco-destrutivel.png');
     this.load.image('switch-block', 'src/assets/img/bloco.png');
   }
