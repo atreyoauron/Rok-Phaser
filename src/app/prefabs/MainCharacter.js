@@ -130,16 +130,16 @@ class MainCharacter extends Phaser.GameObjects.Sprite {
             jump: false,
             totalLifePoints: 1000,
             currentLifePoints: 1000,
-            powerBoost: 100,
+            powerBoost: 0,
             takingDamage: false,
             powerBostActive: false,
             attacking: false,
             boostTime: 3000,
             currentTime: 0,
             itens: {
-                doubleJump: true,
-                spear: true,
-                armor: true
+                doubleJump: false,
+                spear: false,
+                armor: false
             }
         });
     }
