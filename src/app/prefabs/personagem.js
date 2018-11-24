@@ -135,11 +135,9 @@ class Odin extends MainCharacter {
   inAir() {
     if (this.anims.currentAnim.key === 'fire_spear' && this.anims.isPlaying
     || this.anims.currentAnim.key === 'jump_fire_spear' && this.anims.isPlaying ) {
-      console.log('não tocando o in air');
       return;
     }
 
-    console.log('tocando in air');
     this.anims.play('inAir', true);
   }
 
@@ -147,7 +145,6 @@ class Odin extends MainCharacter {
     const powerBostActive = this.getData('powerBostActive');
 
     if (powerBostActive) {
-      console.log('goldJumping')
       this.anims.play('gold_jumping');
     } else {
       this.anims.play('jumping');
@@ -193,6 +190,7 @@ class Odin extends MainCharacter {
 
   superHeroLanding() {
     this.anims.play('landing', true);
+    this.scene.sound.play('Impacto_com_o_chao');
   }
 
   getActivatedScene(scenes) {

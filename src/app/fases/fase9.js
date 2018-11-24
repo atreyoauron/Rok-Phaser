@@ -46,7 +46,8 @@ class FaseNove extends Phaser.Scene {
         var tileset = map.addTilesetImage('plataformas');
         this.ground = map.createStaticLayer('plataformas', tileset);
         this.ground.setCollisionByProperty({ collider: true });
-        const bg = this.add.image(0,0,'fase-9');
+        const bg = this.add.sprite(0,0,'fase9-sprite', 0);
+        bg.anims.play('fase9');
         bg.setOrigin(0);
 
         this.physics.add.collider(this.odin, [this.ground], function() {

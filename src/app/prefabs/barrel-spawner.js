@@ -213,6 +213,9 @@ class BarrelSpawner extends Phaser.GameObjects.Group {
   killBarrel(barrel, group) {
     barrel.body.setVelocityX(0);
     barrel.anims.play('explosion');
+    if (barrel.anims.currentAnim.key === 'explosion') {
+      this.scene.sound.play('explosao')
+    }
     barrel.on('animationcomplete', function (animation, frame) {
       if (animation.key == 'explosion') {
         group.killAndHide(barrel);

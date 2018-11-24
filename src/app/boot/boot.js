@@ -124,6 +124,10 @@ class Boot extends Phaser.Scene {
       frameWidth: 640,
       frameHeight: 360,
     });
+    this.load.spritesheet('fase9-sprite', 'src/assets/img/fase9-sprite.png', {
+      frameWidth: 640,
+      frameHeight: 360,
+    });
 
     this.load.spritesheet('button-sprite', 'src/assets/img/buttons.png', {
       frameWidth: 36,
@@ -141,6 +145,19 @@ class Boot extends Phaser.Scene {
     });
 
 
+    this.load.audio('explosao', 'src/assets/sounds/explosao.ogg');
+    this.load.audio('explosao_de_carne', 'src/assets/sounds/explosao_de_carne.ogg');
+    this.load.audio('fireloop', 'src/assets/sounds/fireloop.mp3');
+    this.load.audio('Illrauga_morrendo', 'src/assets/sounds/Illrauga_morrendo.ogg');
+    this.load.audio('Impacto_com_o_chao', 'src/assets/sounds/Impacto_com_o_chao.ogg');
+    this.load.audio('impacto_da_lanca', 'src/assets/sounds/impacto_da_lanca.ogg');
+    this.load.audio('Inimigo_sendo_golpeado', 'src/assets/sounds/Inimigo_sendo_golpeado.ogg');
+    this.load.audio('Odin_morrendo', 'src/assets/sounds/Odin_morrendo.ogg');
+    this.load.audio('Pegar_item', 'src/assets/sounds/Pegar_item.ogg');
+    this.load.audio('Power_up', 'src/assets/sounds/Power_up.ogg');
+    this.load.audio('Pulo_melhor', 'src/assets/sounds/Pulo_melhor.ogg');
+    this.load.audio('Tempestade_de_neve', 'src/assets/sounds/Tempestade_de_neve.ogg');
+    this.load.audio('Vocal_de_dano_humano', 'src/assets/sounds/Vocal_de_dano_humano.ogg');
     this.load.tilemapTiledJSON('fase_1', 'src/assets/json/fase_1.json');
     this.load.tilemapTiledJSON('fase_2', 'src/assets/json/fase_2.json');
     this.load.tilemapTiledJSON('fase_3', 'src/assets/json/fase_3.json');
@@ -153,7 +170,6 @@ class Boot extends Phaser.Scene {
     this.load.tilemapTiledJSON('fase_10', 'src/assets/json/fase_10.json');
     this.load.image('fase_1_plataformas', 'src/assets/img/plataforma_fase_1.png');
     this.load.image('fundo_fase_1', ['src/assets/img/fase_1_bg.png', 'src/assets/img/fase_n_1_bg.png']);
-    this.load.audio('bgMusic', 'src/assets/audio/sound.mp3');
     this.load.image('hel', 'src/assets/img/hel.png');
     this.load.image('rok_logo', 'src/assets/img/rok-logo.png');
     this.load.image('plataformas', 'src/assets/img/plataforma_fase_1.png');
@@ -200,6 +216,13 @@ class Boot extends Phaser.Scene {
       key: 'hel',
       frames: this.anims.generateFrameNumbers('hel-bg', { start: 0, end: 9 }),
       frameRate: 9,
+      repeat: -1
+    })
+
+    this.anims.create({
+      key: 'fase9',
+      frames: this.anims.generateFrameNumbers('fase9-sprite', { start: 0, end: 24 }),
+      frameRate: 12,
       repeat: -1
     })
 

@@ -48,12 +48,14 @@ class SpearSpawner extends Phaser.Physics.Arcade.Group {
         hel.reduceHelLifePoints();
       }
       if (firstCollider.body.onWall()) {
+        config.scene.sound.play('impacto_da_lanca');
         this.kill(firstCollider);
         return;
       }
       if (firstCollider.body.touching.left || firstCollider.body.touching.right) {
         collider.setDataEnabled();
         collider.setData({ hit: true });
+        config.scene.sound.play('impacto_da_lanca');
         firstCollider.destroy();
       }
     }, null, this);

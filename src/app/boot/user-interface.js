@@ -29,6 +29,8 @@ class UserInterface extends Phaser.Scene {
     }
 
     create() {
+        const tempestade = this.sound.play('Tempestade_de_neve')
+
         this.cameras.main.flash(500, 0, 0, 0);
         this.input.addPointer(3);
         const lifeBarBox = this.add.graphics();
@@ -164,7 +166,8 @@ class UserInterface extends Phaser.Scene {
 
     userPowerBost(firstTime) {
         if (firstTime) {
-            this.odin.setData('currentTime', this.odin.getData('boostTime'));
+          this.sound.play('Power_up');
+          this.odin.setData('currentTime', this.odin.getData('boostTime'));
         }
 
         this.time.addEvent({

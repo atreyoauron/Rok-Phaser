@@ -53,6 +53,7 @@ class MainCharacter extends Phaser.GameObjects.Sprite {
         let isDoubleJumping = this.getData('isDoubleJumping');
 
         if (bodyRule) {
+            this.scene.sound.play('Pulo_melhor');
             this.jumping();
             this.body.setVelocityY(-280);
             this.setData('jump', true);
@@ -156,12 +157,14 @@ class MainCharacter extends Phaser.GameObjects.Sprite {
     }
 
     getDoubleJumpItem() {
+        this.scene.sound.play('Pegar_item');
         const itens = {...this.getData('itens')};
         itens.doubleJump = true;
         this.setData('itens', itens);
     }
 
     getSpear() {
+        this.scene.sound.play('Pegar_item');
         const itens = {...this.getData('itens')};
         itens.spear = true;
         this.setData('itens', itens);

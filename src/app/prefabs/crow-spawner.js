@@ -119,6 +119,11 @@ class CrowSpawner extends Phaser.Physics.Arcade.Group {
     crow.body.setSize(128, 128, 128, 128);
     crow.anims.play('big-explosion', true);
 
+    if (crow.anims.currentAnim.key === 'big-explosion') {
+      // this.config.scene.sound.play('explosao_de_carne')
+      // this.config.scene.sound.play('Illrauga_morrendo')
+    }
+
     crow.on('animationcomplete', function (animation, frame) {
       if (animation.key == 'big-explosion') {
         crow.destroy();
