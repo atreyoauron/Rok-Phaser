@@ -177,6 +177,7 @@ class Boot extends Phaser.Scene {
     this.load.image('arrow', 'src/assets/img/arrow.png');
     this.load.image('attack', 'src/assets/img/attack.png');
     this.load.image('jump', 'src/assets/img/jump.png');
+    this.load.image('fase-1', 'src/assets/img/fase_1_hub.png');
     this.load.image('fase-5', 'src/assets/img/fase_5_bg.png');
     this.load.image('fase-6', 'src/assets/img/fase_6_bg.png');
     this.load.image('fase-7', 'src/assets/img/fase_7_bg.png');
