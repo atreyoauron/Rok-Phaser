@@ -79,7 +79,7 @@ class FaseUm extends Phaser.Scene {
         });
 
         this.physics.add.overlap(this.odin, checkpoint, (over1, over2) => {
-          checkpoint.getCheckpoint(this.ui, this.sys.game.config.width / 2, this.sys.game.config.width / 2, 'faseum');
+          checkpoint.getCheckpoint(this.ui, this.sys.game.config.width / 2, this.sys.game.config.height / 2, 'faseum');
         }, null, this);
     }
 
