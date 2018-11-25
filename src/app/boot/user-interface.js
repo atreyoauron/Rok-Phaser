@@ -87,24 +87,22 @@ class UserInterface extends Phaser.Scene {
           this.rightButtonPressed = true;
         }, this);
 
-        leftButton.on('pointerout', function() {
-          this.leftButtonPressed = false;
-          this.rightButtonPressed = false;
-        }, this);
 
         rightButton.on('pointerout', function() {
-          this.leftButtonPressed = false;
-          this.rightButtonPressed = false;
-        }, this);
-
-        leftButton.on('pointerup', function() {
-          this.leftButtonPressed = false;
           this.rightButtonPressed = false;
         }, this);
 
         rightButton.on('pointerup', function() {
-          this.leftButtonPressed = false;
           this.rightButtonPressed = false;
+        }, this);
+
+
+        leftButton.on('pointerout', function() {
+          this.leftButtonPressed = false;
+        }, this);
+
+        leftButton.on('pointerup', function() {
+          this.leftButtonPressed = false;
         }, this);
 
 
