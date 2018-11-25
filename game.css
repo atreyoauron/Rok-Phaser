@@ -1,0 +1,42 @@
+body { background-color: #000; margin: 0; }
+
+canvas { width: 100% !important; height: auto !important; }
+
+#vikingpedia {
+  background-color:#000;
+  position: absolute;
+  width: 100% !important;
+  display: flex;
+  z-index: 999;
+  overflow: hidden;
+  transform: all 0.5 ease-in-out;
+}
+
+#vikingpedia.hidden {
+  height: 0;
+}
+
+#vikingpedia.show {
+  height: 100vh !important;
+}
+
+.list {
+  width: 30%;
+  max-height: 100vh;
+  overflow: auto;
+  border-right: 2px dashed #fff;
+  padding: 1rem 3rem;
+  box-sizing: border-box;
+  color: #fff;
+  font-size: 45px;
+}
+
+.text {
+  width: 70%;
+  max-height: 100vh;
+  overflow: auto;
+  padding: 1rem 2rem;
+  box-sizing: border-box;
+  font-size: 33px;
+  color: #fff;
+}

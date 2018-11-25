@@ -199,15 +199,11 @@ class FaseSete extends Phaser.Scene {
       scene: this,
       x: 494,
       y: 142,
-      key: 'switch-block'
+      key: 'checkpoint'
     });
 
     this.physics.add.overlap(this.odin, checkpoint, (over1, over2) => {
-      this.ui.getCheckpoint(
-        511,
-        144,
-        'fasesete');
-      this.ui.events.emit('damageTaken', 0);
+      checkpoint.getCheckpoint(this.ui, 511, 144, 'fasesete');
     }, null, this);
   }
 

@@ -75,15 +75,11 @@ class FaseUm extends Phaser.Scene {
           scene: this,
           x: this.sys.game.config.width / 2,
           y: this.sys.game.config.height / 2,
-          key: 'switch-block'
+          key: 'checkpoint'
         });
 
         this.physics.add.overlap(this.odin, checkpoint, (over1, over2) => {
-          this.ui.getCheckpoint(
-            this.sys.game.config.width / 2,
-            this.sys.game.config.height / 2,
-            'faseum');
-          this.ui.events.emit('damageTaken', 0);
+          checkpoint.getCheckpoint(this.ui, this.sys.game.config.width / 2, this.sys.game.config.width / 2, 'faseum');
         }, null, this);
     }
 

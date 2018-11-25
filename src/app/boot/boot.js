@@ -76,6 +76,11 @@ class Boot extends Phaser.Scene {
       frameHeight: 16,
     });
 
+    this.load.spritesheet('checkpoint', 'src/assets/img/checkpoint.png', {
+      frameWidth: 16,
+      frameHeight: 16,
+    });
+
     this.load.spritesheet('hidromel', 'src/assets/img/hidromel.png', {
       frameWidth: 16,
       frameHeight: 16,
@@ -112,9 +117,9 @@ class Boot extends Phaser.Scene {
       frameWidth: 24,
       frameHeight: 24
     });
-    this.load.spritesheet('big-explosion', 'src/assets/img/big-explosion.png', {
-      frameWidth: 128,
-      frameHeight: 128
+    this.load.spritesheet('big-explosion', 'src/assets/img/BOOM_strip9.png', {
+      frameWidth: 67,
+      frameHeight: 68
     });
     this.load.spritesheet('lanca', 'src/assets/img/lanca.png', {
       frameWidth: 37,
@@ -316,7 +321,7 @@ class Boot extends Phaser.Scene {
 
     this.anims.create({
       key: 'big-explosion',
-      frames: this.anims.generateFrameNumbers('big-explosion', { start: 0, end: 16 }),
+      frames: this.anims.generateFrameNumbers('big-explosion', { start: 0, end: 8 }),
       frameRate: 16,
       repeat: 0
     });

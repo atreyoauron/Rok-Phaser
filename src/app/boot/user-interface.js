@@ -30,6 +30,23 @@ class UserInterface extends Phaser.Scene {
 
     create() {
         const tempestade = this.sound.play('Tempestade_de_neve')
+        this.pausedScene = null;
+
+        this.input.keyboard.on('keydown_P', function () {
+          this.togglePauseGame();
+        }, this);
+
+        this.input.keyboard.on('keydown_ESC', function () {
+          const isPaused = this.togglePauseGame();
+          const vikingPedia = document.getElementById('vikingpedia');
+          if (isPaused) {
+            vikingPedia.classList.remove('hidden')
+            vikingPedia.classList.add('show')
+          } else {
+            vikingPedia.classList.add('hidden')
+            vikingPedia.classList.remove('show')
+          }
+        }, this);
 
         this.cameras.main.flash(500, 0, 0, 0);
         this.input.addPointer(3);
@@ -115,6 +132,21 @@ class UserInterface extends Phaser.Scene {
             activatedScene.scene.stop();
             this.resetGame(activatedScene);
         }, this);
+    }
+
+    togglePauseGame() {
+      if (this.pausedScene) {
+        this.scene.resume('boot');
+        this.scene.resume(this.pausedScene);
+        this.pausedScene = null;
+        return false;
+      }
+
+      const activatedScene = this.getActivatedScene(this.scene.manager.scenes);
+      this.pausedScene = activatedScene.scene.key;
+      this.scene.pause('boot');
+      this.scene.pause(activatedScene.scene.key);
+      return true;
     }
 
     resetGame(activatedScene) {

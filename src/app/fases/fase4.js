@@ -56,8 +56,8 @@ class FaseQuatro extends Phaser.Scene {
         this.physics.add.collider(this.odin, [this.ground], function () {
             this.odin.resetJump();
         }, null, this);
-        // const bg = this.add.image(0,0,'fundo_direita');
-        // bg.setOrigin(0);
+        const bg = this.add.image(0,0,'fundo_direita');
+        bg.setOrigin(0);
         this.odin = this.add.existing(this.odin);
 
         const barrels = {
@@ -298,11 +298,11 @@ class FaseQuatro extends Phaser.Scene {
           scene: this,
           x: 30,
           y: 83,
-          key: 'switch-block'
+          key: 'checkpoint'
         });
 
         this.physics.add.overlap(this.odin, checkpoint, (over1, over2) => {
-          this.ui.getCheckpoint(30, 83, 'fasequatro');
+          checkpoint.getCheckpoint(this.ui, 30, 83, 'fasequatro');
           this.ui.events.emit('damageTaken', 0);
         }, null, this);
     }

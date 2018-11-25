@@ -59,7 +59,7 @@ class CrowSpawner extends Phaser.Physics.Arcade.Group {
     this.config.scene.physics.add.overlap(config.crowGroup, [(config.overlapList) ? config.overlapList : null, this.crowGroup], function (firstOverlap, overlap) {
       if (firstOverlap.name === 'odin') {
         const odinTakingDamage = firstOverlap.getData('takingDamage');
-        if (!odinTakingDamage) {
+        if (!odinTakingDamage && overlap.texture.key !== 'big-explosion') {
           this.userInterface.events.emit('damageTaken', 250);
           firstOverlap.setData('takingDamage', true);
           this.config.scene.time.addEvent({
@@ -75,6 +75,7 @@ class CrowSpawner extends Phaser.Physics.Arcade.Group {
       if (firstOverlap.anims.currentAnim.key !== 'big-explosion') {
         if (firstOverlap.getData('hit')) {
           if (!overlap.getData('hit')) {
+            console.log(firstOverlap);
             overlap.setData('hit', true);
             if (firstOverlap.body.touching.left) {
               overlap.body.setVelocityX(-120);
@@ -116,7 +117,7 @@ class CrowSpawner extends Phaser.Physics.Arcade.Group {
   }
 
   kill(crow) {
-    crow.body.setSize(128, 128, 128, 128);
+    crow.body.setSize(68, 68, 68, 68);
     crow.anims.play('big-explosion', true);
 
     if (crow.anims.currentAnim.key === 'big-explosion') {
