@@ -41,14 +41,25 @@ class FaseTres extends Phaser.Scene {
 
         var map = this.add.tilemap('fase_3');
 
+        const bg = this.add.image(0,0,'fundo_meio');
+        bg.setOrigin(0);
         var tileset = map.addTilesetImage('plataformas');
         this.ground = map.createStaticLayer('plataformas', tileset);
+        this.ground.setAlpha(0);
+
+        this.input.keyboard.on('keydown_T', function () {
+          this.ground.setAlpha(1);
+        }, this);
+
+        this.input.keyboard.on('keydown_U', function () {
+          this.ground.setAlpha(0);
+        }, this);
+
         this.ground.setCollisionByProperty({ collider: true });
         this.physics.add.collider(this.odin, [this.ground], function() {
             this.odin.resetJump();
         }, null, this);
-        const bg = this.add.image(0,0,'fundo_meio');
-        bg.setOrigin(0);
+
         this.odin = this.add.existing(this.odin);
 
         const barrelOne = new BarrelSpawner({

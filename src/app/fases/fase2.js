@@ -39,15 +39,25 @@ class FaseDois extends Phaser.Scene {
         this.cameras.main.setBackgroundColor('rgba(10, 230, 255, 1)');
 
         var map = this.add.tilemap('fase_2');
+        const bg = this.add.image(0,0,'fundo_esquerda');
+        bg.setOrigin(0);
+
         var tileset = map.addTilesetImage('plataformas');
         this.ground = map.createStaticLayer('plataformas', tileset);
         this.ground.setCollisionByProperty({ collider: true });
+        this.ground.setAlpha(0);
+
+        this.input.keyboard.on('keydown_T', function () {
+          this.ground.setAlpha(1);
+        }, this);
+
+        this.input.keyboard.on('keydown_U', function () {
+          this.ground.setAlpha(0);
+        }, this);
 
         this.physics.add.collider(this.odin, [this.ground], function() {
             this.odin.resetJump();
         }, null, this);
-        const bg = this.add.image(0,0,'fundo_esquerda');
-        bg.setOrigin(0);
         this.odin = this.add.existing(this.odin);
 
         const barrelOne = new BarrelSpawner({

@@ -53,6 +53,16 @@ class FaseQuatro extends Phaser.Scene {
         var tileset = map.addTilesetImage('plataformas');
         this.ground = map.createStaticLayer('plataformas', tileset);
         this.ground.setCollisionByProperty({ collider: true });
+        this.ground.setAlpha(0);
+
+        this.input.keyboard.on('keydown_T', function () {
+          this.ground.setAlpha(1);
+        }, this);
+
+        this.input.keyboard.on('keydown_U', function () {
+          this.ground.setAlpha(0);
+        }, this);
+
         this.physics.add.collider(this.odin, [this.ground], function () {
             this.odin.resetJump();
         }, null, this);
