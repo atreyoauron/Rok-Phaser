@@ -56,6 +56,13 @@ class FaseSete extends Phaser.Scene {
 
     const bg = this.add.image(0,0,'fase-7');
     bg.setOrigin(0);
+
+    const checkpoint = new CheckPoint({
+      scene: this,
+      x: 494,
+      y: 142,
+      key: 'checkpoint'
+    });
     this.odin = this.add.existing(this.odin);
     this.breakableWall = this.physics.add.staticGroup([
       this.physics.add.staticSprite(495, 195, 'breakable-wall'),
@@ -192,14 +199,6 @@ class FaseSete extends Phaser.Scene {
     }, {
       x: 50,
       y: 0
-    });
-
-
-    const checkpoint = new CheckPoint({
-      scene: this,
-      x: 494,
-      y: 142,
-      key: 'checkpoint'
     });
 
     this.physics.add.overlap(this.odin, checkpoint, (over1, over2) => {

@@ -15,12 +15,12 @@ class Hel extends Phaser.GameObjects.Sprite {
       this.setActive(false);
       this.ui = config.scene.scene.get('userInterface');
 
+      this.currentIndex = 0;
       this.possibleSpawnerPoints = [
-        { x: 320, y: 93, flip: false },
-        { x: 563, y: 79, flip: false },
-        { x: 324, y: 269, flip: false },
-        { x: 184, y: 241, flip: true },
-        { x: 511, y: 256, flip: false },
+        { x: 94, y: 135, flip: true },
+        { x: 513, y: 57, flip: false },
+        { x: 521, y: 240, flip: false },
+        { x: 94, y: 240, flip: true },
       ]
   }
 
@@ -42,8 +42,12 @@ class Hel extends Phaser.GameObjects.Sprite {
   }
 
   reespawn() {
-    const randomPosition = this.possibleSpawnerPoints[Math.floor(Math.random() * this.possibleSpawnerPoints.length)];
+    if (this.currentIndex > this.possibleSpawnerPoints.length - 1) {
+      this.currentIndex = 0;
+    }
+    const randomPosition = this.possibleSpawnerPoints[this.currentIndex];
     this.spawn(randomPosition.x, randomPosition.y, randomPosition.flip);
+    this.currentIndex++;
   }
 
   fireCrown(x, y, flip) {

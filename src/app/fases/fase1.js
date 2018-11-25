@@ -69,14 +69,15 @@ class FaseUm extends Phaser.Scene {
         }, null, this);
         const bg = this.add.image(0,0,'fase-1');
         bg.setOrigin(0);
-        this.odin = this.add.existing(this.odin);
-
         const checkpoint = new CheckPoint({
           scene: this,
           x: this.sys.game.config.width / 2,
           y: this.sys.game.config.height / 2,
           key: 'checkpoint'
         });
+        this.odin = this.add.existing(this.odin);
+
+
 
         this.physics.add.overlap(this.odin, checkpoint, (over1, over2) => {
           checkpoint.getCheckpoint(this.ui, this.sys.game.config.width / 2, this.sys.game.config.height / 2, 'faseum');
