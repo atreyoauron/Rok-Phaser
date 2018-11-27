@@ -87,15 +87,6 @@ class MainCharacter extends Phaser.GameObjects.Sprite {
     checkCursorMoviment(context) {
         const pointer = this.scene.input.activePointer;
 
-        if(!pointer.isDown) {
-          this.leftButtonPressed = false;
-          this.rightButtonPressed = false;
-          this.attackButtonPressed = false;
-          this.jumpButtonPressed = false;
-        } else {
-          console.log(pointer);
-        }
-
         if(context.cursors.right.isDown && context.cursors.left.isDown) {
             this.body.setVelocityX(0);
         }

@@ -46,6 +46,7 @@ class CrowSpawner extends Phaser.Physics.Arcade.Group {
     const crow = config.crowGroup.create(config.x, config.y, 'crow');
     crow.body.setSize(crow.body.sourceWidth * 0.5, crow.body.height - 10, crow.body.sourceWidth * 0.5, crow.body.height - 10)
     crow.anims.play('crow-flying');
+    crow.setData('dead', false);
     crow.setVelocity(config.speedDirection.x, config.speedDirection.y);
     crow.setBounce(config.bounce.x, config.bounce.y);
     crow.setGravityY(-700);
