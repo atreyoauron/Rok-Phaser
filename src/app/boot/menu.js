@@ -38,9 +38,9 @@ class MainMenu extends Phaser.Scene {
     const newGame = this.make.text({
       x: this.sys.game.config.width / 2 - 40,
       y: this.sys.game.config.height / 2,
-      text: 'Novo jogo',
+      text: 'New Game',
       style: {
-        font: '20px monospace',
+        font: '20px Nordic Alternative',
         fill: '#fff'
       }
     });
@@ -54,9 +54,9 @@ class MainMenu extends Phaser.Scene {
     const continuar = this.make.text({
       x: this.sys.game.config.width / 2 - 40,
       y: this.sys.game.config.height / 2 + 40,
-      text: 'Continuar',
+      text: 'Continue',
       style: {
-        font: '20px monospace',
+        font: '20px Nordic Alternative',
         fill: '#fff'
       }
     });
@@ -71,9 +71,9 @@ class MainMenu extends Phaser.Scene {
     const opcoes = this.make.text({
       x: this.sys.game.config.width / 2 - 40,
       y: this.sys.game.config.height / 2 + 80,
-      text: 'Opções',
+      text: 'Options',
       style: {
-        font: '20px monospace',
+        font: '20px Nordic Alternative',
         fill: '#fff'
       }
     });

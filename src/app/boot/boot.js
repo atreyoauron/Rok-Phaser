@@ -277,7 +277,13 @@ class Boot extends Phaser.Scene {
 
     this.anims.create({
       key: 'gold_jumping',
-      frames: this.anims.generateFrameNumbers('gold_jump', {start: 0, end: 6}),
+      frames: this.anims.generateFrameNumbers('gold_jump', {start: 0, end: 4}),
+      frameRate: 7
+    })
+
+    this.anims.create({
+      key: 'gold_landing',
+      frames: this.anims.generateFrameNumbers('gold_jump', {start: 5, end: 6}),
       frameRate: 7
     })
 

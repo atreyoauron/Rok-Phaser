@@ -91,7 +91,7 @@ class CrowSpawner extends Phaser.Physics.Arcade.Group {
 
   crowCollider(config) {
     this.config.scene.physics.add.collider(config.crowGroup, [...config.colliderList], function (crow, collider) {
-      if (crow.body.onWall() && crow.getData('hit')) {
+      if (crow.body.onWall() && crow.getData('hit') && crow.anims.currentAnim.key !== 'big-explosion') {
         crow.body.setVelocity(0);
         this.kill(crow);
       }
@@ -120,9 +120,10 @@ class CrowSpawner extends Phaser.Physics.Arcade.Group {
     crow.body.setSize(68, 68, 68, 68);
     crow.anims.play('big-explosion', true);
 
-    if (crow.anims.currentAnim.key === 'big-explosion') {
-      // this.config.scene.sound.play('explosao_de_carne')
-      // this.config.scene.sound.play('Illrauga_morrendo')
+    if (crow.anims.currentAnim.key === 'big-explosion' && !crow.getData('dead')) {
+      this.config.scene.sound.play('explosao_de_carne')
+      this.config.scene.sound.play('Illrauga_morrendo')
+      crow.setData('dead', true);
     }
 
     crow.on('animationcomplete', function (animation, frame) {
