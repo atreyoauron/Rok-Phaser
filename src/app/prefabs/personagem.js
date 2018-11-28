@@ -68,13 +68,24 @@ class Odin extends MainCharacter {
 
     this.scene.input.keyboard.on('keydown_C', function () {
       const itens = this.getData('itens');
+      const isAttacking = this.getData('attacking');
+      const powerBostActive = this.getData('powerBostActive');
 
       if(!itens.spear) { return; }
       if (this.anims.currentAnim.key === 'fire_spear' && !itens.armor
       || this.anims.currentAnim.key === 'jump_fire_spear' && !itens.armor ) { return; }
 
+      if(isAttacking && !powerBostActive) { return; }
       this.scene.events.emit('fireSpear');
-      // this.fireSpear();
+
+      this.setData('attacking', true);
+      this.scene.time.addEvent({
+        delay: 500,
+        repeat: 0,
+        callback: () => {
+          this.setData('attacking', false);
+        }
+      }, this);
     }, this);
   }
 
