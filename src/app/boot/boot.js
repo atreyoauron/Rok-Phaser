@@ -151,6 +151,8 @@ class Boot extends Phaser.Scene {
 
 
     this.load.audio('explosao', 'src/assets/sounds/explosao.ogg');
+    this.load.audio('musica', 'src/assets/sounds/gameplay.mp3');
+    this.load.audio('menu', 'src/assets/sounds/menu.mp3');
     this.load.audio('explosao_de_carne', 'src/assets/sounds/explosao_de_carne.ogg');
     this.load.audio('fireloop', 'src/assets/sounds/fireloop.mp3');
     this.load.audio('Illrauga_morrendo', 'src/assets/sounds/Illrauga_morrendo.ogg');

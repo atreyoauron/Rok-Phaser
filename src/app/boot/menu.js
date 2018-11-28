@@ -23,6 +23,7 @@ class MainMenu extends Phaser.Scene {
   }
 
   create() {
+    this.sound.play('menu')
     this.scene.pause('boot');
 
     const splash = this.add.image(0, 0, 'fundo-splash');
@@ -129,6 +130,7 @@ class MainMenu extends Phaser.Scene {
 
   update() {
     if (this.cameras.main.fadeEffect.isComplete) {
+      this.sound.stopAll()
       this.scene.launch('userInterface');
       this.scene.start('faseum');
     }

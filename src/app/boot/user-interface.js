@@ -29,8 +29,9 @@ class UserInterface extends Phaser.Scene {
     }
 
     create() {
-        const tempestade = this.sound.play('Tempestade_de_neve')
-        this.pausedScene = null;
+      this.sound.play('Tempestade_de_neve')
+      this.sound.play('musica')
+      this.pausedScene = null;
 
         this.input.keyboard.on('keydown_P', function () {
           this.togglePauseGame();
