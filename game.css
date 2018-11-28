@@ -1,3 +1,10 @@
+@font-face {
+  font-family: Nordic Alternative;
+  src: url('./src/assets/nordic.ttf');
+  font-weight:400;
+  font-weight:normal;
+}
+
 body { background-color: #000; margin: 0; }
 
 canvas { width: 100% !important; height: auto !important; }

@@ -2,6 +2,7 @@
 import CrowSpawner from '../prefabs/crow-spawner.js';
 import Hel from '../prefabs/hel.js';
 import HidromelSpawner from '../prefabs/hidromel-spawner.js';
+import BarrelSpawner from '../prefabs/barrel-spawner.js';
 
 class FaseDez extends Phaser.Scene {
   constructor() {
@@ -10,7 +11,9 @@ class FaseDez extends Phaser.Scene {
       pixelArt: true,
       physics: {
         arcade: {
-          gravity: { y: 700 },
+          gravity: {
+            y: 700
+          },
           debug: false,
           // tileBias: 120,
         }
@@ -46,11 +49,13 @@ class FaseDez extends Phaser.Scene {
 
     var tileset = map.addTilesetImage('plataformas');
     this.ground = map.createStaticLayer('plataformas', tileset);
-    this.ground.setCollisionByProperty({ collider: true });
+    this.ground.setCollisionByProperty({
+      collider: true
+    });
     this.physics.add.collider(this.odin, [this.ground], function () {
       this.odin.resetJump();
     }, null, this);
-    const bg = this.add.image(0,0,'fase-10');
+    const bg = this.add.image(0, 0, 'fase-10');
     bg.setOrigin(0);
 
     const hidromel = new HidromelSpawner({
@@ -96,6 +101,79 @@ class FaseDez extends Phaser.Scene {
       this.physics.add.staticSprite(570, 256, 'breakable-wall'),
     ]);
 
+    const barrelOne = new BarrelSpawner({
+      scene: this,
+      groupConfig: {
+        defaultKey: 'barril',
+        maxSize: 2,
+      },
+      groupMultipleConfig: {},
+      customConfig: {
+        x: 0,
+        y: 270,
+        speedDirection: 120,
+        colliders: [this.ground, this.firstSwitchWall, this.secondSwitchWall, this.thirdSwitchWall, this.fourthSwitchWall],
+        overlaps: [this.odin],
+      }
+    });
+
+
+    const barrelTwo = new BarrelSpawner({
+      scene: this,
+      groupConfig: {
+        defaultKey: 'barril',
+        maxSize: 2,
+      },
+      groupMultipleConfig: {},
+      customConfig: {
+        x: 640,
+        y: 270,
+        speedDirection: -120,
+        colliders: [this.ground, this.firstSwitchWall, this.secondSwitchWall, this.thirdSwitchWall, this.fourthSwitchWall],
+        overlaps: [this.odin],
+      }
+    });
+
+
+    const barrelThree = new BarrelSpawner({
+      scene: this,
+      groupConfig: {
+        defaultKey: 'barril',
+        maxSize: 2,
+      },
+      groupMultipleConfig: {},
+      customConfig: {
+        x: 0,
+        y: 206,
+        speedDirection: 120,
+        colliders: [this.ground, this.firstSwitchWall, this.secondSwitchWall, this.thirdSwitchWall, this.fourthSwitchWall],
+        overlaps: [this.odin],
+      }
+    });
+
+    const barrelFour = new BarrelSpawner({
+      scene: this,
+      groupConfig: {
+        defaultKey: 'barril',
+        maxSize: 2,
+      },
+      groupMultipleConfig: {},
+      customConfig: {
+        x: 640,
+        y: 206,
+        speedDirection: -120,
+        colliders: [this.ground, this.firstSwitchWall, this.secondSwitchWall, this.thirdSwitchWall, this.fourthSwitchWall],
+        overlaps: [this.odin],
+      }
+    });
+
+
+
+    barrelOne.createBarrelSpawner();
+    barrelTwo.createBarrelSpawner();
+    barrelThree.createBarrelSpawner();
+    barrelFour.createBarrelSpawner();
+
     this.crows = new CrowSpawner({
       scene: this,
       groupConfig: {
@@ -136,7 +214,7 @@ class FaseDez extends Phaser.Scene {
       this.physics.add.staticImage(35, 240, 'alvo'),
     ]);
 
-    this.helSwitch.children.each(function(child) {
+    this.helSwitch.children.each(function (child) {
       child.setDataEnabled();
       child.setName('hel-weak-points');
       child.setData('hel', this.hel);
