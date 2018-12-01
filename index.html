@@ -11,15 +11,11 @@
 
     <body>
         <div id="vikingpedia" class="hidden">
-          <ul class="list">
-            <li>Odin</li>
-            <li>Urubu</li>
+          <ul id="menu" class="list">
           </ul>
-          <section class="text">
-            <p>
-              Lorem ipsum dolor
-            </p>
-          </section>
+          <pre class="text" id="texto">
+            
+          </pre>
         </div>
         <!-- <h1>ROK</h1>
         <p>
@@ -61,5 +57,38 @@
             }
           }
         </script>
+
+        <script>
+            const vikingPediaTopics = {
+              'teste': {
+                'texto': 'lorem ipsum dolor'
+              },
+              'teste2': {
+                'texto': 'lorem <i>ipsum</i> dolor 2\n <b>linha 2</b> <img src="./src/assets/img/hel.png" />'
+              },
+              'teste3': {
+                'texto': 'ldasdasdsadsaorem <i>ipsum</i> dolor 2\n <b>linha 2</b> <img src="./src/assets/img/hel.png" />'
+              }              
+            }
+
+            const vikingpedia = document.getElementById('vikingpedia');
+            console.log(vikingpedia)
+            const lista = document.getElementById('menu');
+            const texto = document.getElementById('texto');
+
+            const keys = Object.keys(vikingPediaTopics);
+            
+            console.log('keys');
+            for(let i = 0; i < keys.length; i++) {
+              const element = document.createElement('li');
+              element.innerHTML = keys[i];
+              lista.appendChild(element);
+
+              element.addEventListener('click', function() {
+                texto.innerHTML = vikingPediaTopics[keys[i]].texto;
+              });
+            }
+        </script>
     </body>
 </html>
+
