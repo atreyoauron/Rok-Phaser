@@ -76,6 +76,7 @@ class UserInterface extends Phaser.Scene {
 
         const leftButton = this.add.sprite(27,330, 'button-sprite', 0);
         const rightButton = this.add.sprite(97,330, 'button-sprite', 1);
+        const special = this.add.sprite(500,330, 'button-sprite', 4);
         const attack = this.add.sprite(550,330, 'button-sprite', 3);
         const jump = this.add.sprite(608,330, 'button-sprite', 2);
 
@@ -83,6 +84,22 @@ class UserInterface extends Phaser.Scene {
         rightButton.setInteractive();
         attack.setInteractive();
         jump.setInteractive();
+        special.setInteractive();
+
+        special.on('pointerdown', function() {
+          const odin = this.odin;
+
+          const itens = odin.getData('powerBoost');
+
+          if (itens < 100) {
+            return;
+          }
+
+          odin.setData('powerBostActive', true);
+          odin.startPowerUp();
+          this.userPowerBost(true);
+          odin.idle();
+      }, this);
 
         leftButton.on('pointerdown', function() {
           this.leftButtonPressed = true;

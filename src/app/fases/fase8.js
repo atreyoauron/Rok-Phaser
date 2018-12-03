@@ -184,7 +184,7 @@ class FaseOito extends Phaser.Scene {
         this.crows.createCrow({x: 273, y: 21},{ x: 0, y: 50});
 
 
-        this.barrelSwitch = this.physics.add.staticImage(602, 33, 'switch-block');
+        this.barrelSwitch = this.physics.add.staticImage(602, 33, 'alvo');
         this.barrelSwitch.setDataEnabled();
         this.barrelSwitch.setName('switchBarrelOff');
 
@@ -199,7 +199,7 @@ class FaseOito extends Phaser.Scene {
             || this.odin.x >= 136 && this.odin.x <= 237 && this.odin.y > 360
             || this.odin.x >= 136 && this.odin.x <= 629 && this.odin.y > 360) {
                 this.scene.start('fasenove', {
-                odinx: this.odin.x,
+                odinx: 100,
                 odiny: 0,
             });
         }

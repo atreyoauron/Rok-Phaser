@@ -134,6 +134,11 @@ class Boot extends Phaser.Scene {
       frameHeight: 360,
     });
 
+    this.load.spritesheet('coracao', 'src/assets/img/hearth.png', {
+      frameWidth: 18,
+      frameHeight: 17,
+    });
+
     this.load.spritesheet('button-sprite', 'src/assets/img/buttons.png', {
       frameWidth: 36,
       frameHeight: 36,
@@ -196,6 +201,8 @@ class Boot extends Phaser.Scene {
     this.load.image('fundo_direita', 'src/assets/img/fundo_direita.png');
     this.load.image('breakable-wall', 'src/assets/img/bloco-destrutivel.png');
     this.load.image('switch-block', 'src/assets/img/bloco.png');
+    this.load.image('pulo-duplo', 'src/assets/img/pulo-duplo.png');
+    this.load.image('item_lanca', 'src/assets/img/item_lanca.png');
   }
 
   create() {
@@ -216,6 +223,14 @@ class Boot extends Phaser.Scene {
     this.anims.create({
       key: 'spawner-animation',
       frames: this.anims.generateFrameNumbers('hidromel_spawner', { start: 0, end: 24 }),
+      frameRate: 8,
+      repeat: -1
+    });
+
+
+    this.anims.create({
+      key: 'coracao-beat',
+      frames: this.anims.generateFrameNumbers('coracao', { start: 0, end: 3 }),
       frameRate: 8,
       repeat: -1
     });

@@ -74,7 +74,7 @@ class FaseSete extends Phaser.Scene {
       this.odin.resetJump();
     }, null, this);
 
-    const spearItem = this.physics.add.staticImage(565, 213, 'spear-item');
+    const spearItem = this.physics.add.staticImage(565, 213, 'item_lanca');
 
     this.physics.add.overlap(this.odin, spearItem, function (odin, spear) {
       this.odin.getSpear();

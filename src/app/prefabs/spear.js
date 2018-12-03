@@ -38,16 +38,18 @@ class SpearSpawner extends Phaser.Physics.Arcade.Group {
         return;
       }
       if(firstCollider.name === 'hel-weak-points') {
-        if(firstCollider.getData(alreadyHit)) { return; }
+        if(firstCollider.getData('alreadyHit')) { return; }
         const hel = collider.getData('hel');
-        firstCollider.setTint(0x00ff00);
+        firstCollider.anims.stop();
+        firstCollider.setTint(0x808080);
         hel.reduceHelLifePoints();
         firstCollider.setData('alreadyHit', true);
       } else {
         if(collider.name === 'hel-weak-points') {
-          if(collider.getData(alreadyHit)) { return; }
+          if(collider.getData('alreadyHit')) { return; }
           const hel = collider.getData('hel');
-          collider.setTint(0x00ff00);
+          collider.anims.stop();
+          collider.setTint(0x808080);
           hel.reduceHelLifePoints();
           collider.setData('alreadyHit', true);
         }

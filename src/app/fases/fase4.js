@@ -306,7 +306,7 @@ class FaseQuatro extends Phaser.Scene {
         barrelBottomFive.createBarrelSpawner();
         barrelBottomSix.createBarrelSpawner();
 
-        const doubleJump = this.physics.add.staticImage(82, 90, 'spear-item');
+        const doubleJump = this.physics.add.staticImage(82, 90, 'pulo-duplo');
         this.physics.add.overlap(this.odin, doubleJump, function (odin, doubleJump) {
             this.odin.getDoubleJumpItem();
             doubleJump.destroy();

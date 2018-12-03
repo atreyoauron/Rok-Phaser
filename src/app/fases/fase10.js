@@ -208,13 +208,14 @@ class FaseDez extends Phaser.Scene {
     this.hel.configureHel();
 
     this.helSwitch = this.physics.add.staticGroup([
-      this.physics.add.staticImage(596, 66, 'alvo'),
-      this.physics.add.staticImage(596, 240, 'alvo'),
-      this.physics.add.staticImage(35, 132, 'alvo'),
-      this.physics.add.staticImage(35, 240, 'alvo'),
+      this.physics.add.staticSprite(596, 66, 'coracao'),
+      this.physics.add.staticSprite(596, 240, 'coracao'),
+      this.physics.add.staticSprite(35, 132, 'coracao'),
+      this.physics.add.staticSprite(35, 240, 'coracao'),
     ]);
 
     this.helSwitch.children.each(function (child) {
+      child.anims.play('coracao-beat');
       child.setDataEnabled();
       child.setName('hel-weak-points');
       child.setData('hel', this.hel);
