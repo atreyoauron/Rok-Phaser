@@ -19,6 +19,12 @@ canvas { width: 100% !important; height: auto !important; }
   transform: all 0.5 ease-in-out;
 }
 
+#finalVideo {
+  display: none;
+  width: 100vw;
+  height: 100vh;
+}
+
 #vikingpedia.hidden {
   height: 0;
 }

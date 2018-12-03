@@ -21,12 +21,12 @@ const config = {
     type: Phaser.AUTO,
     width: 640,
     height: 360,
-    scene: [ 
-        SplashScreen, 
-        Boot, 
-        MainMenu, 
-        FaseUm, 
-        FaseDois, 
+    scene: [
+        SplashScreen,
+        Boot,
+        MainMenu,
+        FaseUm,
+        FaseDois,
         FaseTres,
         FaseQuatro,
         FaseCinco,
@@ -35,8 +35,8 @@ const config = {
         FaseOito,
         FaseNove,
         FaseDez,
+        UserInterface,
         Creditos,
-        UserInterface
     ]
 }
 

@@ -57,7 +57,6 @@ class FaseUm extends Phaser.Scene {
         const screenHeight = this.sys.game.config.height;
 
         var map = this.add.tilemap('fase_1');
-
         const fundo = this.add.image(0,0, 'fundo_fase_1');
         fundo.setOrigin(0);
 
@@ -76,7 +75,6 @@ class FaseUm extends Phaser.Scene {
           key: 'checkpoint'
         });
         this.odin = this.add.existing(this.odin);
-
 
 
         this.physics.add.overlap(this.odin, checkpoint, (over1, over2) => {
