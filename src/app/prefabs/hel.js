@@ -62,6 +62,7 @@ class Hel extends Phaser.GameObjects.Sprite {
   }
 
   reduceHelLifePoints() {
+    console.log('hitting hel');
     let updatedLifePoints = this.getData('currentLifePoints') - 250;
     let porcentagem;
     this.setData('currentLifePoints', updatedLifePoints);
@@ -74,6 +75,24 @@ class Hel extends Phaser.GameObjects.Sprite {
   killHel() {
     this.config.crowSpawner.destroyGroup();
     this.setData('dead', true);
+    this.config.scene.cameras.main.fadeOut(1000, 0, 0, 0);
+    this.config.scene.cameras.main.once('camerafadeoutcomplete', function (camera) {
+      this.config.scene.scene.stop('userInterface');
+      const userInterface = this.scene.scene.get('userInterface')
+      userInterface.sound.stopAll();
+      this.config.scene.scene.pause('fasedez');
+
+      const finalVideo = document.getElementById('finalVideo');
+      finalVideo.style.display = 'block';
+      finalVideo.play();
+
+      finalVideo.addEventListener('ended',iniciarCreditos.bind(this),false);
+      function iniciarCreditos(e) {
+          finalVideo.style.display = 'none';
+          this.config.scene.scene.start('Creditos');
+      }
+
+    }, this);
   }
 
   spawn(x, y, flip) {

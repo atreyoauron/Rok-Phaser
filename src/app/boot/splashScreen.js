@@ -25,13 +25,12 @@ class SplashScreen extends Phaser.Scene {
         logo.setScale(0);
         logo.setX(this.sys.game.config.width / 2 - (logo.width * logo.scaleX / 2));
         logo.setY(this.sys.game.config.height / 2 - (logo.height * logo.scaleY / 2));
-
         const tween = this.tweens.add({
             targets: logo,
             scaleX: 0.3,
             scaleY: 0.3,
             ease: 'Power1',
-            duration: 100,
+            duration: 1500,
             repeat: 0,
             onComplete: function () {
                 this.cameras.main.fadeOut(1000, 0, 0, 0);
