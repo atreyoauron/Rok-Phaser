@@ -166,6 +166,7 @@ class Odin extends MainCharacter {
     let jump = this.getData('jump');
     let double = this.getData('isDoubleJumping');
     let itens = this.getData('itens');
+    let powerBostActive = this.getData('powerBostActive');
 
     if (!itens.spear) {
       return;
@@ -174,7 +175,11 @@ class Odin extends MainCharacter {
     if (jump || double) {
       this.anims.play('jump_fire_spear');
     } else {
-      this.anims.play('fire_spear');
+      if(powerBostActive) {
+        this.anims.play('fire_spear_gold');
+      } else {
+        this.anims.play('fire_spear');
+      }
     }
   }
 

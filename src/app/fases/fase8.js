@@ -199,7 +199,7 @@ class FaseOito extends Phaser.Scene {
             || this.odin.x >= 136 && this.odin.x <= 237 && this.odin.y > 360
             || this.odin.x >= 136 && this.odin.x <= 629 && this.odin.y > 360) {
                 this.scene.start('fasenove', {
-                odinx: (this.odin.x > 100 && this.odin.x < 570) ? 100 : this.odin.x,
+                odinx: this.odin.x,
                 odiny: 0,
             });
         }

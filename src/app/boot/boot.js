@@ -154,6 +154,11 @@ class Boot extends Phaser.Scene {
       frameHeight: 42
     });
 
+    this.load.spritesheet('odin_throw_spear_gold', 'src/assets/img/Odingoldenspear.png', {
+      frameWidth: 54,
+      frameHeight: 42
+    });
+
 
     this.load.audio('explosao', 'src/assets/sounds/explosao.ogg');
     this.load.audio('musica', 'src/assets/sounds/gameplay.mp3');
@@ -266,6 +271,13 @@ class Boot extends Phaser.Scene {
     this.anims.create({
       key: 'fire_spear',
       frames: this.anims.generateFrameNumbers('odin_fire_spear', { start: 0, end: 6 }),
+      frameRate: 7,
+      repeat: 0
+    });
+
+    this.anims.create({
+      key: 'fire_spear_gold',
+      frames: this.anims.generateFrameNumbers('odin_throw_spear_gold', { start: 0, end: 6 }),
       frameRate: 7,
       repeat: 0
     });
