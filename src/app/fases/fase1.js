@@ -1,6 +1,8 @@
 /// <reference path="../../../phaser.d.ts" />
 
 import CheckPoint from '../prefabs/checkpoint.js';
+import VikingPedia from '../prefabs/vikingpedia-topic.js';
+
 class FaseUm extends Phaser.Scene {
     constructor() {
         super({
@@ -56,6 +58,8 @@ class FaseUm extends Phaser.Scene {
         const screenWidth = this.sys.game.config.width;
         const screenHeight = this.sys.game.config.height;
 
+
+
         var map = this.add.tilemap('fase_1');
         const fundo = this.add.image(0,0, 'fundo_fase_1');
         fundo.setOrigin(0);
@@ -74,8 +78,13 @@ class FaseUm extends Phaser.Scene {
           y: this.sys.game.config.height / 2,
           key: 'checkpoint'
         });
+
+        const vikingPedia = this.physics.add.staticImage(317, 41, 'alvo');
         this.odin = this.add.existing(this.odin);
 
+        this.physics.add.overlap(vikingPedia, this.odin, function() {
+          setNewTopic('Odin')
+        });
 
         this.physics.add.overlap(this.odin, checkpoint, (over1, over2) => {
           checkpoint.getCheckpoint(this.ui, this.sys.game.config.width / 2, this.sys.game.config.height / 2, 'faseum');

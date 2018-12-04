@@ -123,21 +123,33 @@
             }
 
             const vikingpedia = document.getElementById('vikingpedia');
-            console.log(vikingpedia)
             const lista = document.getElementById('menu');
             const texto = document.getElementById('texto');
+            window.activeTopics = [];
 
-            const keys = Object.keys(vikingPediaTopics);
 
-            console.log('keys');
-            for(let i = 0; i < keys.length; i++) {
-              const element = document.createElement('li');
-              element.innerHTML = keys[i];
-              lista.appendChild(element);
+            function setNewTopic(topic) {
+              const alreadyExist = window.activeTopics.includes(topic)
+              if (alreadyExist) { return; }
+              window.activeTopics.push(topic);
+              buildTopics();
+            }
 
-              element.addEventListener('click', function() {
-                texto.innerHTML = vikingPediaTopics[keys[i]].texto;
+            function buildTopics() {
+              const keys = Object.keys(vikingPediaTopics);
+              const validKeys = keys.filter(data => {
+                return window.activeTopics.indexOf(data) > -1
               });
+
+              for(let i = 0; i < validKeys.length; i++) {
+                const element = document.createElement('li');
+                element.innerHTML = validKeys[i];
+                lista.appendChild(element);
+
+                element.addEventListener('click', function() {
+                  texto.innerHTML = vikingPediaTopics[validKeys[i]].texto;
+                });
+              }
             }
         </script>
     </body>

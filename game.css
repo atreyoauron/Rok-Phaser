@@ -39,14 +39,20 @@ canvas { width: 100% !important; height: auto !important; }
 }
 
 .list {
-  width: 30%;
-  max-height: 100vh;
+  max-height: 70vh;
   overflow: auto;
   border-right: 2px dashed #fff;
-  padding: 1rem 3rem;
+  padding: 0;
+  margin-left: 50px;
   box-sizing: border-box;
   color: #fff;
   font-size: 45px;
+  list-style: none;
+  margin-top: 4rem;
+}
+
+.list li {
+  font-size: 23px;
 }
 
 .text {
@@ -57,4 +63,10 @@ canvas { width: 100% !important; height: auto !important; }
   box-sizing: border-box;
   font-size: 33px;
   color: #fff;
+}
+
+
+pre {
+  white-space: pre-wrap;
+  text-align: justify;
 }

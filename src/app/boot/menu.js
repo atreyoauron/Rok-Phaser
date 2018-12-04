@@ -141,7 +141,7 @@ class MainMenu extends Phaser.Scene {
 
     this.cameras.main.once('camerafadeoutcomplete', function (camera) {
       this.sound.stopAll()
-
+      this.scene.stop('MainMenu');
       const startVideo = document.getElementById('startVideo');
       startVideo.style.display = 'block';
       startVideo.play();

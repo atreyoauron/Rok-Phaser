@@ -29,6 +29,7 @@ class UserInterface extends Phaser.Scene {
     }
 
     create() {
+      buildTopics();
       const tempestade = this.sound.play('Tempestade_de_neve', {
         loop: true
       });

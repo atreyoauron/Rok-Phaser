@@ -80,7 +80,7 @@ class Hel extends Phaser.GameObjects.Sprite {
       this.config.scene.scene.stop('userInterface');
       const userInterface = this.scene.scene.get('userInterface')
       userInterface.sound.stopAll();
-      this.config.scene.scene.pause('fasedez');
+      this.config.scene.scene.stop('fasedez');
 
       const finalVideo = document.getElementById('finalVideo');
       finalVideo.style.display = 'block';
