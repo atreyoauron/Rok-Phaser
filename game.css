@@ -51,6 +51,7 @@ canvas { width: 100% !important; height: auto !important; }
   box-sizing: border-box;
   color: #fff;
   font-size: 45px;
+  margin: 5% 0 5% 5%;
   list-style: none;
   width: 40%;
 }
@@ -69,10 +70,20 @@ canvas { width: 100% !important; height: auto !important; }
   box-sizing: border-box;
   font-size: 33px;
   color: #fff;
+  background-color: transparent;
 }
 
 
 pre {
   white-space: pre-wrap;
   text-align: justify;
+  height: auto;
+  max-height: 200px;
+  overflow: auto;
+  font-size: 18px;
+  color: white;
+  background-color: #000;
+  word-break: normal !important;
+  word-wrap: normal !important;
+  white-space: pre-wrap !important;
 }
