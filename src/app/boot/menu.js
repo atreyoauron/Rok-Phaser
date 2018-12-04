@@ -126,14 +126,24 @@ class MainMenu extends Phaser.Scene {
           console.log('abrir opções');
       }
     }, this);
+
+    this.cameras.main.once('camerafadeoutcomplete', function (camera) {
+      this.sound.stopAll()
+
+      const startVideo = document.getElementById('startVideo');
+      startVideo.style.display = 'block';
+      startVideo.play();
+
+      startVideo.addEventListener('ended',iniciarCreditos.bind(this),false);
+      function iniciarCreditos(e) {
+          startVideo.style.display = 'none';
+          this.scene.launch('userInterface');
+          this.scene.start('faseum');
+      }
+    }, this);
   }
 
   update() {
-    if (this.cameras.main.fadeEffect.isComplete) {
-      this.sound.stopAll()
-      this.scene.launch('userInterface');
-      this.scene.start('faseum');
-    }
 
   }
 }
