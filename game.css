@@ -10,6 +10,8 @@ body { background-color: #000; margin: 0; }
 canvas { width: 100% !important; height: auto !important; }
 
 #vikingpedia {
+  box-sizing: border-box;
+  padding: 2rem;
   background-color:rgba(0, 0, 0, 0.9);
   background-image:url(src/assets/img/VP/FrameRedu.png);
   background-repeat: no-repeat;
@@ -20,7 +22,7 @@ canvas { width: 100% !important; height: auto !important; }
   display: flex;
   z-index: 999;
   overflow: hidden;
-  transform: all 0.5 ease-in-out;
+  transition: all 0.8s ease-in-out;
 }
 
 #finalVideo,
@@ -32,14 +34,16 @@ canvas { width: 100% !important; height: auto !important; }
 
 #vikingpedia.hidden {
   height: 0;
+  padding: 0;
 }
 
 #vikingpedia.show {
   height: 100vh !important;
+  padding: 2rem;
 }
 
 .list {
-  max-height: 70vh;
+  max-height: 100vh;
   overflow: auto;
   border-right: 2px dashed #fff;
   padding: 0;
@@ -48,18 +52,20 @@ canvas { width: 100% !important; height: auto !important; }
   color: #fff;
   font-size: 45px;
   list-style: none;
-  margin-top: 4rem;
+  width: 40%;
 }
 
 .list li {
-  font-size: 23px;
+  font-size: 53px;
+  padding-right: 40px;
 }
 
 .text {
-  width: 70%;
+  width: 60%;
+  margin: 0;
   max-height: 100vh;
   overflow: auto;
-  padding: 1rem 2rem;
+  padding: 0;
   box-sizing: border-box;
   font-size: 33px;
   color: #fff;
