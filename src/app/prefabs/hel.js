@@ -89,7 +89,7 @@ class Hel extends Phaser.GameObjects.Sprite {
       finalVideo.addEventListener('ended',iniciarCreditos.bind(this),false);
       function iniciarCreditos(e) {
           finalVideo.style.display = 'none';
-          this.config.scene.scene.start('menu');
+          this.config.scene.scene.start('MainMenu');
       }
 
     }, this);

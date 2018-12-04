@@ -14,11 +14,12 @@ class SplashScreen extends Phaser.Scene {
     }
 
     create() {
+        this.cameras.main.setBackgroundColor('rgba(0, 0, 0, 1)');
         this.cameras.main.flash(1000, 0, 0, 0);
 
-        const splash = this.add.image(0, 0, 'fundo-splash');
-        splash.setOrigin(0);
-        splash.setAlpha(0.1);
+        // const splash = this.add.image(0, 0, 'fundo-splash');
+        // splash.setOrigin(0);
+        // splash.setAlpha(0.1);
         window.logo = this.add.image(0, 0, 'logo');
 
         logo.setOrigin(0.5);

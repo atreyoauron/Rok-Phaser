@@ -22,13 +22,23 @@ class MainMenu extends Phaser.Scene {
 
   }
 
+  continue() {
+    const previousData = JSON.parse(localStorage.getItem('currentGameState'));
+
+    this.scene.start(previousData.fase, {
+        odinx: previousData.x,
+        odiny: previousData.y
+    });
+  }
+
   create() {
     this.sound.play('menu')
     this.scene.pause('boot');
 
-    const splash = this.add.image(0, 0, 'fundo-splash');
-    splash.setOrigin(0);
-    splash.setAlpha(0.1);
+    this.cameras.main.setBackgroundColor('rgba(0, 0, 0, 1)');
+    // const splash = this.add.image(0, 0, 'fundo-splash');
+    // splash.setOrigin(0);
+    // splash.setAlpha(0.1);
 
     const rokLogo = this.add.image(0, 0, 'rok_logo');
     rokLogo.setOrigin(0);
@@ -46,47 +56,49 @@ class MainMenu extends Phaser.Scene {
       }
     });
 
+    newGame.setX(this.sys.game.config.width / 2 - (newGame.width / 2) + 10)
+
     newGame.setInteractive();
 
     newGame.on('pointerdown', function (e, a) {
       this.cameras.main.fadeOut(1000, 0, 0, 0, function () {}, this);
     }, this);
 
-    const continuar = this.make.text({
-      x: this.sys.game.config.width / 2 - 40,
-      y: this.sys.game.config.height / 2 + 40,
-      text: 'Continue',
-      style: {
-        font: '20px Nordic Alternative',
-        fill: '#fff'
-      }
-    });
+    // const continuar = this.make.text({
+    //   x: this.sys.game.config.width / 2 - 40,
+    //   y: this.sys.game.config.height / 2 + 40,
+    //   text: 'Continue',
+    //   style: {
+    //     font: '20px Nordic Alternative',
+    //     fill: '#fff'
+    //   }
+    // });
+    // continuar.setX(this.sys.game.config.width / 2 - (continuar.width / 2) + 5)
 
-    continuar.setInteractive();
+    // continuar.setInteractive();
 
-    continuar.on('pointerdown', function (e, a) {
-      console.log(e);
-      console.log(a);
-    }, this);
+    // continuar.on('pointerdown', function (e, a) {
 
-    const opcoes = this.make.text({
-      x: this.sys.game.config.width / 2 - 40,
-      y: this.sys.game.config.height / 2 + 80,
-      text: 'Options',
-      style: {
-        font: '20px Nordic Alternative',
-        fill: '#fff'
-      }
-    });
+    // }, this);
 
-    opcoes.setInteractive();
+    // const opcoes = this.make.text({
+    //   x: this.sys.game.config.width / 2 - 40,
+    //   y: this.sys.game.config.height / 2 + 80,
+    //   text: 'Options',
+    //   style: {
+    //     font: '20px Nordic Alternative',
+    //     fill: '#fff'
+    //   }
+    // });
 
-    opcoes.on('pointerdown', function (e, a) {
-      console.log(e);
-      console.log(a);
-    }, this);
+    // opcoes.setInteractive();
 
-    this.menuItens = [newGame, continuar, opcoes];
+    // opcoes.on('pointerdown', function (e, a) {
+    //   console.log(e);
+    //   console.log(a);
+    // }, this);
+
+    this.menuItens = [newGame];
     this.selectedMenu = this.menuItens[this.activeIndex];
     this.selectedMenu.setColor('#00ff00');
 
@@ -120,7 +132,7 @@ class MainMenu extends Phaser.Scene {
           this.cameras.main.fadeOut(1000, 0, 0, 0, function () {}, this);
           break;
         case (1):
-          console.log('continuar jogo');
+          this.continue();
           break;
         case (2):
           console.log('abrir opções');

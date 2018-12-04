@@ -53,6 +53,9 @@ class FaseNove extends Phaser.Scene {
         this.physics.add.collider(this.odin, [this.ground], function() {
             this.odin.resetJump();
         }, null, this);
+
+        this.odin = this.add.existing(this.odin);
+
         const checkpoint = new CheckPoint({
           scene: this,
           x: 621,
@@ -64,7 +67,6 @@ class FaseNove extends Phaser.Scene {
           checkpoint.getCheckpoint(this.ui, 621, 52, 'fasenove');
         }, null, this);
 
-        this.odin = this.add.existing(this.odin);
 
         const barrelOne = new BarrelSpawner({
             scene: this,

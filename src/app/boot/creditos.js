@@ -98,7 +98,7 @@ class Creditos extends Phaser.Scene {
         this.cameras.main.fadeOut(3000, 0, 0, 0);
         this.cameras.main.once('camerafadeoutcomplete', function (camera) {
           console.log('iniciar menu');
-          this.scene.start('menu');
+          this.scene.start('MainMenu');
         }, this);
       }
     }
