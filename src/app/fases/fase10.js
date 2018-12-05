@@ -222,15 +222,43 @@ class FaseDez extends Phaser.Scene {
     }, this);
 
     this.physics.add.collider(this.hel, [this.ground]);
+
+    if (!checkIfExists('Ragnarök')) {
+      const ragnarokPedia = this.physics.add.staticImage(562, 317, 'vikingpedia');
+      ragnarokPedia.setDataEnabled();
+      ragnarokPedia.setData('jaPegou', false);
+      this.physics.add.overlap(ragnarokPedia, this.odin, function() {
+        if (!ragnarokPedia.getData('jaPegou')) {
+          this.sound.play('Pegar_item');
+          setNewTopic('Ragnarök');
+          ragnarokPedia.setVisible(false);
+          ragnarokPedia.setData('jaPegou', true);
+        }
+      }, null, this);
+    }
+
+    if (!checkIfExists('Fenrir')) {
+      const fenrirPedia = this.physics.add.staticImage(70, 317, 'vikingpedia');
+      fenrirPedia.setDataEnabled();
+      fenrirPedia.setData('jaPegou', false);
+      this.physics.add.overlap(fenrirPedia, this.odin, function() {
+        if (!fenrirPedia.getData('jaPegou')) {
+          this.sound.play('Pegar_item');
+          setNewTopic('Fenrir');
+          fenrirPedia.setVisible(false);
+          fenrirPedia.setData('jaPegou', true);
+        }
+      }, null, this);
+    }
   }
 
   update() {
     this.odin.checkCursorMoviment(this.common);
 
-    if (this.odin.x >= 137 && this.odin.x <= 244 && this.odin.y > 360) {
+    if (this.odin.x < 0) {
       this.scene.start('fasenove', {
-        odinx: this.odin.x,
-        odiny: 0
+        odinx: 604,
+        odiny: 52
       });
     }
   }

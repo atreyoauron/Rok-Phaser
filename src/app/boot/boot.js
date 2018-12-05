@@ -201,6 +201,7 @@ class Boot extends Phaser.Scene {
     this.load.image('fase-9', 'src/assets/img/fase_9_bg.png');
     this.load.image('fase-10', 'src/assets/img/fase_10_bg.png');
     this.load.image('alvo', 'src/assets/img/alvo.png');
+    this.load.image('vikingpedia', 'src/assets/img/vikingpedia.png');
     this.load.image('fundo_esquerda', 'src/assets/img/fundo_esquerda.png');
     this.load.image('fundo_meio', 'src/assets/img/fundo_meio.png');
     this.load.image('fundo_direita', 'src/assets/img/fundo_direita.png');
@@ -319,6 +320,13 @@ class Boot extends Phaser.Scene {
     this.anims.create({
       key: 'inAir',
       frames: this.anims.generateFrameNumbers('odin', { start: 11, end: 12 }),
+      frameRate: 2,
+      repeat: -1,
+    });
+
+    this.anims.create({
+      key: 'inAir_gold',
+      frames: this.anims.generateFrameNumbers('gold_jump', { start: 2, end: 4 }),
       frameRate: 2,
       repeat: -1,
     });

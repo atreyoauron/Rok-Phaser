@@ -79,12 +79,22 @@ class FaseUm extends Phaser.Scene {
           key: 'checkpoint'
         });
 
-        const vikingPedia = this.physics.add.staticImage(317, 41, 'alvo');
         this.odin = this.add.existing(this.odin);
 
-        this.physics.add.overlap(vikingPedia, this.odin, function() {
-          setNewTopic('Odin')
-        });
+        if (!checkIfExists('Odin')) {
+          const vikingPedia = this.physics.add.staticImage(317, 41, 'vikingpedia');
+          vikingPedia.setDataEnabled();
+          vikingPedia.setData('jaPegou', false);
+
+          this.physics.add.overlap(vikingPedia, this.odin, function() {
+            if (!vikingPedia.getData('jaPegou')) {
+              this.sound.play('Pegar_item');
+              setNewTopic('Odin');
+              vikingPedia.setData('jaPegou', true);
+              vikingPedia.setVisible(false);
+            }
+          }, null, this);
+        }
 
         this.physics.add.overlap(this.odin, checkpoint, (over1, over2) => {
           checkpoint.getCheckpoint(this.ui, this.sys.game.config.width / 2, this.sys.game.config.height / 2, 'faseum');

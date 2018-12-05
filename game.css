@@ -43,7 +43,6 @@ canvas { width: 100% !important; height: auto !important; }
 }
 
 .list {
-  max-height: 100vh;
   overflow: auto;
   border-right: 2px dashed #fff;
   padding: 0;
@@ -57,8 +56,10 @@ canvas { width: 100% !important; height: auto !important; }
 }
 
 .list li {
-  font-size: 53px;
+  font-size: 42px;
   padding-right: 40px;
+  font-family: fantasy;
+  cursor: pointer;
 }
 
 .text {
@@ -66,7 +67,7 @@ canvas { width: 100% !important; height: auto !important; }
   margin: 0;
   max-height: 100vh;
   overflow: auto;
-  padding: 0;
+  padding: 3rem 0 0 0;
   box-sizing: border-box;
   font-size: 33px;
   color: #fff;
@@ -77,8 +78,7 @@ canvas { width: 100% !important; height: auto !important; }
 pre {
   white-space: pre-wrap;
   text-align: justify;
-  height: auto;
-  max-height: 200px;
+  padding: 0 1rem;
   overflow: auto;
   font-size: 18px;
   color: white;
@@ -86,4 +86,9 @@ pre {
   word-break: normal !important;
   word-wrap: normal !important;
   white-space: pre-wrap !important;
+  max-height: 320px;
+}
+
+.active {
+  color: cyan;
 }

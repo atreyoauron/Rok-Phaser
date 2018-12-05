@@ -92,6 +92,21 @@ class FaseSeis extends Phaser.Scene {
         this.crows.createCrow({x: 315, y: 135},{ x: 0, y: -50});
 
         this.crows.createCrow({x: 533, y: 35},{ x: 0, y: -50});
+
+        if (!checkIfExists('Ratatosk')) {
+          const RatatoskPedia = this.physics.add.staticImage(169, 324, 'vikingpedia');
+          RatatoskPedia.setDataEnabled();
+          RatatoskPedia.setData('jaPegou', false);
+
+          this.physics.add.overlap(RatatoskPedia, this.odin, function() {
+            if (!RatatoskPedia.getData('jaPegou')) {
+              this.sound.play('Pegar_item');
+              setNewTopic('Ratatosk');
+              RatatoskPedia.setData('jaPegou', true);
+              RatatoskPedia.setVisible(false);
+            }
+          }, null, this);
+        }
     }
 
     update() {

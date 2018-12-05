@@ -148,8 +148,13 @@ class Odin extends MainCharacter {
     || this.anims.currentAnim.key === 'jump_fire_spear' && this.anims.isPlaying ) {
       return;
     }
+    const powerBostActive = this.getData('powerBostActive');
 
-    this.anims.play('inAir', true);
+    if(powerBostActive) {
+      this.anims.play('inAir_gold', true)
+    } else {
+      this.anims.play('inAir', true);
+    }
   }
 
   jumping() {
@@ -173,7 +178,11 @@ class Odin extends MainCharacter {
     }
 
     if (jump || double) {
-      this.anims.play('jump_fire_spear');
+      if(powerBostActive) {
+        this.anims.play('fire_spear_gold');
+      } else {
+        this.anims.play('jump_fire_spear');
+      }
     } else {
       if(powerBostActive) {
         this.anims.play('fire_spear_gold');
@@ -244,7 +253,11 @@ class Odin extends MainCharacter {
     let double = this.getData('isDoubleJumping');
 
     if (jump || double) {
-      if (this.anims.currentAnim.key !== 'jumping' && this.anims.currentAnim.key !== 'gold_jumping') {
+      if (
+        this.anims.currentAnim.key !== 'jumping'
+        && this.anims.currentAnim.key !== 'gold_jumping'
+        && this.anims.currentAnim.key !== 'jump_fire_spear'
+        && this.anims.currentAnim.key !== 'fire_spear_gold') {
         this.inAir();
       }
     }

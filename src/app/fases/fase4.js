@@ -317,6 +317,36 @@ class FaseQuatro extends Phaser.Scene {
           checkpoint.getCheckpoint(this.ui, 30, 83, 'fasequatro');
           this.ui.events.emit('damageTaken', 0);
         }, null, this);
+
+        if (!checkIfExists('Válaskjálf')) {
+          const valaskPedia = this.physics.add.staticImage(583, 23, 'vikingpedia');
+          valaskPedia.setDataEnabled();
+          valaskPedia.setData('jaPegou', false);
+
+          this.physics.add.overlap(valaskPedia, this.odin, function() {
+            if (!valaskPedia.getData('jaPegou')) {
+              this.sound.play('Pegar_item');
+              setNewTopic('Válaskjálf');
+              valaskPedia.setData('jaPegou', true);
+              valaskPedia.setVisible(false);
+            }
+          }, null, this);
+        }
+
+        if (!checkIfExists('Barrilghëlmir')) {
+          const barrilPedia = this.physics.add.staticImage(57, 206, 'vikingpedia');
+          barrilPedia.setDataEnabled();
+          barrilPedia.setData('jaPegou', false);
+
+          this.physics.add.overlap(barrilPedia, this.odin, function() {
+            if (!barrilPedia.getData('jaPegou')) {
+              this.sound.play('Pegar_item');
+              setNewTopic('Barrilghëlmir');
+              barrilPedia.setData('jaPegou', true);
+              barrilPedia.setVisible(false);
+            }
+          }, null, this);
+        }
     }
 
     update() {

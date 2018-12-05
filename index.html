@@ -128,6 +128,10 @@
             window.activeTopics = [];
 
 
+            function checkIfExists(topic) {
+              return window.activeTopics.includes(topic);
+            }
+
             function setNewTopic(topic) {
               const alreadyExist = window.activeTopics.includes(topic)
               if (alreadyExist) { return; }
@@ -135,7 +139,14 @@
               buildTopics();
             }
 
+            function removeActiveClasses() {
+              lista.childNodes.forEach(data => {
+                data.classList.remove('active')
+              })
+            }
+
             function buildTopics() {
+              lista.innerHTML = '';
               const keys = Object.keys(vikingPediaTopics);
               const validKeys = keys.filter(data => {
                 return window.activeTopics.indexOf(data) > -1
@@ -147,6 +158,8 @@
                 lista.appendChild(element);
 
                 element.addEventListener('click', function() {
+                  removeActiveClasses();
+                  element.classList.add('active');
                   texto.innerHTML = vikingPediaTopics[validKeys[i]].texto;
                 });
               }

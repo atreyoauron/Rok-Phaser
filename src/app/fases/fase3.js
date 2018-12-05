@@ -95,6 +95,36 @@ class FaseTres extends Phaser.Scene {
             }
         });
 
+        if (!checkIfExists('Asgard')) {
+          const asgardPedia = this.physics.add.staticImage(383, 115, 'vikingpedia');
+          asgardPedia.setDataEnabled();
+          asgardPedia.setData('jaPegou', false);
+
+          this.physics.add.overlap(asgardPedia, this.odin, function() {
+            if (!asgardPedia.getData('jaPegou')) {
+              this.sound.play('Pegar_item');
+              setNewTopic('Asgard');
+              asgardPedia.setData('jaPegou', true);
+              asgardPedia.setVisible(false);
+            }
+          }, null, this);
+        }
+
+        if (!checkIfExists('Vidar')) {
+          const vidarPedia = this.physics.add.staticImage(291, 213, 'vikingpedia');
+          vidarPedia.setDataEnabled();
+          vidarPedia.setData('jaPegou', false);
+
+          this.physics.add.overlap(vidarPedia, this.odin, function() {
+            if (!vidarPedia.getData('jaPegou')) {
+              this.sound.play('Pegar_item');
+              setNewTopic('Vidar');
+              vidarPedia.setData('jaPegou', true);
+              vidarPedia.setVisible(false);
+            }
+          }, null, this);
+        }
+
         barrelOne.createBarrelSpawner();
         barrelTwo.createBarrelSpawner();
     }

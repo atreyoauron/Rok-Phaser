@@ -97,6 +97,35 @@ class FaseQuatro extends Phaser.Scene {
         this.crows.createCrow({x: 100, y: 300},{ x: -50, y: 0});
 
         this.crows.createCrow({x: 36, y: 340},{ x: 50, y: 0});
+
+        if (!checkIfExists('Yggdrasill')) {
+          const YggdrasillPedia = this.physics.add.staticImage(454, 30, 'vikingpedia');
+          YggdrasillPedia.setDataEnabled();
+          YggdrasillPedia.setData('jaPegou', false);
+
+          this.physics.add.overlap(YggdrasillPedia, this.odin, function() {
+            if (!YggdrasillPedia.getData('jaPegou')) {
+              this.sound.play('Pegar_item');
+              setNewTopic('Yggdrasill');
+              YggdrasillPedia.setData('jaPegou', true);
+              YggdrasillPedia.setVisible(false);
+            }
+          }, null, this);
+        }
+
+        if (!checkIfExists('Illrauga')) {
+          const IllraugaPedia = this.physics.add.staticImage(68, 150, 'vikingpedia');
+          IllraugaPedia.setDataEnabled();
+          IllraugaPedia.setData('jaPegou', false);
+          this.physics.add.overlap(IllraugaPedia, this.odin, function() {
+            if (!IllraugaPedia.getData('jaPegou')) {
+              this.sound.play('Pegar_item');
+              setNewTopic('Illrauga');
+              IllraugaPedia.setData('jaPegou', true);
+              IllraugaPedia.setVisible(false);
+            }
+          }, null, this);
+        }
     }
 
     update() {

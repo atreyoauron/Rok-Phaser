@@ -162,6 +162,21 @@ class FaseNove extends Phaser.Scene {
         });
         hidromel2.createSpawner();
 
+        if (!checkIfExists('Hidromel')) {
+          const hidromelPedia = this.physics.add.staticImage(482, 40, 'vikingpedia');
+          hidromelPedia.setDataEnabled();
+          hidromelPedia.setData('jaPegou', false);
+
+          this.physics.add.overlap(hidromelPedia, this.odin, function() {
+            if (!hidromelPedia.getData('jaPegou')) {
+              this.sound.play('Pegar_item');
+              setNewTopic('Hidromel');
+              hidromelPedia.setData('jaPegou', true);
+              hidromelPedia.setVisible(false);
+            }
+          }, null, this);
+        }
+
         barrelOne.createBarrelSpawner();
         barrelTwo.createBarrelSpawner();
     }

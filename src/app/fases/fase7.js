@@ -201,6 +201,36 @@ class FaseSete extends Phaser.Scene {
       y: 0
     });
 
+    if (!checkIfExists('Lif e Lífthrasir')) {
+      const LifPedia = this.physics.add.staticImage(349, 70, 'vikingpedia');
+      LifPedia.setDataEnabled();
+      LifPedia.setData('jaPegou', false);
+
+      this.physics.add.overlap(LifPedia, this.odin, function() {
+        if (!LifPedia.getData('jaPegou')) {
+          this.sound.play('Pegar_item');
+          setNewTopic('Lif e Lífthrasir');
+          LifPedia.setData('jaPegou', true);
+          LifPedia.setVisible(false);
+        }
+      }, null, this);
+    }
+
+    if (!checkIfExists('Gungnir')) {
+      const GungnirPedia = this.physics.add.staticImage(602, 210, 'vikingpedia');
+      GungnirPedia.setDataEnabled();
+      GungnirPedia.setData('jaPegou', false);
+
+      this.physics.add.overlap(GungnirPedia, this.odin, function() {
+        if (!GungnirPedia.getData('jaPegou')) {
+          this.sound.play('Pegar_item');
+          setNewTopic('Gungnir');
+          GungnirPedia.setData('jaPegou', true);
+          GungnirPedia.setVisible(false);
+        }
+      }, null, this);
+    }
+
     this.physics.add.overlap(this.odin, checkpoint, (over1, over2) => {
       checkpoint.getCheckpoint(this.ui, 511, 144, 'fasesete');
     }, null, this);

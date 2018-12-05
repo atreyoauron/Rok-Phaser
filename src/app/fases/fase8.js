@@ -189,6 +189,36 @@ class FaseOito extends Phaser.Scene {
         this.barrelSwitch.setName('switchBarrelOff');
 
         this.barrelSwitch.setData('barrels', [firstWave]);
+
+        if (!checkIfExists('Hel (Entidade)')) {
+          const helEntidadePedia = this.physics.add.staticImage(404, 44, 'vikingpedia');
+          helEntidadePedia.setDataEnabled();
+          helEntidadePedia.setData('jaPegou', false);
+
+          this.physics.add.overlap(helEntidadePedia, this.odin, function() {
+            if (!helEntidadePedia.getData('jaPegou')) {
+              this.sound.play('Pegar_item');
+              setNewTopic('Hel (Entidade)');
+              helEntidadePedia.setData('jaPegou', true);
+              helEntidadePedia.setVisible(false);
+            }
+          }, null, this);
+        }
+
+        if (!checkIfExists('Hel (Reino)')) {
+          const helReinoPedia = this.physics.add.staticImage(191, 238, 'vikingpedia');
+          helReinoPedia.setDataEnabled();
+          helReinoPedia.setData('jaPegou', false);
+
+          this.physics.add.overlap(helReinoPedia, this.odin, function() {
+            if (!helReinoPedia.getData('jaPegou')) {
+              this.sound.play('Pegar_item');
+              setNewTopic('Hel (Reino)');
+              helReinoPedia.setData('jaPegou', true);
+              helReinoPedia.setVisible(false);
+            }
+          }, null, this);
+        }
     }
 
     update() {
