@@ -17,6 +17,7 @@ class UserInterface extends Phaser.Scene {
         this.rightButtonPressed = false;
         this.attackButtonPressed = false;
         this.jumpButtonPressed = false;
+        this.closeConfigured = false;
     }
 
     init() {
@@ -26,6 +27,30 @@ class UserInterface extends Phaser.Scene {
 
     preload() {
 
+    }
+
+    vikingPedia() {
+      var viking = document.getElementById('vikingpedia');
+      var close = document.getElementById('closeVikingPedia');
+
+      if(!this.closeConfigured) {
+        close.addEventListener('click', () => {
+          this.togglePauseGame();
+          viking.classList.add('hidden');
+          viking.classList.remove('show');
+        })
+      }
+
+      this.closeConfigured = true;
+      const isPaused = this.togglePauseGame();
+      const vikingPedia = document.getElementById('vikingpedia');
+      if (isPaused) {
+        vikingPedia.classList.remove('hidden')
+        vikingPedia.classList.add('show')
+      } else {
+        vikingPedia.classList.add('hidden')
+        vikingPedia.classList.remove('show')
+      }
     }
 
     create() {
@@ -45,15 +70,7 @@ class UserInterface extends Phaser.Scene {
         }, this);
 
         this.input.keyboard.on('keydown_B', function () {
-          const isPaused = this.togglePauseGame();
-          const vikingPedia = document.getElementById('vikingpedia');
-          if (isPaused) {
-            vikingPedia.classList.remove('hidden')
-            vikingPedia.classList.add('show')
-          } else {
-            vikingPedia.classList.add('hidden')
-            vikingPedia.classList.remove('show')
-          }
+          this.vikingPedia();
         }, this);
 
         this.cameras.main.flash(500, 0, 0, 0);
@@ -80,12 +97,18 @@ class UserInterface extends Phaser.Scene {
         const special = this.add.sprite(500,330, 'button-sprite', 4);
         const attack = this.add.sprite(550,330, 'button-sprite', 3);
         const jump = this.add.sprite(608,330, 'button-sprite', 2);
+        const vikingPediaButton = this.add.sprite(600,40, 'vikingpedia_button', 2);
 
         leftButton.setInteractive();
         rightButton.setInteractive();
         attack.setInteractive();
         jump.setInteractive();
         special.setInteractive();
+        vikingPediaButton.setInteractive();
+
+        vikingPediaButton.on('pointerdown', function() {
+          this.vikingPedia();
+        }, this);
 
         special.on('pointerdown', function() {
           const odin = this.odin;

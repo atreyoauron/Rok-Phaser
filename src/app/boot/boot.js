@@ -209,6 +209,7 @@ class Boot extends Phaser.Scene {
     this.load.image('switch-block', 'src/assets/img/bloco.png');
     this.load.image('pulo-duplo', 'src/assets/img/pulo-duplo.png');
     this.load.image('item_lanca', 'src/assets/img/item_lanca.png');
+    this.load.image('vikingpedia_button', 'src/assets/img/vikingpedia_button.png');
   }
 
   create() {

@@ -11,6 +11,7 @@
 
     <body>
         <div id="vikingpedia" class="hidden">
+          <span id="closeVikingPedia" class="close-vikingpedia">X</span>
           <ul id="menu" class="list">
           </ul>
           <pre class="text" id="texto">
@@ -126,7 +127,6 @@
             const lista = document.getElementById('menu');
             const texto = document.getElementById('texto');
             window.activeTopics = [];
-
 
             function checkIfExists(topic) {
               return window.activeTopics.includes(topic);
