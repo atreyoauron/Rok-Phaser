@@ -76,8 +76,40 @@ class FaseDois extends Phaser.Scene {
             }
         });
 
+        if (!checkIfExists('Midgard')) {
+          const midgardPedia = this.physics.add.staticImage(255, 10, 'vikingpedia');
+          midgardPedia.setDataEnabled();
+          midgardPedia.setData('jaPegou', false);
+
+          this.physics.add.overlap(midgardPedia, this.odin, function() {
+            if (!midgardPedia.getData('jaPegou')) {
+              this.sound.play('Pegar_item');
+              setNewTopic('Midgard');
+              midgardPedia.setData('jaPegou', true);
+              midgardPedia.setVisible(false);
+            }
+          }, null, this);
+        }
+
+        if (!checkIfExists('Hugin e Munin')) {
+          const huginPedia = this.physics.add.staticImage(280, 210, 'vikingpedia');
+          huginPedia.setDataEnabled();
+          huginPedia.setData('jaPegou', false);
+
+          this.physics.add.overlap(huginPedia, this.odin, function() {
+            if (!huginPedia.getData('jaPegou')) {
+              this.sound.play('Pegar_item');
+              setNewTopic('Hugin e Munin');
+              huginPedia.setData('jaPegou', true);
+              huginPedia.setVisible(false);
+            }
+          }, null, this);
+        }
+
         barrelOne.createBarrelSpawner();
+
     }
+
 
     update() {
         this.odin.checkCursorMoviment(this.common);

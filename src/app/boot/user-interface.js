@@ -44,7 +44,7 @@ class UserInterface extends Phaser.Scene {
           this.togglePauseGame();
         }, this);
 
-        this.input.keyboard.on('keydown_ESC', function () {
+        this.input.keyboard.on('keydown_B', function () {
           const isPaused = this.togglePauseGame();
           const vikingPedia = document.getElementById('vikingpedia');
           if (isPaused) {
