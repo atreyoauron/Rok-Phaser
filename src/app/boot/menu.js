@@ -36,9 +36,10 @@ class MainMenu extends Phaser.Scene {
     this.scene.pause('boot');
 
     this.cameras.main.setBackgroundColor('rgba(0, 0, 0, 1)');
-    // const splash = this.add.image(0, 0, 'fundo-splash');
-    // splash.setOrigin(0);
-    // splash.setAlpha(0.1);
+    const splash = this.add.image(0, 0, 'fundo-splash');
+    splash.setOrigin(0);
+    splash.setAlpha(0.15);
+    splash.setScale(0.57);
 
     const rokLogo = this.add.image(0, 0, 'rok_logo');
     rokLogo.setOrigin(0);
