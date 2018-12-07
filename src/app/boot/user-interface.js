@@ -65,6 +65,12 @@ class UserInterface extends Phaser.Scene {
 
       this.pausedScene = null;
 
+      this.input.keyboard.on('keydown_R', function () {
+        const activatedScene = this.getActivatedScene(this.scene.manager.scenes);
+
+        this.resetGame(activatedScene);
+      }, this);
+
         this.input.keyboard.on('keydown_P', function () {
           this.togglePauseGame();
         }, this);
